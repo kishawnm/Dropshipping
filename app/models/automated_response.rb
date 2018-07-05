@@ -1,0 +1,2 @@
+class AutomatedResponse < ApplicationRecord
+end

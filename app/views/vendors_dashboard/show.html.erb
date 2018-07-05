@@ -1,0 +1,53 @@
+<!-- Page Content -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row bg-title">
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">Drop shipping Dashboard Page</h4>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Left sidebar -->
+      <div class="col-md-12">
+        <div class="white-box">
+          <div class="row">
+            <div class="col-lg-2 col-md-3  col-sm-4 col-xs-12 inbox-panel">
+              <div class="list-group mail-list m-t-20">
+                Todays Disputes
+                <table id="issue-id">
+                  <% @issues.each do |issue| %>
+                      <tr class="list-group-item active make-request" data-href="<%= vendors_dashboard_path(issue) %>">
+                        <td class=""><%= issue.first_name %></td>
+                        <td class="p-10"><%= issue.last_name %></td>
+                        <td class="p-10"><%= issue.order_number %></td>
+                      </tr>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+            <div class="chatview col-lg-10 col-md-9 col-sm-8 col-xs-12 mail_listing">
+              <%= render 'chat_view' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</div>
+<script>
+  $(document).on("click", ".btn-custom-class", function (e) {
+    e.preventDefault();
+    var value = jQuery(this).data("desc");
+    jQuery("#TextArea").text(value);
+  });
+
+
+  $(document).on("click", ".make-request", function (e) {
+    e.preventDefault();
+    var link = $(this).data("href");
+    window.location.href = link;
+  });
+
+
+</script>

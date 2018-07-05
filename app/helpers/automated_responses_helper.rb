@@ -1,0 +1,2 @@
+module AutomatedResponsesHelper
+end

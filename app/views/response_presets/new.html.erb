@@ -1,0 +1,33 @@
+<!-- Page Content -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row bg-title">
+      <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+        <h4 class="page-title">Drop Shipping Dashboard</h4>
+        <%= render 'form' %>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="white-box">
+              <div class="table-responsive">
+                <table class="table color-table primary-table">
+                  <thead>
+                  <h4 class="page-title">My Responses</h4>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <% @responses.each do |response| %>
+                        <td><%= response.name %></td>
+                        <td><%= link_to 'Edit', new_response_preset_path(response) %></td>
+                        <td><%= link_to 'Delete', response_preset_path(response), method: 'DELETE' %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

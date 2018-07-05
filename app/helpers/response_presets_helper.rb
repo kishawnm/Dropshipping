@@ -1,0 +1,2 @@
+module ResponsePresetsHelper
+end

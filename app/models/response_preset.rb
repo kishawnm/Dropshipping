@@ -1,0 +1,2 @@
+class ResponsePreset < ApplicationRecord
+end

@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="white-box">
+      <h3 class="box-title m-b-0">Presets</h3>
+      <%= form_with model: @response, class: "form-horizontal" do |f| %>
+          <div class="form-group">
+            <label class="col-md-12">Name of Response </label>
+            <div class="col-md-12">
+              <%= f.text_field :name, class: 'form-control',required:true ,placeholder: 'Default' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-12">Message</label>
+            <div class="col-md-12">
+              <%= f.text_area :message, class: 'form-control',required:true, placeholder: 'Your Message', size: "25x5" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12">
+              <%= f.submit 'Submit', class: 'btn btn-default' %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

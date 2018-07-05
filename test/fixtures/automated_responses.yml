@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name_of_response: MyString
+  subject: MyString
+  response: MyText
+
+two:
+  name_of_response: MyString
+  subject: MyString
+  response: MyText
