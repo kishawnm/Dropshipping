@@ -21,6 +21,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'devise'
 
+gem 'griddler'
+
 gem 'bootstrap-sass', '~> 3.3.7'
 # gem for styling
 gem 'font-awesome-rails'
