@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vendor_dispute_id: 1
+  body: MyText
+  email: MyString
+
+two:
+  vendor_dispute_id: 1
+  body: MyText
+  email: MyString
