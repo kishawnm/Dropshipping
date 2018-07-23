@@ -2,6 +2,7 @@
   <h4 class="font-bold m-t-0">Your message title goes here</h4>
   <hr>
 </div>
+<% if @dispute.present? %>
 <div class="over-flow p-10">
   <div class="row p-10">
     <div class="chat col-lg-6 col-md-6 col-sm-6">
@@ -17,6 +18,7 @@
   </div>
   <hr>
 </div>
+      <% end %>
 <div class="p-10">
   <% @presets.each do |preset| %>
       <a href="#" class="btn btn-default btn-custom-class" data-desc="<%= preset.message %>" id="<%= preset.id %>"><%= preset.name%></a>

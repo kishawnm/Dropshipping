@@ -11,7 +11,7 @@ class VendorsDashboardController < ApplicationController
   end
   
   def index
-    @dispute=VendorDispute.find_by_id(VendorDispute.first.id)
+    @dispute=VendorDispute.find_by(vendor_id:current_vendor.id)
     @issues=VendorDispute.where(vendor_id:current_vendor.id)
     @presets=ResponsePreset.all.where(vendor_id:current_vendor.id)
 
