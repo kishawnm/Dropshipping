@@ -4,12 +4,6 @@ class EmailProcessor
     @email = email
   end
   
-  def process
-    
-    # put "My name name is ferhan"
-  end
-  
-  
   
   
   def self.process(email)
