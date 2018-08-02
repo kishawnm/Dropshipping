@@ -5,7 +5,7 @@ class EmailProcessor
   end
 
   def process
-    # binding.pry
+      # binding.pry
     VendorDisputeMessage.create!({ body: @email.body, email: @email.from })
   end
 
