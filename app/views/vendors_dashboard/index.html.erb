@@ -51,7 +51,7 @@
           <div class="vcarousel slide">
             <!-- Carousel items -->
             <div class="white-box over-flow">
-              <p id="p1"><%= @str='<form action="https://http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
+              <p id="p1"><%= @str='<form action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
 		 <input type="hidden" id="vendor_id" name="vendor_id" ' + "value=#{current_vendor.id}>"+'
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 5px; display: block;">First Name</label>
@@ -60,6 +60,10 @@
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 10px; display: block;">Last Name</label>
 			<input type="text" name="last_name" placeholder="Last name" style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box;">
+		</div>
+		<div style="margin-bottom: 15px;">
+			<label style="margin-bottom: 10px; display: block;">Email</label>
+			<input type="text" name="email" placeholder="Email" style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box;">
 		</div>
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 10px; display: block;">Order No</label>

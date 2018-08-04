@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :vendors_dashboard, only: [:index,:show] do
     collection do
       post :customer_issues
+      post :create_messages
     end
   end
   
