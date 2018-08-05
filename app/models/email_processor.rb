@@ -5,14 +5,13 @@ class EmailProcessor
   end
   
   def process
+    
+    
     vendor_id=VendorDispute.find_by(email: @email.from[:email])
-    VendorDisputeMessage.create!({ body: @email.body, email: @email.from, vendor_dispute_id: vendor_id.id })
+    if @email.subject.include? vendor_id.order_number
+      VendorDisputeMessage.create!({ body: @email.body, email: @email.from[:email], vendor_dispute_id: vendor_id.id })
+    end
   end
-  
-  # #
-  #
-  #
-  # def self.process(email)
-  #   VendorDisputeMessage.create!({ body: email.body, email: email.from })
-  # end
+
+
 end
