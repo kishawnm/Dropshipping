@@ -15,6 +15,7 @@ class VendorsDashboardController < ApplicationController
     @dispute=VendorDispute.find_by(vendor_id: current_vendor.id)
     @issues =VendorDispute.where(vendor_id: current_vendor.id)
     @presets=ResponsePreset.all.where(vendor_id: current_vendor.id)
+    @messages=VendorDisputeMessage.where(vendor_dispute_id:@dispute.id)
     @chat   =VendorDisputeMessage.new
   
   end
@@ -23,6 +24,7 @@ class VendorsDashboardController < ApplicationController
     @issues =VendorDispute.where(vendor_id: current_vendor.id)
     @presets=ResponsePreset.all.where(vendor_id: current_vendor.id)
     @dispute=VendorDispute.find_by_id(params[:id])
+    @messages=VendorDisputeMessage.where(vendor_dispute_id:@dispute.id)
     @chat   =VendorDisputeMessage.new
     respond_to do |format|
       format.js

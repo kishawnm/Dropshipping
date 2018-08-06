@@ -10,12 +10,14 @@
           <span class="time-right">11:00</span>
         </div>
       </div>
-      <div class="row p-10">
-        <div class="mychat col-lg-6 col-md-6 col-sm-6" style="float:right;">
-          <p>Hey! I'm fine. Thanks for asking!</p>
-          <span class="time-left">11:01</span>
-        </div>
-      </div>
+      <% @messages.each do |message| %>
+          <div class="row p-10">
+            <div class="mychat col-lg-6 col-md-6 col-sm-6" style="float:right;">
+              <p><%= message.body %></p>
+              <span class="time-left">11:01</span>
+            </div>
+          </div>
+      <% end %>
       <hr>
     </div>
 <% end %>
@@ -29,7 +31,7 @@
       <div class="col-md-12">
         <%= f.text_area :body, id: 'TextArea', class: 'form-control', rows: "5", placeholder: "Your Text Goes Here.." %>
       </div>
-      <%= f.hidden_field :vendor_dispute_id, :value => @dispute.id if @dispute.present?%>
+      <%= f.hidden_field :vendor_dispute_id, :value => @dispute.id if @dispute.present? %>
       <%= f.hidden_field :email, :value => current_vendor.email %>
 
       <% if @dispute.present? %>
