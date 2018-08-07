@@ -11,12 +11,21 @@
         </div>
       </div>
       <% @messages.each do |message| %>
-          <div class="row p-10">
-            <div class="mychat col-lg-6 col-md-6 col-sm-6" style="float:right;">
-              <p><%= message.body %></p>
-              <span class="time-left">11:01</span>
-            </div>
-          </div>
+          <% if message.email=='current_vendor.email' %>
+              <div class="row p-10">
+                <div class="mychat col-lg-6 col-md-6 col-sm-6" style="float:right;">
+                  <p><%= message.body %></p>
+                  <span class="time-left">11:01</span>
+                </div>
+              </div>
+          <% else %>
+              <div class="row p-10">
+                <div class="chat col-lg-6 col-md-6 col-sm-6">
+                  <p><%= @dispute.description %></p>
+                  <span class="time-right">11:00</span>
+                </div>
+              </div>
+          <% end %>
       <% end %>
       <hr>
     </div>
@@ -26,7 +35,7 @@
       <a href="#" class="btn btn-default btn-custom-class" data-desc="<%= preset.message %>" id="<%= preset.id %>"><%= preset.name %></a>
   <% end %>
 </div>
-<%= form_for @chat, :url => create_messages_vendors_dashboard_index_path(@chat), :method => :post do |f| %>
+<%= form_for @chat, :url => create_messages_vendors_dashboard_index_path(@chat), format: :js, :method => :post, remote: true do |f| %>
     <div class="form-group">
       <div class="col-md-12">
         <%= f.text_area :body, id: 'TextArea', class: 'form-control', rows: "5", placeholder: "Your Text Goes Here.." %>

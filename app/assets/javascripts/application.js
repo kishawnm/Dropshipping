@@ -11,9 +11,9 @@
 // about supported directives.
 
 //= require jquery
-//= require bootstrap-sprockets
+//= require jquery_ujs
+// = require bootstrap-sprockets
 //= require custom
 //= require jquery.slimscroll
 //= require dashboard1
-//= require turbolinks
 //= require_tree .
