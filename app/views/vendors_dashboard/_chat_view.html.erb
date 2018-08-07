@@ -35,7 +35,7 @@
       <a href="#" class="btn btn-default btn-custom-class" data-desc="<%= preset.message %>" id="<%= preset.id %>"><%= preset.name %></a>
   <% end %>
 </div>
-<%= form_for @chat, :url => create_messages_vendors_dashboard_index_path(@chat), format: :js, :method => :post, remote: true do |f| %>
+<%= form_for @chat, :url => create_messages_vendors_dashboard_index_path(@chat), :method => :post, remote: true do |f| %>
     <div class="form-group">
       <div class="col-md-12">
         <%= f.text_area :body, id: 'TextArea', class: 'form-control', rows: "5", placeholder: "Your Text Goes Here.." %>
