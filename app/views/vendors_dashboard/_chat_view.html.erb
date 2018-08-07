@@ -15,14 +15,14 @@
               <div class="row p-10">
                 <div class="mychat col-lg-6 col-md-6 col-sm-6" style="float:right;">
                   <p><%= message.body %></p>
-                  <span class="time-left">11:01</span>
+                  <span class="time-left"><%= message.created_at.strftime("%H:%M") %></span>
                 </div>
               </div>
           <% else %>
               <div class="row p-10">
                 <div class="chat col-lg-6 col-md-6 col-sm-6">
-                  <p><%= @dispute.description %></p>
-                  <span class="time-right">11:00</span>
+                  <p><%= message.body %></p>
+                  <span class="time-right"><%= message.created_at.strftime("%H:%M") %></span>
                 </div>
               </div>
           <% end %>
