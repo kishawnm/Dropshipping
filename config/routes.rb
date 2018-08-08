@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :vendors
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'welcome#home'
+  get 'error-message' => 'welcome#error_message'
   resources :automated_responses
   resources :response_presets
   resources :vendors_dashboard, only: [:index,:show] do

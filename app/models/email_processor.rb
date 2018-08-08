@@ -6,10 +6,9 @@ class EmailProcessor
   
   def process
     
-    
-    vendor_id=VendorDispute.find_by(email: @email.from[:email])
-    if @email.subject.include? vendor_id.order_number
-      VendorDisputeMessage.create!({ body: @email.body, email: @email.from[:email], vendor_dispute_id: vendor_id.id })
+    vendor_dispute=VendorDispute.find_by(subject: @email.subject[:subject])
+    if @email.subject[:subject] ==vendor_dispute.subject
+      VendorDisputeMessage.create!({ body: @email.body, email: @email.from[:email], vendor_dispute_id:vendor_dispute.id })
     end
   end
 

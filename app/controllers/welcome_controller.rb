@@ -12,5 +12,8 @@ class WelcomeController < ApplicationController
   def submit_form
     
   end
+  def error_message
+    
+  end
 
 end
