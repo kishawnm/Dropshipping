@@ -15,7 +15,9 @@ class VendorsDashboardController < ApplicationController
     @dispute=VendorDispute.find_by(vendor_id: current_vendor.id)
     @issues =VendorDispute.where(vendor_id: current_vendor.id)
     @presets=ResponsePreset.all.where(vendor_id: current_vendor.id)
+    if @dispute.present?
     @messages=VendorDisputeMessage.where(vendor_dispute_id:@dispute.id)
+    end
     @chat   =VendorDisputeMessage.new
   
   end
