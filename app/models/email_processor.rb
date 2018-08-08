@@ -5,7 +5,7 @@ class EmailProcessor
   end
   
   def process
-    sub=@email.subject.delete! 'Re: '
+    sub=@email.subject.slice!(0, 2)
     puts '===================='
     puts @email.subject
     puts '===================='
