@@ -6,6 +6,18 @@ class EmailProcessor
   
   def process
     subject=@email.subject.delete! 'Re: '
+    puts '===================='
+    puts @email.subject
+    puts '===================='
+    puts '===================='
+    puts '===================='
+    puts '===================='
+    
+    puts subject
+    
+    
+    
+    
     vendor_dispute=VendorDispute.find_by(subject: subject)
     if subject ==vendor_dispute.subject
       VendorDisputeMessage.create!({ body: @email.body, email: @email.from[:email], vendor_dispute_id:vendor_dispute.id })
