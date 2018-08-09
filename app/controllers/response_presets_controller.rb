@@ -23,11 +23,12 @@ class ResponsePresetsController < ApplicationController
   
   end
   
-  def show
+  def destroy
     @response=ResponsePreset.find_by_id(params[:id])
     @response.destroy
     redirect_to new_response_preset_path
   end
+  
   
   private
   def response_params

@@ -25,7 +25,7 @@ class AutomatedResponsesController < ApplicationController
 
   end
 
-  def show
+  def destroy
     @response=AutomatedResponse.find_by_id(params[:id])
     @response.destroy
     redirect_to new_automated_response_path

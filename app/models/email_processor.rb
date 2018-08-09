@@ -5,14 +5,14 @@ class EmailProcessor
   end
   
   def process
-    sub=@email.subject.slice!(0, 2)
+    @email.subject.slice!(0, 4)
     puts '===================='
     puts @email.subject
     puts '===================='
     puts '===================='
     puts '===================='
     puts '===================='
-    
+    sub=@email.subject
     puts sub
     
     
