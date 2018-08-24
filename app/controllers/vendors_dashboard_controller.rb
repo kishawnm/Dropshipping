@@ -11,6 +11,19 @@ class VendorsDashboardController < ApplicationController
     dispute.subject     ='Issue#'+params[:order_number] + '-'+params[:vendor_id]
     unless VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
       dispute.save!
+      automated_res=AutomatedResponse.where(vendor_id: params[:vendor_id])
+      vendor       =Vendor.find_by_id(params[:vendor_id])
+      automated_res.each do |res|
+        if dispute.description.downcase.include? res.trigger.downcase
+          @message                  =VendorDisputeMessage.new
+          @message.vendor_dispute_id=dispute.id
+          @message.body             =res.response
+          @message.email            = vendor.email
+          @message.save!
+          @vendor_dispute=VendorDispute.find_by_id(dispute.id)
+          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute).message_email.deliver_now
+        end
+      end
     else
       redirect_to error_message_path
     end

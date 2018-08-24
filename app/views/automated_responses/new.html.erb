@@ -16,7 +16,7 @@
                   <tbody>
                   <tr>
                     <% @responses.each do |response| %>
-                        <td><%= response.name_of_response %></td>
+                        <td><%= response.trigger %></td>
                         <td><%= link_to 'Edit', new_automated_response_path(response) %>
                         <td><%= link_to 'Destroy', { action: :destroy, id: response.id }, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         </tr>
