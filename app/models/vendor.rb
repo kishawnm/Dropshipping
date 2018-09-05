@@ -5,5 +5,5 @@ class Vendor < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   has_many :vendor_disputes
-  
+
 end

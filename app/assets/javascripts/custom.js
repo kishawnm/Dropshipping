@@ -102,8 +102,8 @@ $(document).ready(function () {
                 , parent = $this.closest('.panel')
                 , wrapper = parent.find('.panel-wrapper')
                 , collapseOpts = {
-                    toggle: false
-                };
+                toggle: false
+            };
             if (!wrapper.length) {
                 wrapper = parent.children('.panel-heading').nextAll().wrapAll('<div/>').parent().addClass('panel-wrapper');
                 collapseOpts = {};
@@ -141,13 +141,13 @@ $(document).ready(function () {
     }(jQuery, window, document));
     //tooltip
     $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-        //Popover
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    //Popover
     $(function () {
-            $('[data-toggle="popover"]').popover()
-        })
-        // Task
+        $('[data-toggle="popover"]').popover()
+    })
+    // Task
     $(".list-task li label").click(function () {
         $(this).toggleClass("task-done");
     });
@@ -165,19 +165,22 @@ $('.slimscrollright').slimScroll({
     , position: 'right'
     , size: "5px"
     , color: '#dcdcdc'
-, });
+    ,
+});
 $('.slimscrollsidebar').slimScroll({
     height: '100%'
     , position: 'right'
     , size: "0px"
     , color: '#dcdcdc'
-, });
+    ,
+});
 $('.chat-list').slimScroll({
     height: '100%'
     , position: 'right'
     , size: "0px"
     , color: '#dcdcdc'
-, });
+    ,
+});
 // Resize all elements
 $("body").trigger("resize");
 // visited ul li

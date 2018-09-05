@@ -9,11 +9,13 @@ class WelcomeController < ApplicationController
     end
   
   end
+  
   def submit_form
-    
+  
   end
+  
   def error_message
-    
+  
   end
 
 end
