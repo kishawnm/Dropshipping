@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   mount_griddler
   devise_for :vendors
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'welcome#home'
+  # root 'welcome#home'
   get 'error-message' => 'welcome#error_message'
   resources :automated_responses
   resources :response_presets
