@@ -16,8 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'home/hello_world' => "home#hello_world", as: :hello_world
-  get 'welcome/new_hello' => "welcome#new_hello", as: :new_hello
+  # get 'welcome/home' => "welcome#home", as: :home
 
 
 end

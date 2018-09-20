@@ -10,10 +10,6 @@ class WelcomeController < ApplicationController
   
   end
 
-  def new_hello
-
-  end
-
   def submit_form
   
   end
