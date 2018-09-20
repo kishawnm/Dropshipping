@@ -9,7 +9,11 @@ class WelcomeController < ApplicationController
     end
   
   end
-  
+
+  def new_hello
+
+  end
+
   def submit_form
   
   end

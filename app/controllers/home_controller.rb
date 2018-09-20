@@ -5,4 +5,8 @@ class HomeController < ShopifyApp::AuthenticatedController
     # /shop = Shop.find_by(shopify_domain: params[:shop])
     # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
   end
+
+  def hello_world
+
+  end
 end
