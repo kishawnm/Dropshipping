@@ -39,6 +39,12 @@ class HomeController < ShopifyApp::AuthenticatedController
     # require 'aftership'
     # send order id in params
     @orders = ShopifyAPI::Order.find(params[:order_id])
+    order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
+    put "order details "*10
+    puts @orders
+    put "order details "*10
+    puts order_details
+    put "order details "*10
     redirect_to vendors_dashboard_index_path(order: @orders)
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
