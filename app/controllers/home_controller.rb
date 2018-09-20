@@ -1,6 +1,8 @@
 class HomeController < ShopifyApp::AuthenticatedController
   def index
+    puts "hello"*10
     puts params
+    puts "world"*10
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @webhooks = ShopifyAPI::Webhook.find(:all)
     # /shop = Shop.find_by(shopify_domain: params[:shop])
@@ -33,6 +35,18 @@ class HomeController < ShopifyApp::AuthenticatedController
         end
       end
     end
+  end
+
+  def get_tracking_status
+    # require 'rubygems'
+    # require 'aftership'
+    # send order id in params
+    # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
+    # pluck tracking id from order_details object
+    # tracking_no = order_details[:tracking_id]
+    # AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
+    # tracking_status = AfterShip::V4::Tracking.get('ups', tracking_no)
+    # get tracking status from tracking_status object
   end
 
 end

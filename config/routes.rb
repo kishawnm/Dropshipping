@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   end
 
   # get 'welcome/home' => "welcome#home", as: :home
-
+  get 'home/get_tracking_status' => "home#get_tracking_status", as: :get_tracking_status
 
 end

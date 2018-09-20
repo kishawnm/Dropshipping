@@ -39,6 +39,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'shopify_api'
+gem "aftership", "~> 4.3.1"
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
