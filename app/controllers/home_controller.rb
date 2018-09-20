@@ -1,8 +1,5 @@
 class HomeController < ShopifyApp::AuthenticatedController
   def index
-    puts "hello"*10
-    puts params
-    puts "world"*10
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @webhooks = ShopifyAPI::Webhook.find(:all)
     # /shop = Shop.find_by(shopify_domain: params[:shop])

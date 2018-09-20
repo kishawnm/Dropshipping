@@ -1,5 +1,5 @@
-class VendorsDashboardController < ShopifyApp::AuthenticatedController
-  
+class VendorsDashboardController < ApplicationController
+  include ShopifyApp::AuthenticatedController
   def customer_issues
     dispute             =VendorDispute.new
     dispute.vendor_id   =params[:vendor_id]
@@ -31,6 +31,7 @@ class VendorsDashboardController < ShopifyApp::AuthenticatedController
   
   def index
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
+    @orders = ShopifyAPI::Order.find(551509033056)
     @dispute=VendorDispute.find_by(vendor_id: current_vendor.id)
     @issues =VendorDispute.where(vendor_id: current_vendor.id)
     @presets=ResponsePreset.all.where(vendor_id: current_vendor.id)
