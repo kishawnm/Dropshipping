@@ -1,4 +1,4 @@
-class WelcomeController < ShopifyApp::AuthenticatedController
+class WelcomeController < ApplicationController
   
   def home
     

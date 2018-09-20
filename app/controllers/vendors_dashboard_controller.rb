@@ -1,4 +1,4 @@
-class VendorsDashboardController < ShopifyApp::AuthenticatedController
+class VendorsDashboardController < ApplicationController
   
   def customer_issues
     dispute             =VendorDispute.new
