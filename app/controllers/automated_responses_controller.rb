@@ -1,4 +1,4 @@
-class AutomatedResponsesController < ApplicationController
+class AutomatedResponsesController < ShopifyApp::AuthenticatedController
   
   
   def new

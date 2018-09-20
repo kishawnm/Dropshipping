@@ -1,4 +1,4 @@
-class ResponsePresetsController < ApplicationController
+class ResponsePresetsController < ShopifyApp::AuthenticatedController
   
   def new
     if params[:format].present?
