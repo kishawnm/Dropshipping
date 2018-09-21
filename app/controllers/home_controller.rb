@@ -42,9 +42,11 @@ class HomeController < ShopifyApp::AuthenticatedController
     puts params[:order_id]
     puts "*****"*10
     # @orders = ShopifyAPI::Order.find(:all, :params => { :ids => params[:order_id] })
-    @orders = ShopifyAPI::Order.last
+    # @orders = ShopifyAPI::Order.last
+    orders = ShopifyAPI::Order.find(:all, params: {limit: 250, page: page})
+    order = orders.find { |o| o.order_number == params[:order_id] }
     puts "order details "*10
-    puts @orders.response
+    puts order
     puts "order details "*10
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
@@ -54,7 +56,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     # tracking_status = AfterShip::V4::Tracking.get('ups', "LY517551584CN")
     # puts tracking_status
     # get tracking status from tracking_status object
-    redirect_to vendors_dashboard_index_path(order: @orders)
+    redirect_to vendors_dashboard_index_path(order: order)
   end
 
 end
