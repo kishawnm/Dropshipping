@@ -40,7 +40,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'shopify_api'
 gem "aftership", "~> 4.3.1"
-
+gem 'httparty', '~> 0.13.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

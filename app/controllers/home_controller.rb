@@ -35,14 +35,17 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def get_tracking_status
-    # require 'rubygems'
-    # require 'aftership'
+    require 'rubygems'
+    require 'aftership'
+    include HTTParty
     # send order id in params
     @orders = ShopifyAPI::Order.find(params[:order_id])
     order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
+    response = HTTParty.get(order_details)
+
+    puts response.body, response.code, response.message, response.headers.inspect
     puts "order details "*10
-    puts @orders.class
-    puts @orders[0]
+    puts @orders
     puts "order details "*10
     puts order_details
     puts "order details "*10
