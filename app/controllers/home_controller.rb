@@ -18,7 +18,7 @@ class HomeController < ShopifyApp::AuthenticatedController
         end
       else
         vendor = Vendor.new
-        vendor.email = "#{user_name}@example.com"
+        vendor.email = "#{user_name}@swirblesolutions.com"
         vendor.password = "#{user_name}"
         vendor.password_confirmation = "#{user_name}"
         vendor.store = store
@@ -45,9 +45,10 @@ class HomeController < ShopifyApp::AuthenticatedController
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
     # tracking_no = order_details[:tracking_id]
-    AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
-    tracking_status = AfterShip::V4::Tracking.get('ups', "LY517551584CN")
-    puts tracking_status
+    # AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
+    # AfterShip::V4::Courier.detect({:tracking_number => 'LY517551584CN'})
+    # tracking_status = AfterShip::V4::Tracking.get('ups', "LY517551584CN")
+    # puts tracking_status
     # get tracking status from tracking_status object
     redirect_to vendors_dashboard_index_path(order: @orders)
   end
