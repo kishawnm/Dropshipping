@@ -40,7 +40,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     # send order id in params
     @orders = ShopifyAPI::Order.find(params[:order_id])
     order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
-    response = HTTParty.get(order_details)
+    response = HTTParty.get('https://brayben.myshopify.com/admin/orders/551509033056.json')
 
     puts response.body, response.code, response.message, response.headers.inspect
     puts "order details "*10
