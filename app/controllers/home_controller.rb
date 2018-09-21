@@ -48,13 +48,14 @@ class HomeController < ShopifyApp::AuthenticatedController
     puts "order details "*10
     puts order_details
     puts "order details "*10
-    redirect_to vendors_dashboard_index_path(order: @orders)
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
     # tracking_no = order_details[:tracking_id]
-    # AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
-    # tracking_status = AfterShip::V4::Tracking.get('ups', tracking_no)
+    AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
+    tracking_status = AfterShip::V4::Tracking.get('ups', "LY517551584CN")
+    puts tracking_status
     # get tracking status from tracking_status object
+    redirect_to vendors_dashboard_index_path(order: @orders)
   end
 
 end
