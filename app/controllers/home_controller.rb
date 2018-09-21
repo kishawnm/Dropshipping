@@ -42,11 +42,12 @@ class HomeController < ShopifyApp::AuthenticatedController
     puts params[:order_id]
     puts "*****"*10
     # @orders = ShopifyAPI::Order.find(:all, :params => { :ids => params[:order_id] })
-    # @orders = ShopifyAPI::Order.last
+    @orders = ShopifyAPI::Order.find(params[:order_id])
     orders = ShopifyAPI::Order.find(:all)
     order = orders.find { |o| o.order_number == params[:order_id] }
     puts "order details "*10
-    puts order
+    puts order.inspect
+    puts @orders.inspect
     puts "order details "*10
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
