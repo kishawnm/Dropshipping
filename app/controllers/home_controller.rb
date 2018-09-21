@@ -38,17 +38,16 @@ class HomeController < ShopifyApp::AuthenticatedController
     require 'rubygems'
     require 'aftership'
     # send order id in params
-    puts "*****"*10
-    puts params[:order_id]
-    puts "*****"*10
     # @orders = ShopifyAPI::Order.find(:all, :params => { :ids => params[:order_id] })
     @orders = ShopifyAPI::Order.find(params[:order_id])
     orders = ShopifyAPI::Order.find(:all)
     order = orders.find { |o| o.order_number == params[:order_id] }
-    puts "order details "*10
-    puts order.inspect
+    puts "*****"*10
     puts @orders.inspect
-    puts "order details "*10
+    puts @orders.class
+    puts @orders.to_json
+    puts JSON.parse @orders
+    puts "*****"*10
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
     # tracking_no = order_details[:tracking_id]
