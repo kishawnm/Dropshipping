@@ -38,12 +38,11 @@ class HomeController < ShopifyApp::AuthenticatedController
     # require 'rubygems'
     # require 'aftership'
     # send order id in params
-    myids = "#{params[:order_id]}"
-    @orders = ShopifyAPI::Order.where(ids: myids)
-    # @orders = ShopifyAPI::Order.find(params[:order_id])
+    @orders = ShopifyAPI::Order.find(params[:order_id])
     order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     puts "order details "*10
-    puts @orders.first
+    puts @orders.class
+    puts @orders[0]
     puts "order details "*10
     puts order_details
     puts "order details "*10
