@@ -41,7 +41,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     @orders = ShopifyAPI::Order.find(params[:order_id])
     order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     puts "order details "*10
-    puts @orders
+    puts @orders.first
     puts "order details "*10
     puts order_details
     puts "order details "*10
