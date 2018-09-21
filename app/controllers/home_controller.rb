@@ -40,7 +40,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     # send order id in params
     @orders = ShopifyAPI::Order.find(params[:order_id])
     puts "order details "*10
-    puts @orders
+    puts @orders.to_a
     puts "order details "*10
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
