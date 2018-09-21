@@ -37,16 +37,15 @@ class HomeController < ShopifyApp::AuthenticatedController
   def get_tracking_status
     require 'rubygems'
     require 'aftership'
+    require 'json'
     # send order id in params
     # @orders = ShopifyAPI::Order.find(:all, :params => { :ids => params[:order_id] })
     @orders = ShopifyAPI::Order.find(params[:order_id])
-    orders = ShopifyAPI::Order.find(:all)
-    order = orders.find { |o| o.order_number == params[:order_id] }
     puts "*****"*10
-    puts @orders.inspect
-    puts @orders.class
-    puts @orders.to_json
-    puts JSON.parse @orders
+    @orders=@orders.to_json
+    obj = JSON.parse(@orders)
+    sv1= obj['fulfillments']
+    puts sv1
     puts "*****"*10
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
@@ -56,7 +55,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     # tracking_status = AfterShip::V4::Tracking.get('ups', "LY517551584CN")
     # puts tracking_status
     # get tracking status from tracking_status object
-    redirect_to vendors_dashboard_index_path(order: order)
+    redirect_to vendors_dashboard_index_path(order: @orders)
   end
 
 end
