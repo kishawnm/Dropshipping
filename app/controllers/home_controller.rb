@@ -5,9 +5,9 @@ class HomeController < ShopifyApp::AuthenticatedController
     # /shop = Shop.find_by(shopify_domain: params[:shop])
     # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
     if params[:shop].present?
-      store = params[:shop]
+      store     = params[:shop]
       user_name = store.split(".")[0]
-      vend = Vendor.where(store: store)
+      vend      = Vendor.where(store: store)
       if vend.present?
         vend = Vendor.where(store: store).last
         sign_in :vendor, vend
@@ -17,11 +17,11 @@ class HomeController < ShopifyApp::AuthenticatedController
           redirect_to new_vendor_session_path
         end
       else
-        vendor = Vendor.new
-        vendor.email = "#{user_name}@swirblesolutions.com"
-        vendor.password = "#{user_name}"
+        vendor                       = Vendor.new
+        vendor.email                 = "#{user_name}@swirblesolutions.com"
+        vendor.password              = "#{user_name}"
         vendor.password_confirmation = "#{user_name}"
-        vendor.store = store
+        vendor.store                 = store
         if vendor.save
           sign_in :vendor, vendor
           if current_vendor.present?
@@ -33,7 +33,7 @@ class HomeController < ShopifyApp::AuthenticatedController
       end
     end
   end
-
+  
   def get_tracking_status
     require 'rubygems'
     require 'aftership'
@@ -43,17 +43,18 @@ class HomeController < ShopifyApp::AuthenticatedController
     @orders = ShopifyAPI::Order.find(params[:order_id])
     puts "*****"*10
     @orders=@orders.to_json
-    obj = JSON.parse(@orders)
-    sv1= obj['fulfillments']
+    obj    = JSON.parse(@orders)
+    sv1    = obj['fulfillments']['tracking_number']
     puts sv1
     puts "*****"*10
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
     # tracking_no = order_details[:tracking_id]
-    # AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
-    # AfterShip::V4::Courier.detect({:tracking_number => 'LY517551584CN'})
-    # tracking_status = AfterShip::V4::Tracking.get('ups', "LY517551584CN")
+    AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
+    tracking_status1  = AfterShip::V4::Courier.detect({ :tracking_number => sv1 })
+    # tracking_status   = AfterShip::V4::Tracking.get(sv1,{})
     # puts tracking_status
+    puts tracking_status1
     # get tracking status from tracking_status object
     redirect_to vendors_dashboard_index_path(order: @orders)
   end
