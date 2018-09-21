@@ -42,7 +42,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     puts params[:order_id]
     puts "*****"*10
     # @orders = ShopifyAPI::Order.find(:all, :params => { :ids => params[:order_id] })
-    @orders = ShopifyAPI::Order.find(params[:order_id])
+    @orders = ShopifyAPI::Order.last
     puts "order details "*10
     puts @orders
     puts "order details "*10
