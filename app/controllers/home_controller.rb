@@ -44,6 +44,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     puts "*****"*10
     @orders=@orders.to_json
     obj    = JSON.parse(@orders)
+    puts obj
     sv1    = obj['fulfillments']['tracking_number']
     puts sv1
     puts "*****"*10
