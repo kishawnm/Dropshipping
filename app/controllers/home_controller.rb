@@ -53,7 +53,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     # pluck tracking id from order_details object
     # tracking_no = order_details[:tracking_id]
     AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
-    tracking_status1  = AfterShip::V4::Courier.detect({ :tracking_number => sv1 })
+    tracking_status1  = AfterShip::V4::Tracking.detect({ :tracking_number => sv1 })
     # tracking_status   = AfterShip::V4::Tracking.get(sv1,{})
     # puts tracking_status
     puts tracking_status1
