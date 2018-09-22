@@ -46,14 +46,14 @@ class HomeController < ShopifyApp::AuthenticatedController
     obj    = JSON.parse(@orders)
     sv2    = obj['fulfillments']
     sv1    = obj['fulfillments'].first
-    puts sv1.inspect
-    puts sv2.inspect
+    sv1=sv1['tracking_number']
+    puts sv1
     puts "*****"*10
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
     # tracking_no = order_details[:tracking_id]
     AfterShip.api_key = 'b00ab653-016a-48d7-9a4a-ae8072e6f41c'
-    tracking_status1  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
+    tracking_status1  = AfterShip::V4::Courier.detect({ :tracking_number => sv1 })
     # tracking_status   = AfterShip::V4::Tracking.get(sv1,{})
     # puts tracking_status
     puts tracking_status1
