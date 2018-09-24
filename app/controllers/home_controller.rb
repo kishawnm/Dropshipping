@@ -50,14 +50,15 @@ class HomeController < ShopifyApp::AuthenticatedController
     puts sv1
     # puts sv2
     puts "*****"*10
+    AfterShip.api_key = "dfbe0470-2867-427d-b534-408db77f4cde"
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
-    tracking_status1  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
+    tracking_status  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
     # tracking_no = order_details[:tracking_id]
-    AfterShip.api_key = 'dfbe0470-2867-427d-b534-408db77f4cde'
-    # tracking_status1  = AfterShip::V4::Tracking.get.({ :tracking_number => sv1 })
+    tracking_status1  = AfterShip::V4::Tracking.get.({ :tracking_number => sv1 })
     # tracking_status   = AfterShip::V4::Tracking.get('china-post',sv1)
     # puts tracking_status
+    puts tracking_status
     puts tracking_status1
     # get tracking status from tracking_status object
     redirect_to vendors_dashboard_index_path
