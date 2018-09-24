@@ -41,25 +41,26 @@ class HomeController < ShopifyApp::AuthenticatedController
     # send order id in params
     # @orders = ShopifyAPI::Order.find(:all, :params => { :ids => params[:order_id] })
     @orders = ShopifyAPI::Order.find(params[:order_id])
-    puts "*****"*10
     @orders=@orders.to_json
     obj    = JSON.parse(@orders)
     # sv2    = obj['fulfillments'].first
     sv1    = obj['fulfillments'].first
     sv1=sv1['tracking_number']
-    puts sv1
+
     # puts sv2
-    puts "*****"*10
-    AfterShip.api_key = "dfbe0470-2867-427d-b534-408db77f4cde"
     # order_details = "#{current_vendor.store}/admin/orders/#{params[:order_id]}.json"
     # pluck tracking id from order_details object
-    tracking_status  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
     # tracking_no = order_details[:tracking_id]
-    tracking_status1  = AfterShip::V4::Tracking.get.({ :tracking_number => sv1 })
-    # tracking_status   = AfterShip::V4::Tracking.get('china-post',sv1)
+    AfterShip.api_key = 'dfbe0470-2867-427d-b534-408db77f4cde'
+    # tracking_status1  = AfterShip::V4::Tracking.get.({ :tracking_number => sv1 })
+    tracking_status  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
+    tracking_status1   = AfterShip::V4::Tracking.get('china-post',sv1)
     # puts tracking_status
+    puts "*****"*10
     puts tracking_status
     puts tracking_status1
+    puts "*****"*10
+
     # get tracking status from tracking_status object
     redirect_to vendors_dashboard_index_path
   end
