@@ -54,7 +54,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     # pluck tracking id from order_details object
     tracking_status1  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
     # tracking_no = order_details[:tracking_id]
-    AfterShip.api_key = '55ce66a8-26a2-41eb-aa41-544bfa558985'
+    AfterShip.api_key = 'dfbe0470-2867-427d-b534-408db77f4cde'
     # tracking_status1  = AfterShip::V4::Tracking.get.({ :tracking_number => sv1 })
     # tracking_status   = AfterShip::V4::Tracking.get('china-post',sv1)
     # puts tracking_status
