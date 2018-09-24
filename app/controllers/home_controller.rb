@@ -43,7 +43,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     @orders = ShopifyAPI::Order.find(params[:order_id])
     @orders=@orders.to_json
     obj    = JSON.parse(@orders)
-    # sv2    = obj['fulfillments'].first
+    sv2    = obj['fulfillments'].first
     sv1    = obj['fulfillments'].first
     sv1=sv1['tracking_number']
 
@@ -54,9 +54,10 @@ class HomeController < ShopifyApp::AuthenticatedController
     AfterShip.api_key = 'dfbe0470-2867-427d-b534-408db77f4cde'
     # tracking_status1  = AfterShip::V4::Tracking.get.({ :tracking_number => sv1 })
     tracking_status  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
-    tracking_status1   = AfterShip::V4::Tracking.get('china-post',sv1)
+    tracking_status1   = AfterShip::V4::Tracking.get('china-ems',sv1)
     # puts tracking_status
     puts "*****"*10
+    puts sv1
     puts tracking_status
     puts tracking_status1
     puts "*****"*10
