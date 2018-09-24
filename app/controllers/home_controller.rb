@@ -54,12 +54,18 @@ class HomeController < ShopifyApp::AuthenticatedController
     AfterShip.api_key = 'dfbe0470-2867-427d-b534-408db77f4cde'
     # tracking_status1  = AfterShip::V4::Tracking.get.({ :tracking_number => sv1 })
     tracking_status  = AfterShip::V4::Courier.detect({ :tracking_number => 'LY517551584CN' })
-    tracking_status1   = AfterShip::V4::Tracking.get('china-ems',sv1)
+    tracking_status1   = AfterShip::V4::Tracking.get('kronos',sv1)
+    tracking_status2   = AfterShip::V4::Tracking.get('sfcservice',sv1)
+    tracking_status3   = AfterShip::V4::Tracking.get('cnexps',sv1)
+    tracking_status4   = AfterShip::V4::Tracking.get('china-ems',sv1)
     # puts tracking_status
     puts "*****"*10
-    puts sv1
+    puts sv2
     puts tracking_status
     puts tracking_status1
+    puts tracking_status2
+    puts tracking_status3
+    puts tracking_status4
     puts "*****"*10
 
     # get tracking status from tracking_status object
