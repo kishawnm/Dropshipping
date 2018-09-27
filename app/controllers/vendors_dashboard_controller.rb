@@ -49,6 +49,7 @@ class VendorsDashboardController < ApplicationController
     # redirect_to :controller=>'home', :action=>'get_tracking_status', :order_id=>551509033056
 
     if params[:tracking_number].present? && @dispute.present?
+      @tracking_no = params[:tracking_number]
       @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
       puts "hello"*90
       puts params[:tracking_number]
@@ -57,7 +58,7 @@ class VendorsDashboardController < ApplicationController
         format.html
       end
     else
-      redirect_to get_tracking_status_path(order_id: 551509033056, vendor_dispute_id: params[:id])
+      redirect_to get_tracking_status_path(order_id: @dispute.order_number, vendor_dispute_id: params[:id])
     end
 
   end

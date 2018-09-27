@@ -34,7 +34,12 @@
   <% @presets.each do |preset| %>
       <a href="#" class="btn btn-default btn-custom-class" data-desc="<%= preset.message %>" id="<%= preset.id %>"><%= preset.name %></a>
   <% end %>
-  <!--<!%= link_to 'Order', get_tracking_status_path(order_id: 551509033056) %>-->
+  <% if @tracking_no.present? %>
+    <a class="btn-primary" id="enter_track_no">Send Tracking no</a>
+    <div style="display: none" id="tracking_id_content"><%= @tracking_no %></div>
+  <% else %>
+    <a class="btn-primary" disabled="disabled">Send Tracking no</a>
+  <% end %>
 
 </div>
 <%= form_for @chat, :url => create_messages_vendors_dashboard_index_path(@chat), :method => :post, remote: true do |f| %>
@@ -50,3 +55,8 @@
       <% end %>
     </div>
 <% end %>
+<script>
+    $( "#enter_track_no" ).click(function() {
+        $("#TextArea").val($("#tracking_id_content").text());
+    });
+</script>
