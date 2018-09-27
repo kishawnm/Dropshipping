@@ -41,22 +41,25 @@ class VendorsDashboardController < ApplicationController
       @messages =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
     end
   end
-  
-  def show
-    binding.pry
-    @dispute = VendorDispute.find_by_id(params[:id])
-    if @dispute.present? && params[:id].present?
-      # redirect_to get_tracking_status_url(order_id: 551509033056)
-      # redirect_to :controller=>'home', :action=>'get_tracking_status', :order_id=>551509033056
 
-    else
+  def show
+    @dispute = VendorDispute.find_by_id(params[:id])
+    # if @dispute.present? && params[:id].present?
+
+    # redirect_to :controller=>'home', :action=>'get_tracking_status', :order_id=>551509033056
+
+    if params[:tracking_number].present? && @dispute.present?
       @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      puts "hello"*90
+      puts params[:tracking_number]
       respond_to do |format|
         format.js
         format.html
       end
+    else
+      redirect_to get_tracking_status_path(order_id: 551509033056, vendor_dispute_id: params[:id])
     end
-  
+
   end
   
   

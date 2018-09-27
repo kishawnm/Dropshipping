@@ -35,7 +35,15 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
   
   def get_tracking_status
-
+  if params[:order_id].present? && params[:vendor_dispute_id].present?
+    @orders = ShopifyAPI::Order.find(params[:order_id])
+    @orders=@orders.to_json
+    obj    = JSON.parse(@orders)
+    sv2    = obj['fulfillments'].first
+    sv1    = obj['fulfillments'].first
+    sv1=sv1['tracking_number']
+    redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: sv1)
+  else
     @orders = ShopifyAPI::Order.find(params[:order_id])
     @orders=@orders.to_json
     obj    = JSON.parse(@orders)
@@ -43,6 +51,8 @@ class HomeController < ShopifyApp::AuthenticatedController
     sv1    = obj['fulfillments'].first
     sv1=sv1['tracking_number']
     redirect_to vendors_dashboard_path(params[:id])
+  end
+
   end
 
 end
