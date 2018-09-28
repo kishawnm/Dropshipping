@@ -36,9 +36,9 @@
   <% end %>
   <% if @tracking_no.present? %>
     <a class="btn-primary" id="enter_track_no">Send Tracking no</a>
-    <div style="display: none" id="tracking_id_content"><%= @tracking_no %></div>
+    <div class="button" id="tracking_id_content"><%= @tracking_no %></div>
   <% else %>
-    <a class="btn-primary" disabled="disabled">Send Tracking no</a>
+    <a class="button disabled" disabled="disabled">Send Tracking no</a>
   <% end %>
 
 </div>
