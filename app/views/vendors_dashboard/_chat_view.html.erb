@@ -36,8 +36,7 @@
   <% end %>
   <% if @tracking_no.present? %>
     <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
-    <div class="button" id="tracking_id_content"><%= @tracking_no %></div>
-    <div class="button" id="tracking_id_content1"><%= @tracking_url %></div>
+    <div class="hidden" id="tracking_id_content1"> Here is your tracking number <%= @tracking_no %> and link <%= @tracking_url %> </div>
   <% else %>
     <a class="btn btn-default disabled">Send Tracking no</a>
   <% end %>
@@ -58,6 +57,6 @@
 <% end %>
 <script>
     $( "#enter_track_no" ).click(function() {
-        $("#TextArea").val($(".button").text());
+        $("#TextArea").val($("#tracking_id_content1").text());
     });
 </script>

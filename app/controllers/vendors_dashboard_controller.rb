@@ -52,10 +52,6 @@ class VendorsDashboardController < ApplicationController
       @tracking_no = params[:tracking_number]
       @tracking_url=params[:tracking_link]
       @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
-      puts "************"*90
-      puts params[:tracking_number]
-      puts params[:tracking_link]
-      puts "************"*90
       respond_to do |format|
         format.js
         format.html
