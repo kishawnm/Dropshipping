@@ -39,7 +39,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     if params[:order_id].present? && params[:vendor_dispute_id].present?
       @orders = ShopifyAPI::Order.find(params[:order_id])
         puts '**********'*10
-      PUTS @orders
+        puts @orders
         puts '**********'*10
       
       
@@ -56,6 +56,11 @@ class HomeController < ShopifyApp::AuthenticatedController
       end
     else
       @orders = ShopifyAPI::Order.find(params[:order_id])
+      puts '^^^^^^^^^^^6'*10
+      puts @orders
+      puts '^^^^^^^^66'*10
+
+
       unless @orders.code== 404
         @orders = @orders.to_json
         obj     = JSON.parse(@orders)
