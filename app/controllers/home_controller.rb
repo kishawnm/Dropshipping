@@ -46,7 +46,7 @@ class HomeController < ShopifyApp::AuthenticatedController
       puts sv1
       puts "******************"*10
       sv1          =sv1['tracking_number']
-      tracking_link=sv1['tracking_url']
+      tracking_link=sv1['tracking_urls'].first
       puts "******************"*10
       puts sv1['tracking_url']
       puts "******************"*10
