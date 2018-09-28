@@ -50,6 +50,7 @@ class VendorsDashboardController < ApplicationController
 
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no = params[:tracking_number]
+      @tracking_url=params[:tracking_url]
       @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
       puts "hello"*90
       puts params[:tracking_number]

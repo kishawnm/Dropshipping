@@ -35,10 +35,11 @@
       <a href="#" class="btn btn-default btn-custom-class" data-desc="<%= preset.message %>" id="<%= preset.id %>"><%= preset.name %></a>
   <% end %>
   <% if @tracking_no.present? %>
-    <a class="btn-primary" id="enter_track_no">Send Tracking no</a>
-    <div class="button" id="tracking_id_content"><%= @tracking_no %></div>
+    <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
+    <div class="button" id="tracking_id_content"><% @tracking_no %></div>
+    <div class="button" id="tracking_id_content1"><% @tracking_url %></div>
   <% else %>
-    <a class="button disabled" disabled="disabled">Send Tracking no</a>
+    <a class="'btn btn-default disabled" disabled="disabled">Send Tracking no</a>
   <% end %>
 
 </div>
@@ -57,6 +58,6 @@
 <% end %>
 <script>
     $( "#enter_track_no" ).click(function() {
-        $("#TextArea").val($("#tracking_id_content").text());
+        $("#TextArea").val($(".button").text());
     });
 </script>

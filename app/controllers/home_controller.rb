@@ -38,9 +38,7 @@ class HomeController < ShopifyApp::AuthenticatedController
   if params[:order_id].present? && params[:vendor_dispute_id].present?
     @orders = ShopifyAPI::Order.find(params[:order_id])
     @orders=@orders.to_json
-    puts "******************"*10
-    
-    puts "******************"*10
+
     obj    = JSON.parse(@orders)
     sv2    = obj['fulfillments'].first
     sv1    = obj['fulfillments'].first
@@ -48,10 +46,9 @@ class HomeController < ShopifyApp::AuthenticatedController
       puts sv2
     puts "******************"*10
     sv1=sv1['tracking_number']
-    puts "******************"*10
-    puts sv1
-    puts "******************"*10
-    redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: sv1)
+    tracking_link=sv1['tracking_url']
+
+    redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: sv1,tracking_link:tracking_link)
   else
     @orders = ShopifyAPI::Order.find(params[:order_id])
     @orders=@orders.to_json
