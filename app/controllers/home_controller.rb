@@ -37,20 +37,32 @@ class HomeController < ShopifyApp::AuthenticatedController
   def get_tracking_status
     
     if params[:order_id].present? && params[:vendor_dispute_id].present?
-      @orders         = ShopifyAPI::Order.find(params[:order_id])
-      @orders         = @orders.to_json
-      obj             = JSON.parse(@orders)
-      sv1             = obj['fulfillments'].first
-      tracking_number = sv1['tracking_number']
-      tracking_link   = sv1['tracking_url']
-      redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link)
+      @orders = ShopifyAPI::Order.find(params[:order_id])
+        puts '**********'*10
+      PUTS @orders
+        puts '**********'*10
+      
+      
+      if @orders.code== 200
+        @orders         = @orders.to_json
+        obj             = JSON.parse(@orders)
+        sv1             = obj['fulfillments'].first
+        tracking_number = sv1['tracking_number']
+        tracking_link   = sv1['tracking_url']
+        
+        redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link)
+      else
+        redirect_to vendors_dashboard_path
+      end
     else
       @orders = ShopifyAPI::Order.find(params[:order_id])
-      @orders = @orders.to_json
-      obj     = JSON.parse(@orders)
-      sv2     = obj['fulfillments'].first
-      sv1     = obj['fulfillments'].first
-      sv1     = sv1['tracking_number']
+      unless @orders.code== 404
+        @orders = @orders.to_json
+        obj     = JSON.parse(@orders)
+        sv2     = obj['fulfillments'].first
+        sv1     = obj['fulfillments'].first
+        sv1     = sv1['tracking_number']
+      end
       redirect_to vendors_dashboard_path(params[:id])
     end
   
