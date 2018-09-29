@@ -44,7 +44,9 @@ class VendorsDashboardController < ApplicationController
 
   def show
     @dispute = VendorDispute.find_by_id(params[:id])
-    
+    puts '****'*100
+    puts params
+    puts '****'*100
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no = params[:tracking_number]
       @tracking_url=params[:tracking_link]
