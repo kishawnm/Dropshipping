@@ -35,13 +35,14 @@
       <a href="#" class="btn btn-default btn-custom-class" data-desc="<%= preset.message %>" id="<%= preset.id %>"><%= preset.name %></a>
   <% end %>
   <% if @tracking_no.present? %>
-    <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
-    <div class="hidden" id="tracking_id_content1"> Here is your tracking number <%= @tracking_no %> and tracking url <%= @tracking_url %> </div>
-  <% elsif @status.present? %>
-      <a class="btn btn-default disabled">Send Tracking no</a>
-  <% else %>
       <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
-      <div class="hidden" id="tracking_id_content1"><%= @status %></div>
+      <div class="hidden" id="tracking_id_content1"> Here is your tracking number <%= @tracking_no %> and tracking
+        url <%= @tracking_url %> </div>
+  <% elsif @status.present? %>
+      <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
+      <div class="hidden" id="tracking_id_content1"><%= @status %> </div>
+  <% else %>
+      <a class="btn btn-default disabled">Send Tracking no</a>
   <% end %>
 
 </div>
@@ -59,7 +60,7 @@
     </div>
 <% end %>
 <script>
-    $( "#enter_track_no" ).click(function() {
-        $("#TextArea").val($("#tracking_id_content1").text());
-    });
+  $("#enter_track_no").click(function () {
+    $("#TextArea").val($("#tracking_id_content1").text());
+  });
 </script>
