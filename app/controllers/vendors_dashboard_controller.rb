@@ -53,6 +53,13 @@ class VendorsDashboardController < ApplicationController
         format.js
         format.html
       end
+    elsif @dispute.present?
+      @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      respond_to do |format|
+        format.js
+        format.html
+      end
+
     else
       redirect_to get_tracking_status_path(order_id: @dispute.order_number, vendor_dispute_id: params[:id])
     end
