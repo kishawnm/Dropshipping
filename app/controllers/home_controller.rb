@@ -38,24 +38,18 @@ class HomeController < ShopifyApp::AuthenticatedController
     
     if params[:order_id].present? && params[:vendor_dispute_id].present?
       begin
-        @orders = ShopifyAPI::Order.find(params[:order_id])
+        orders = ShopifyAPI::Order.find(params[:order_id])
       rescue ActiveResource::ResourceNotFound
-        redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id])
-        puts %{Please provide valid order}
+        status='Please enter valid order number'
+        redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
       end
-      @orders         = @orders.to_json
-      obj             = JSON.parse(@orders)
+      orders          = orders.to_json
+      obj             = JSON.parse(orders)
       sv1             = obj['fulfillments'].first
       tracking_number = sv1['tracking_number']
       tracking_link   = sv1['tracking_url']
       redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link)
     else
-      @orders = ShopifyAPI::Order.find(params[:order_id])
-      @orders = @orders.to_json
-      obj     = JSON.parse(@orders)
-      sv2     = obj['fulfillments'].first
-      sv1     = obj['fulfillments'].first
-      sv1     = sv1['tracking_number']
       redirect_to vendors_dashboard_path(params[:id])
     end
   

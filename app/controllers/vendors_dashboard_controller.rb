@@ -53,8 +53,9 @@ class VendorsDashboardController < ApplicationController
         format.js
         format.html
       end
-    elsif @dispute.present?
+    elsif params[:status].present?
       @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      @status = params[:status]
       respond_to do |format|
         format.js
         format.html
