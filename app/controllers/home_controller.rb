@@ -37,7 +37,12 @@ class HomeController < ShopifyApp::AuthenticatedController
   def get_tracking_status
     
     if params[:order_id].present? && params[:vendor_dispute_id].present?
-      @orders = ShopifyAPI::Order.find(params[:order_id])
+      begin
+        @orders = ShopifyAPI::Order.find(params[:order_id])
+      rescue ActiveResource::ResourceNotFound
+        redirect_to vendors_dashboard_path
+        puts %{Please provide valid order}
+      end
       @orders         = @orders.to_json
       obj             = JSON.parse(@orders)
       sv1             = obj['fulfillments'].first
