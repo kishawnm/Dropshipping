@@ -44,10 +44,7 @@ class VendorsDashboardController < ApplicationController
 
   def show
     @dispute = VendorDispute.find_by_id(params[:id])
-    # if @dispute.present? && params[:id].present?
-
-    # redirect_to :controller=>'home', :action=>'get_tracking_status', :order_id=>551509033056
-
+    
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no = params[:tracking_number]
       @tracking_url=params[:tracking_link]

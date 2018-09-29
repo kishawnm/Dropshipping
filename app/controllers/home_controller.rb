@@ -40,7 +40,7 @@ class HomeController < ShopifyApp::AuthenticatedController
       begin
         @orders = ShopifyAPI::Order.find(params[:order_id])
       rescue ActiveResource::ResourceNotFound
-        redirect_to vendors_dashboard_path
+        redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id])
         puts %{Please provide valid order}
       end
       @orders         = @orders.to_json
