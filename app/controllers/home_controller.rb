@@ -42,6 +42,7 @@ class HomeController < ShopifyApp::AuthenticatedController
         # orders          = orders.to_json
         # obj             = JSON.parse(orders)
         orders_list = ShopifyAPI::Order.all
+        puts orders_list
         orders_list_js         = orders_list.to_json
         obj_list             = JSON.parse(orders_list_js)
         obj_list.each do |obj|
