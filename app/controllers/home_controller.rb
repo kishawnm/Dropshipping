@@ -38,11 +38,9 @@ class HomeController < ShopifyApp::AuthenticatedController
     
     if params[:order_id].present? && params[:vendor_dispute_id].present?
       begin
-        orders = ShopifyAPI::Order.where(name: "##{params[:order_id]}").last
+        orders = ShopifyAPI::Order.find(params[:order_id])
         orders          = orders.to_json
         obj             = JSON.parse(orders)
-        puts "obj"*10
-        puts obj
         sv1             = obj['fulfillments'].first
         tracking_number = sv1['tracking_number']
         tracking_link   = sv1['tracking_url']
