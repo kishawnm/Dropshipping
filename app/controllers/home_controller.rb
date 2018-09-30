@@ -38,27 +38,13 @@ class HomeController < ShopifyApp::AuthenticatedController
     
     if params[:order_id].present? && params[:vendor_dispute_id].present?
       begin
-        # orders = ShopifyAPI::Order.find(params[:order_id])
-        # orders          = orders.to_json
-        # obj             = JSON.parse(orders)
-        orders_list = ShopifyAPI::Order.find(:all, :params => {:status => 'any', :limit => 250})
-        puts orders_list
-        orders_list_js         = orders_list.to_json
-        obj_list             = JSON.parse(orders_list_js)
-        obj_list.each do |obj|
-          if obj['name'] == "##{params[:order_id]}"
-            sv2             = obj['fulfillments'].first
-            tracking_numbersssss = sv2['tracking_number']
-            puts  "name"*90
-            puts obj['name']
-            puts tracking_numbersssss
-            tracking_link   = sv2['tracking_url']
-            redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_numbersssss, tracking_link: tracking_link)
-          end
-        end
-        # sv1             = obj['fulfillments'].first
-        # tracking_number = sv1['tracking_number']
-        # tracking_link   = sv1['tracking_url']
+        orders = ShopifyAPI::Order.find(:all, :params => {:name => "##{params[:order_id]}", :status => 'any', :limit => 250})
+        orders          = orders.to_json
+        obj             = JSON.parse(orders)
+        sv1             = obj['fulfillments'].first
+        tracking_number = sv1['tracking_number']
+        tracking_link   = sv1['tracking_url']
+        redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link)
       rescue ActiveResource::ResourceNotFound
         status='Please enter valid order number'
         redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
