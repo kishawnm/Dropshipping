@@ -41,8 +41,18 @@ class HomeController < ShopifyApp::AuthenticatedController
         orders = ShopifyAPI::Order.find(params[:order_id])
         orders          = orders.to_json
         obj             = JSON.parse(orders)
-        puts  "name"*90
-        puts obj['name']
+        orders_list = ShopifyAPI::Order.find(:all)
+        orders_list_js         = orders_list.to_json
+        obj_list             = JSON.parse(orders_list_js)
+        obj_list.each do |obj|
+          if obj['name'] == "##{params[:order_id]}"
+            sv2             = obj['fulfillments'].first
+            tracking_numbersssss = sv2['tracking_number']
+            puts  "name"*90
+            puts obj['name']
+            puts tracking_numbersssss
+          end
+        end
         sv1             = obj['fulfillments'].first
         tracking_number = sv1['tracking_number']
         tracking_link   = sv1['tracking_url']
