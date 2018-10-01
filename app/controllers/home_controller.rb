@@ -38,7 +38,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     
     if params[:order_id].present? && params[:vendor_dispute_id].present?
       begin
-        orders = ShopifyAPI::Order.find(:all, :params => {:name => "##{params[:order_id]}", :status => 'any', :limit => 250})
+        orders = ShopifyAPI::Order.find(:all, :params => {:name => "##{params[:order_id]}", :status => 'any', :limit => 250}).last
         orders          = orders.to_json
         obj             = JSON.parse(orders)
         sv1             = obj['fulfillments'].first
