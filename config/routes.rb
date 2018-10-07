@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => 'home#index'
+  # root :to => 'home#index'
   mount ShopifyApp::Engine, at: '/'
   # mount using default path: /email_processor
   mount_griddler
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # get 'welcome/home' => "welcome#home", as: :home
+  get 'welcome/home' => "welcome#home", as: :home
   get 'home/get_tracking_status' => "home#get_tracking_status", as: :get_tracking_status
 
 end

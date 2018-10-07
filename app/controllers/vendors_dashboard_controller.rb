@@ -37,36 +37,55 @@ class VendorsDashboardController < ApplicationController
     if params[:order].present?
       @order = params[:order]
     end
+    
+    
+    if params[:input_fields].present?
+      session[:input_fields] = params[:input_fields]
+      @input_fields          = params[:input_fields]
+      if session[:background].present?
+        @background = session[:background]
+      end
+    end
+    if params[:background].present?
+      session[:background] = params[:background]
+      @background          = params[:background]
+      if session[:background].present?
+        @input_fields = session[:input_fields]
+      end
+    end
+    
     if @dispute.present?
       @messages =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
     end
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
-
+  
   def show
     @dispute = VendorDispute.find_by_id(params[:id])
-    puts '****'*100
-    puts params
-    puts '****'*100
+    
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no = params[:tracking_number]
       @tracking_url=params[:tracking_link]
-      @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      @messages    = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
       respond_to do |format|
         format.js
         format.html
       end
     elsif params[:status].present?
       @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
-      @status = params[:status]
+      @status   = params[:status]
       respond_to do |format|
         format.js
         format.html
       end
-
+    
     else
       redirect_to get_tracking_status_path(order_id: @dispute.order_number, vendor_dispute_id: params[:id])
     end
-
+  
   end
   
   
