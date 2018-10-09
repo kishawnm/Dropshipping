@@ -38,22 +38,9 @@ class VendorsDashboardController < ApplicationController
       @order = params[:order]
     end
     
-    
     if params[:input_fields].present?
-      session[:input_fields] = params[:input_fields]
-      @input_fields          = params[:input_fields]
-      if session[:background].present?
-        @background = session[:background]
-      end
+      @input_fields = params[:input_fields]
     end
-    if params[:background].present?
-      session[:background] = params[:background]
-      @background          = params[:background]
-      if session[:background].present?
-        @input_fields = session[:input_fields]
-      end
-    end
-    
     if @dispute.present?
       @messages =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
     end

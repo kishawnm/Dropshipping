@@ -2,30 +2,30 @@
   <div class="vcarousel slide">
     <!-- Carousel items -->
     <div class="white-box over-flow">
-      <p id="p1"><%= @str='<form style='"background-color:#{@background};"' action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
+      <p id="p1"><%= @str='<form action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
 		 <input type="hidden" id="vendor_id" name="vendor_id" ' + "value=#{current_vendor.id}>"+'
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 5px; display: block;' + "color:#{@input_fields};"' ">First Name</label>
-			<input type="text" name="first_name" placeholder="First name" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%; box-sizing: border-box;">
+			<input type="text" name="first_name" placeholder="First name" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%; box-sizing: border-box;outline-color:'"#{@input_fields};"'"">
 		</div>
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Last Name</label>
-			<input type="text" name="last_name" placeholder="Last name" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box;">
+			<input type="text" name="last_name" placeholder="Last name" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:'"#{@input_fields};"'"">
 		</div>
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Email</label>
-			<input type="text" name="email" placeholder="Email" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box;">
+			<input type="text" name="email" placeholder="Email" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:'"#{@input_fields};"'"">
 		</div>
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Order No</label>
-			<input type="text" name="order_number" placeholder="Order No" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box;">
+			<input type="text" name="order_number" placeholder="Order No" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:'"#{@input_fields};"'" ">
 		</div>
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Description of Issue</label>
-			<textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none;"></textarea>
+			<textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none; outline-color:'"#{@input_fields};"'"></textarea>
 		</div>
 		<div style="margin-bottom: 15px;">
-			<input onclick="myFunction()" type="submit" name="submit" value="Submit" style=" background-color: #000000; color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
+			<input onclick="myFunction()" type="submit" name="submit" value="Submit" style="'"background-color:#{@input_fields};"' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
 		</div>
 	</form>
 	<script>
@@ -41,15 +41,9 @@ function myFunction() {
     </div>
     <fieldset>
       <legend>Choose form colors</legend>
-
       <div>
         <input type="color" id="head" name="color" value="#e66465"/>
         <label for="head">Input Fields</label>
-      </div>
-
-      <div>
-        <input type="color" id="body" name="color" value="#f6b73c"/>
-        <label for="body">Background</label>
       </div>
     </fieldset>
 

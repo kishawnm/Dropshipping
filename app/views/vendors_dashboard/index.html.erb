@@ -121,16 +121,6 @@
     });
   });
 
-  $(document).on("change", "#body", function (e) {
-    e.preventDefault();
-    var background = this.value;
-    $.ajax({
-      type: "GET",
-      url: "<%= vendors_dashboard_index_path %>",
-      data: { 'background' : background  }
-
-    });
-  });
 
 
 
