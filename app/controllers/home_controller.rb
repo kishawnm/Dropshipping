@@ -46,7 +46,11 @@ class HomeController < ShopifyApp::AuthenticatedController
           sv1             = obj['fulfillments'].first
           tracking_number = sv1['tracking_number']
           tracking_link   = sv1['tracking_url']
-          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link)
+          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link,complete_obj:obj)
+          puts '*************'*100
+          puts obj
+          puts '*************'*100
+          
         else
           status='Please enter valid order number'
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)

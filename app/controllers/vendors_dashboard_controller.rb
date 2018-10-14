@@ -38,35 +38,41 @@ class VendorsDashboardController < ApplicationController
       @order = params[:order]
     end
     @count = 0
+    @response_rate = 0
     if @dispute.present?
-      @messages =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
-      @count =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id, read:false).where.not(email: current_vendor.email).count
+      @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      @count    = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id, read: false).where.not(email: current_vendor.email).count
     end
-    id = current_vendor.vendor_disputes.pluck(:id)
-      @total_unread = VendorDisputeMessage.where("id IN (?)", id).where.not(read: true).count
-    @dispute_count= VendorDispute.where(vendor_id:current_vendor.id,created_at:Date.today ).count
+    id            = current_vendor.vendor_disputes.pluck(:id)
+    @total_unread = VendorDisputeMessage.where("id IN (?)", id).where.not(read: true).where.not(email: current_vendor.email).count
+    @dispute_count= VendorDispute.where(vendor_id: current_vendor.id, created_at: Date.today).count
+
+    vendor_dispute = VendorDispute.where(vendor_id: current_vendor.id).last
+    customer_message = VendorDisputeMessage.where(vendor_dispute_id:vendor_dispute.id).where.not(email: current_vendor.email).first
+    if vendor_dispute.present? && customer_message.present?
+      @response_rate = time_diff(vendor_dispute.created_at, customer_message.created_at)
+    end
+    
   end
   
   def show
     @dispute = VendorDispute.find_by_id(params[:id])
-    
+    VendorDisputeMessage.where(vendor_dispute_id: @dispute.id).update_all(read: true)
+    @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no = params[:tracking_number]
-      @tracking_url=params[:tracking_link]
-      @messages    = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
-      @messages
+      @tracking_url = params[:tracking_link]
       respond_to do |format|
         format.js
         format.html
       end
     elsif params[:status].present?
-      @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id).update_all(read:true)
-      @status   = params[:status]
+      
+      @status = params[:status]
       respond_to do |format|
         format.js
         format.html
       end
-    
     else
       redirect_to get_tracking_status_path(order_id: @dispute.order_number, vendor_dispute_id: params[:id])
     end
@@ -105,6 +111,20 @@ class VendorsDashboardController < ApplicationController
   
   
   private
+
+  def time_diff(start_time, end_time)
+    seconds_diff = (start_time - end_time).to_i.abs
+  
+    hours = seconds_diff / 3600
+    seconds_diff -= hours * 3600
+  
+    minutes = seconds_diff / 60
+    seconds_diff -= minutes * 60
+  
+    seconds = seconds_diff
+  
+    "#{hours.to_s.rjust(2, '0')}:#{minutes.to_s.rjust(2, '0')}:#{seconds.to_s.rjust(2, '0')}"
+  end
   
   def set_chat
     @chat = VendorDisputeMessage.new
