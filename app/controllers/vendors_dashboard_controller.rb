@@ -36,14 +36,15 @@ class VendorsDashboardController < ApplicationController
   def index
     if params[:order].present?
       @order = params[:order]
-      @dispute_count= VendorDispute.where(vendor_id:current_vendor.id,created_at:Date.today )
     end
+    @count = 0
     if @dispute.present?
       @messages =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
       @count =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id, read:false).where.not(email: current_vendor.email).count
     end
     id = current_vendor.vendor_disputes.pluck(:id)
-      @total_unread = VendorDisputeMessage.where("id IN (?)", id).where.not(read: true)
+      @total_unread = VendorDisputeMessage.where("id IN (?)", id).where.not(read: true).count
+    @dispute_count= VendorDispute.where(vendor_id:current_vendor.id,created_at:Date.today ).count
   end
   
   def show
