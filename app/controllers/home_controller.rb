@@ -38,19 +38,19 @@ class HomeController < ShopifyApp::AuthenticatedController
     
     if params[:order_id].present? && params[:vendor_dispute_id].present?
       begin
-        orders = ShopifyAPI::Order.find(:all, :params => {:name => "##{params[:order_id]}", :status => 'any', :limit => 250})
+        orders = ShopifyAPI::Order.find(:all, :params => { :name => "##{params[:order_id]}", :status => 'any', :limit => 250 })
         if orders.present?
-          orders = ShopifyAPI::Order.find(:all, :params => {:name => "##{params[:order_id]}", :status => 'any', :limit => 250}).last
+          orders          = ShopifyAPI::Order.find(:all, :params => { :name => "##{params[:order_id]}", :status => 'any', :limit => 250 }).last
           orders          = orders.to_json
           obj             = JSON.parse(orders)
           sv1             = obj['fulfillments'].first
+          
           tracking_number = sv1['tracking_number']
           tracking_link   = sv1['tracking_url']
-          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link,complete_obj:obj)
-          puts '*************'*100
-          puts obj
-          puts '*************'*100
-          
+          fulfilled_at    = sv1['created_at']
+          name            = obj['billing_address']['name']
+          created_at      = obj['created_at']
+          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at:created_at)
         else
           status='Please enter valid order number'
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
@@ -59,7 +59,7 @@ class HomeController < ShopifyApp::AuthenticatedController
         status='Please enter valid order number'
         redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
       end
-      
+    
     else
       redirect_to vendors_dashboard_path(params[:id])
     end
