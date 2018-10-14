@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     collection do
       post :customer_issues
       post :create_messages
+      get :form_editor
+
     end
   end
 
