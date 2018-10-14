@@ -1,31 +1,32 @@
-<div class="news-slide m-b-15">
-  <div class="vcarousel slide">
-    <!-- Carousel items -->
-    <div class="white-box over-flow">
-      <p id="p1"><%= @str='<form action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
+<div class="col-lg-6 col-sm-6 col-xs-12">
+  <div class="news-slide m-b-15">
+    <div class="vcarousel slide">
+      <!-- Carousel items -->
+      <div class="white-box over-flow">
+        <p id="p1"><%= @str='<form action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
 		 <input type="hidden" id="vendor_id" name="vendor_id" ' + "value=#{current_vendor.id}>"+'
 		<div style="margin-bottom: 15px;">
-			<label style="margin-bottom: 5px; display: block;' + "color:#{@input_fields};"' ">First Name</label>
-			<input type="text" name="first_name" placeholder="First name" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%; box-sizing: border-box;outline-color:'"#{@input_fields};"'"">
+			<label style="margin-bottom: 5px; display: block;' + "color:#{@input_fields};" ' ">First Name</label>
+			<input type="text" name="first_name" placeholder="First name" required style="height: 35px; border:' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%; box-sizing: border-box;outline-color:' "#{@input_fields};" '"">
 		</div>
 		<div style="margin-bottom: 15px;">
-			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Last Name</label>
-			<input type="text" name="last_name" placeholder="Last name" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:'"#{@input_fields};"'"">
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Last Name</label>
+			<input type="text" name="last_name" placeholder="Last name" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '"">
 		</div>
 		<div style="margin-bottom: 15px;">
-			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Email</label>
-			<input type="text" name="email" placeholder="Email" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:'"#{@input_fields};"'"">
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Email</label>
+			<input type="text" name="email" placeholder="Email" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '"">
 		</div>
 		<div style="margin-bottom: 15px;">
-			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Order No</label>
-			<input type="text" name="order_number" placeholder="Order No" required style="height: 35px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:'"#{@input_fields};"'" ">
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Order No</label>
+			<input type="text" name="order_number" placeholder="Order No" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '" ">
 		</div>
 		<div style="margin-bottom: 15px;">
-			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};"' ">Description of Issue</label>
-			<textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: #ccc 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none; outline-color:'"#{@input_fields};"'"></textarea>
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Description of Issue</label>
+			<textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none; outline-color:' "#{@input_fields};" '"></textarea>
 		</div>
 		<div style="margin-bottom: 15px;">
-			<input onclick="myFunction()" type="submit" name="submit" value="Submit" style="'"background-color:#{@input_fields};"' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
+			<input onclick="myFunction()" type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
 		</div>
 	</form>
 	<script>
@@ -34,18 +35,39 @@ function myFunction() {
 }
 </script>
 ' %></p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button onclick="copyToClipboard('#p1')" class="btn btn-default " id="copybutton">Copy Textarea</button>
-    </div>
-    <fieldset>
-      <legend>Choose form colors</legend>
-      <div>
-        <input type="color" id="head" name="color" value="#e66465"/>
-        <label for="head">Input Fields</label>
       </div>
-    </fieldset>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button onclick="copyToClipboard('#p1')" class="btn btn-default " id="copybutton">Copy Textarea</button>
+      </div>
+      <fieldset>
+        <legend>Choose form colors</legend>
+        <div>
+          <input type="color" id="head" name="color" value="#e66465"/>
+          <label for="head">Input Fields</label>
+        </div>
+      </fieldset>
 
+    </div>
   </div>
 </div>
+<div class="form-code col-lg-6 col-sm-6 col-xs-12">
+  <%= @str.html_safe %>
+</div>
+<script>
+  $(document).on("click", ".btn-custom-class", function (e) {
+    e.preventDefault();
+    var value = jQuery(this).data("desc");
+    jQuery("#TextArea").text(value);
+  });
+
+
+  function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).focus();
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  }
+</script>

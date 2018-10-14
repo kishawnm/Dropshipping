@@ -11,7 +11,7 @@
         </div>
       </div>
       <% @messages.each do |message| %>
-          <% if message.email==current_vendor.email %>
+          <% if message.email == current_vendor.email %>
               <div class="row p-10">
                 <div class="mychat col-lg-6 col-md-6 col-sm-6" style="float:right;">
                   <p><%= message.body %></p>
@@ -42,7 +42,8 @@
       <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
       <div class="hidden" id="tracking_id_content1"><%= @status %> </div>
   <% else %>
-      <a class="btn btn-default disabled">Send Tracking no</a>
+      <button heref="#" title="No tracking available" class="btn btn-default disabled"><span>Send Tracking no</span>
+      </button>
   <% end %>
 
 </div>
@@ -60,7 +61,11 @@
     </div>
 <% end %>
 <script>
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
   $("#enter_track_no").click(function () {
     $("#TextArea").val($("#tracking_id_content1").text());
   });
+
 </script>

@@ -1,0 +1,22 @@
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class=" form-code col-md-12 p-30">
+          <%= render 'form_code', input_fields: @input_fields %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).on("change", "#head", function (e) {
+    e.preventDefault();
+    var input_fields = this.value;
+    $.ajax({
+      type: "GET",
+      url: "<%= form_editor_vendors_dashboard_index_path %>",
+      data: {'input_fields': input_fields}
+
+    });
+  });
+
+</script>

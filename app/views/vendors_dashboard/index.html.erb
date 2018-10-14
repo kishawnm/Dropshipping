@@ -9,22 +9,22 @@
     <%= @order %>
     <!--row -->
     <div class="row">
-      <div class="col-lg-6 col-sm-6 col-xs-12">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="col-lg-6 col-sm-6 col-xs-12">
           <div class="white-box">
             <h3 class="box-title">New Messages</h3>
             <ul class="list-inline two-part">
               <li><i class="ti-email text-info"></i></li>
-              <li class="text-right"><span class="counter">20</span></li>
+              <li class="text-right"><span class="counter"><%= @count %></span></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-xs-12">
           <div class="white-box">
-            <h3 class="box-title">Automate Replies Sent</h3>
+            <h3 class="box-title">New Created Disputes Today</h3>
             <ul class="list-inline two-part">
               <li><i class="ti-email text-purple"></i></li>
-              <li class="text-right"><span class="counter">16</span></li>
+              <li class="text-right"><span class="counter"><%= @dispute_count %></span></li>
             </ul>
           </div>
         </div>
@@ -33,22 +33,19 @@
             <h3 class="box-title">Unread Messages</h3>
             <ul class="list-inline two-part">
               <li><i class="icon-folder-alt text-danger"></i></li>
-              <li class="text-right"><span class="counter">311</span></li>
+              <li class="text-right"><span class="counter"><%= @total_unread %></span></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-xs-12">
           <div class="white-box">
-            <h3 class="box-title">Refund Request</h3>
+            <h3 class="box-title">Response Rate</h3>
             <ul class="list-inline two-part">
               <li><i class="ti-wallet text-success"></i></li>
               <li class="text-right"><span class="counter">11</span></li>
             </ul>
           </div>
         </div>
-      </div>
-      <div class="form-code col-lg-6 col-sm-6 col-xs-12">
-        <%= render 'form_code', input_fields: @input_fields ,background: @background  %>
       </div>
     </div>
     <div class="row">
@@ -85,21 +82,6 @@
 
 
 <script>
-  $(document).on("click", ".btn-custom-class", function (e) {
-    e.preventDefault();
-    var value = jQuery(this).data("desc");
-    jQuery("#TextArea").text(value);
-  });
-
-
-  function copyToClipboard(element) {
-    var $temp = $("<input>");
-    $("body").append($temp);
-    $temp.val($(element).text()).focus();
-    $temp.val($(element).text()).select();
-    document.execCommand("copy");
-    $temp.remove();
-  }
 
   $(document).on("click", ".make-request", function (e) {
     e.preventDefault();
@@ -109,19 +91,4 @@
       type: "GET"
     });
   });
-
-  $(document).on("change", "#head", function (e) {
-    e.preventDefault();
-    var input_fields = this.value;
-    $.ajax({
-      type: "GET",
-      url: "<%= vendors_dashboard_index_path %>",
-      data: { 'input_fields' : input_fields   }
-
-    });
-  });
-
-
-
-
 </script>

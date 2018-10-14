@@ -1,5 +1,5 @@
 class VendorsDashboardController < ApplicationController
-  before_action :set_presets, expect: [:customer_issues]
+  before_action :set_presets, expect: [:customer_issues, :form_editor]
   before_action :set_chat, expect: [:customer_issues]
   before_action :set_dispute, only: [:create_messages, :index]
   before_action :set_issues, only: [:index, :show]
@@ -36,18 +36,14 @@ class VendorsDashboardController < ApplicationController
   def index
     if params[:order].present?
       @order = params[:order]
-    end
-    
-    if params[:input_fields].present?
-      @input_fields = params[:input_fields]
+      @dispute_count= VendorDispute.where(vendor_id:current_vendor.id,created_at:Date.today )
     end
     if @dispute.present?
       @messages =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      @count =VendorDisputeMessage.where(vendor_dispute_id: @dispute.id, read:false).where.not(email: current_vendor.email).count
     end
-    respond_to do |format|
-      format.js
-      format.html
-    end
+    id = current_vendor.vendor_disputes.pluck(:id)
+      @total_unread = VendorDisputeMessage.where("id IN (?)", id).where.not(read: true)
   end
   
   def show
@@ -57,12 +53,13 @@ class VendorsDashboardController < ApplicationController
       @tracking_no = params[:tracking_number]
       @tracking_url=params[:tracking_link]
       @messages    = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      @messages
       respond_to do |format|
         format.js
         format.html
       end
     elsif params[:status].present?
-      @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+      @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id).update_all(read:true)
       @status   = params[:status]
       respond_to do |format|
         format.js
@@ -91,6 +88,18 @@ class VendorsDashboardController < ApplicationController
       format.js
       format.html
     end
+  end
+  
+  def form_editor
+    
+    if params[:input_fields].present?
+      @input_fields = params[:input_fields]
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  
   end
   
   

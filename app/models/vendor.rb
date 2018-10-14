@@ -6,4 +6,19 @@ class Vendor < ApplicationRecord
   
   has_many :vendor_disputes
 
+
+
+  def unread_message
+    count=0
+    a.vendor_disputes.each  do |v|
+     count += v.vendor_dispute_messages.where(read:false)
+    
+      
+    end
+    
+    self.vendor_disputes.vendor_dispute_messages.where(read:false)
+    
+  end
+
+
 end
