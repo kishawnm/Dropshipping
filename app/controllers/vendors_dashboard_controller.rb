@@ -64,7 +64,7 @@ class VendorsDashboardController < ApplicationController
       @tracking_url = params[:tracking_link]
       @name = params[:name]
       @fulfilled_at = params[:fulfilled_at]
-      @created_at = parmas[:created_at]
+      @created_at = params[:created_at]
       respond_to do |format|
         format.js
         format.html
