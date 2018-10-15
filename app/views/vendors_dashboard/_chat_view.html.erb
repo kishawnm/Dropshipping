@@ -60,6 +60,18 @@
       <% end %>
     </div>
 <% end %>
+<% if params[:created_at].present? %>
+    <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 mail_listing">
+      <div class=" col-lg-3 col-md-3 col-sm-3">
+        <p><%= @name %></p>
+        <span class="time-right">#<%= params[:id] %></span>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <p><%= @fulfilled_at.to_date %></p>
+        <span class="time-right"><%= @created_at.to_date %></span>
+      </div>
+    </div>
+<% end %>
 <script>
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
