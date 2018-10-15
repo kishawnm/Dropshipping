@@ -66,15 +66,17 @@
                   <% end %>
                 </table>
                 <br>
-
               </div>
             </div>
             <div class=" chatview col-lg-10 col-md-9 col-sm-8 col-xs-12 mail_listing">
               <%= render 'chat_view', messages: @messages, dispute: @dispute %>
             </div>
             <div class="col-lg-2 col-md-3  col-sm-4 col-xs-12 inbox-panel">
-
             </div>
+            <% puts '************'*100  %>
+            <% puts params %>
+            <% params.inspect %>
+            <% puts '************'*100  %>
             <% if params[:name].present? %>
                 <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 mail_listing">
                   <div class=" col-lg-3 col-md-3 col-sm-3">
