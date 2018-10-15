@@ -51,9 +51,9 @@ class HomeController < ShopifyApp::AuthenticatedController
           name            = obj['billing_address']['name']
           created_at      = obj['created_at']
           puts '*******'*50
-          fulfilled_at
-          name
-          created_at
+          puts fulfilled_at
+          puts name
+           puts created_at
           puts '*******'*50
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at:created_at)
         else
