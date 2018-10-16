@@ -51,6 +51,13 @@ class HomeController < ShopifyApp::AuthenticatedController
           address         = obj['billing_address']
           if address.present?
             name = address['name']
+          else
+            name= 'not available'
+          end
+          
+          if fulfilled_at.present?
+          else
+            fulfilled_at = 'Order is not fulfilled yet '
           end
           created_at = obj['created_at']
           

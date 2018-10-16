@@ -1,6 +1,5 @@
 class AutomatedResponsesController < ApplicationController
   
-  
   def new
     
     if params[:format].present?
