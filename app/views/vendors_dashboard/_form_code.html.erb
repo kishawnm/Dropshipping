@@ -43,8 +43,14 @@ function myFunction() {
       <fieldset>
         <legend>Choose form colors</legend>
         <div>
-          <input type="color" id="head" name="color" value=<%= @input_fields %>>
-          <label for="head">Input Fields</label>
+          <input type="color" class="head" name="color" value=<%= @input_fields %>>
+          <input id="in" onchange="chaa()" class="head" type="text" value="">
+          <script>
+            function chaa() {
+              var aa = $("#in").val();
+              document.getElementById("head").value = aa;
+
+            } </script>
         </div>
       </fieldset>
 

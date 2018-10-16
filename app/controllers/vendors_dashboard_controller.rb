@@ -45,7 +45,7 @@ class VendorsDashboardController < ApplicationController
     end
     id            = current_vendor.vendor_disputes.pluck(:id)
     @total_unread = VendorDisputeMessage.where("id IN (?)", id).where.not(read: true).where.not(email: current_vendor.email).count
-    @dispute_count= VendorDispute.where(vendor_id: current_vendor.id, created_at: Date.today).count
+    @dispute_count= VendorDispute.where(vendor_id: current_vendor.id ).where("DATE(created_at) = ?", Date.today).count
 
     vendor_dispute = VendorDispute.where(vendor_id: current_vendor.id).last
     customer_message = VendorDisputeMessage.where(vendor_dispute_id:vendor_dispute.id).where.not(email: current_vendor.email).first
