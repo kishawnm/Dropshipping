@@ -43,13 +43,13 @@ class VendorsDashboardController < ApplicationController
       @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
       @count    = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id, read: false).where.not(email: current_vendor.email).count
     end
-    id            = current_vendor.vendor_disputes.pluck(:id)
-    @total_unread = VendorDisputeMessage.where("id IN (?)", id).where(read: false).where.not(email: current_vendor.email).count
+    id             = current_vendor.vendor_disputes.pluck(:id)
+    @total_unread  = VendorDisputeMessage.where("id IN (?)", id).where(read: false).where.not(email: current_vendor.email).count
     @dispute_count = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today).count
     
-    vendor_dispute   = VendorDispute.where(vendor_id: current_vendor.id).last
+    vendor_dispute = VendorDispute.where(vendor_id: current_vendor.id).last
     if vendor_dispute.present?
-    customer_message = VendorDisputeMessage.where(vendor_dispute_id: vendor_dispute.id).where(email: current_vendor.email).first
+      customer_message = VendorDisputeMessage.where(vendor_dispute_id: vendor_dispute.id).where(email: current_vendor.email).first
     end
     if vendor_dispute.present? && customer_message.present?
       @response_rate = time_diff(vendor_dispute.created_at, customer_message.created_at)
