@@ -48,7 +48,9 @@ class VendorsDashboardController < ApplicationController
     @dispute_count = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today).count
     
     vendor_dispute   = VendorDispute.where(vendor_id: current_vendor.id).last
+    if vendor_dispute.present?
     customer_message = VendorDisputeMessage.where(vendor_dispute_id: vendor_dispute.id).where(email: current_vendor.email).first
+    end
     if vendor_dispute.present? && customer_message.present?
       @response_rate = time_diff(vendor_dispute.created_at, customer_message.created_at)
     end
