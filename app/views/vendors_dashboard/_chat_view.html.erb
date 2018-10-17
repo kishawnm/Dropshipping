@@ -64,7 +64,7 @@
     <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 ">
       <div class=" col-lg-3 col-md-3 col-sm-3">
         <p>Name:<%= @name %></p>
-        <span class="time-right">order#<%= params[:id] %></span>
+        <span class="time-right">order#<%= @dispute.order_number %></span>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3">
         <p>fulfilled at:<%= @fulfilled_at.to_date %></p>
