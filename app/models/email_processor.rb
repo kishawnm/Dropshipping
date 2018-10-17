@@ -6,7 +6,13 @@ class EmailProcessor
   
   def process
     sub = @email.subject.split(': ').last
+    puts '****'*100
+     puts sub
+    puts '****'*100
     vendor_dispute = VendorDispute.find_by(subject: sub)
+    puts '****'*100
+    puts vendor_dispute
+    puts '****'*100
     if sub == vendor_dispute.subject
       VendorDisputeMessage.create!({ body: @email.body, email: @email.from[:email], vendor_dispute_id: vendor_dispute.id })
       vendor =Vendor.find_by_id(vendor_dispute.vendor_id)
