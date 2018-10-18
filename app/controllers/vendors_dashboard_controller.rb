@@ -12,7 +12,11 @@ class VendorsDashboardController < ApplicationController
     dispute.email       = params[:email]
     dispute.order_number= params[:order_number]
     dispute.description = params[:description]
-    dispute.subject     = params[:first_name]+ ' ' + params[:last_name] +'-Issue#'+params[:order_number] + '-'+params[:vendor_id]
+    if current_vendor.name.present?
+    dispute.subject     = current_vendor.name'-Issue#'+params[:order_number] + '-'+params[:vendor_id]
+    else
+      dispute.subject= 'Issue#'+params[:order_number] + '-'+params[:vendor_id]
+    end
     unless VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
       dispute.save!
       automated_res=AutomatedResponse.where(vendor_id: params[:vendor_id])

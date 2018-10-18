@@ -5,12 +5,7 @@
         <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_vendor.email %>
           <span class="caret"></span></a>
         <ul class="dropdown-menu animated flipInY">
-          <%= link_to 'My Profile', edit_vendor_registration_path, class:"ti-user"%>
-          <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-          <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-          <li role="separator" class="divider"></li>
+          <li><%= link_to 'My Profile', edit_vendor_registration_path, class:"ti-user"%></li>
           <li><%= link_to(' Logout', destroy_vendor_session_path, method: :get, class: "fa fa-power-off") %></li>
         </ul>
       </div>
