@@ -43,8 +43,12 @@ class HomeController < ShopifyApp::AuthenticatedController
           orders = ShopifyAPI::Order.find(:all, :params => { :name => "##{params[:order_id]}", :status => 'any', :limit => 250 }).last
           orders = orders.to_json
           obj    = JSON.parse(orders)
-          sv1    = obj['fulfillments'].first
-          
+          sv1    = obj['fulfillments'].first if obj['fulfillments'].present?
+          if obj['fulfillments'].present?
+            puts obj['fulfillments']
+          else
+            puts "unfullfilled"*10
+          end
           tracking_number = sv1['tracking_number'] if sv1 != nil
           tracking_link   = sv1['tracking_url'] if sv1 != nil
           fulfilled_at    = sv1['created_at'] if sv1 != nil
