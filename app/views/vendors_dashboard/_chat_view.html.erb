@@ -63,12 +63,12 @@
 <% if params[:created_at].present? %>
     <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 ">
       <div class=" col-lg-3 col-md-3 col-sm-3">
-        <p>Name:<%= @name %></p>
-        <span class="time-right">order#<%= @dispute.order_number %></span>
+        <p>Name:<%= @name if @name.present? %></p>
+        <span class="time-right">order#<%= @dispute.order_number if @dispute.present? %></span>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3">
-        <p>fulfilled at:<%= @fulfilled_at.to_date %></p>
-        <span class="time-right">Created at:<%= @created_at.to_date %></span>
+        <p>fulfilled at:<%= @fulfilled_at.to_date if @fulfilled_at.present? %></p>
+        <span class="time-right">Created at:<%= @created_at.to_date if @created_at.present? %></span>
       </div>
     </div>
 <% end %>
