@@ -44,19 +44,18 @@ function myFunction() {
         <legend>Choose form colors</legend>
         <div>
           <input type="color" class="head" id="color_fields" name="color" value=<%= @input_fields %>>
-          <input id="in" onchange="chaa()" class="head" type="text" value="" placeholder="Enter color code">
+          <input id="in" onchange="chaa()" class="head" type="text" value="">
           <script>
             function chaa() {
               var aa = $("#in").val();
               document.getElementById("head").value = aa;
                 var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
                 if(isSafari){
-                    $("#color_fields").css("display", "none");
+                    document.getElementById("color_fields").css("display", "none");
                 } else {
-                    $("#color_fields").css("display", "block");
+                    document.getElementById("color_fields").css("display", "block");
                 }
-            }
-            </script>
+            } </script>
         </div>
       </fieldset>
 
@@ -84,7 +83,7 @@ function myFunction() {
   }
   var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   if(isSafari){
-    $("#color_fields").css("display", "none");
+      $("#color_fields").css("display", "none");
   } else {
       $("#color_fields").css("display", "block");
   }
