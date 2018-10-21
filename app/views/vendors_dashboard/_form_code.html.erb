@@ -49,8 +49,14 @@ function myFunction() {
             function chaa() {
               var aa = $("#in").val();
               document.getElementById("head").value = aa;
-
-            } </script>
+                var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                if(isSafari){
+                    $("#color_fields").css("display", "none");
+                } else {
+                    $("#color_fields").css("display", "block");
+                }
+            }
+            </script>
         </div>
       </fieldset>
 
