@@ -56,7 +56,6 @@ class HomeController < ShopifyApp::AuthenticatedController
           end
           
           if fulfilled_at.present?
-            fulfilled_at = 'Order is fulfilled'
           else
             fulfilled_at = 'Order is not fulfilled yet '
           end
