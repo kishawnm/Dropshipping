@@ -44,7 +44,7 @@ function myFunction() {
         <legend>Choose form colors</legend>
         <div>
           <input type="color" class="head" name="color" value=<%= @input_fields %>>
-          <input id="in" onchange="chaa()" class="head" type="text" value="">
+          <input id="in" onchange="chaa()" class="head" type="text" value="" placeholder="Enter color code">
           <script>
             function chaa() {
               var aa = $("#in").val();
@@ -75,5 +75,11 @@ function myFunction() {
     $temp.val($(element).text()).select();
     document.execCommand("copy");
     $temp.remove();
+  }
+  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if(isSafari){
+    $(".head").css("display", "none");
+  } else {
+      $(".head").css("display", "block");
   }
 </script>
