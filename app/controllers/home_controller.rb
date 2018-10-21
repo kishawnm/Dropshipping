@@ -44,15 +44,11 @@ class HomeController < ShopifyApp::AuthenticatedController
           orders = orders.to_json
           obj    = JSON.parse(orders)
           sv1    = obj['fulfillments'].first if obj['fulfillments'].present?
-          if obj['fulfillments'].present?
-            puts obj['fulfillments']
-          else
-            puts "unfullfilled"*10
-          end
-          tracking_number = sv1['tracking_number'] if sv1 != nil
-          tracking_link   = sv1['tracking_url'] if sv1 != nil
-          fulfilled_at    = sv1['created_at'] if sv1 != nil
-          address         = obj['billing_address'] if obj != nil
+
+          tracking_number = sv1['tracking_number'] if sv1.present?
+          tracking_link   = sv1['tracking_url'] if sv1.present?
+          fulfilled_at    = sv1['created_at'] if sv1.present?
+          address         = obj['billing_address'] if obj.present?
           if address.present?
             name = address['name']
           else
@@ -60,12 +56,13 @@ class HomeController < ShopifyApp::AuthenticatedController
           end
           
           if fulfilled_at.present?
+            fulfilled_at = 'Order is fulfilled'
           else
             fulfilled_at = 'Order is not fulfilled yet '
           end
           created_at = obj['created_at']
           
-          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at: created_at)
+          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at: created_at, status: fulfilled_at)
         else
           status='Please enter valid order number'
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
