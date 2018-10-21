@@ -45,17 +45,6 @@ function myFunction() {
         <div>
           <input type="color" class="head" id="color_fields" name="color" value=<%= @input_fields %>>
           <input id="in" onchange="chaa()" class="head" type="text" value="">
-          <script>
-            function chaa() {
-              var aa = $("#in").val();
-              document.getElementById("head").value = aa;
-                var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                if(isSafari){
-                    document.getElementById("color_fields").css("display", "none");
-                } else {
-                    document.getElementById("color_fields").css("display", "block");
-                }
-            } </script>
         </div>
       </fieldset>
 
@@ -66,25 +55,37 @@ function myFunction() {
   <%= @str.html_safe %>
 </div>
 <script>
-  $(document).on("click", ".btn-custom-class", function (e) {
-    e.preventDefault();
-    var value = jQuery(this).data("desc");
-    jQuery("#TextArea").text(value);
-  });
+    $( document ).ready(function() {
+        function chaa() {
+            var aa = $("#in").val();
+            document.getElementById("head").value = aa;
+            var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            if(isSafari){
+                document.getElementById("color_fields").css("display", "none");
+            } else {
+                document.getElementById("color_fields").css("display", "block");
+            }
+        }
+        $(document).on("click", ".btn-custom-class", function (e) {
+            e.preventDefault();
+            var value = jQuery(this).data("desc");
+            jQuery("#TextArea").text(value);
+        });
 
 
-  function copyToClipboard(element) {
-    var $temp = $("<input>");
-    $("body").append($temp);
-    $temp.val($(element).text()).focus();
-    $temp.val($(element).text()).select();
-    document.execCommand("copy");
-    $temp.remove();
-  }
-  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  if(isSafari){
-      $("#color_fields").css("display", "none");
-  } else {
-      $("#color_fields").css("display", "block");
-  }
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).focus();
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        if(isSafari){
+            $("#color_fields").css("display", "none");
+        } else {
+            $("#color_fields").css("display", "block");
+        }
+    });
 </script>
