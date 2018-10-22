@@ -40,10 +40,10 @@
         number <%= @tracking_no if @tracking_no.present? %> and tracking
         url <%= @tracking_url if @tracking_url.present? %> </div>
   <% elsif @status.present? %>
-      <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
+      <a class=" btn btn-primary disabled" id="enter_track_no" disabled="disabled">Send Tracking no</a>
       <div class="hidden" id="tracking_id_content1"><%= @status %> </div>
   <% else %>
-      <button heref="#" title="No tracking available" class="btn btn-default disabled"><span>Send Tracking no</span>
+      <button heref="#" title="No tracking available" class="btn btn-default disabled" disabled="disabled"><span>Send Tracking no</span>
       </button>
   <% end %>
 

@@ -16,7 +16,7 @@ class VendorsDashboardController < ApplicationController
     if vendor && vendor.name.present?
       dispute.subject   = "#{vendor.name}-Issue##{params[:order_number]}-#{params[:vendor_id]}"
     else
-      dispute.subject   = "Issue##{params[:order_number]}-#{params[:vendor_id]}"
+      dispute.subject   = "Order##{params[:order_number]}-#{params[:vendor_id]}"
     end
     unless VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
       dispute.save!
