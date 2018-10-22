@@ -14,7 +14,7 @@ class VendorsDashboardController < ApplicationController
     dispute.description = params[:description]
     vendor = Vendor.find_by_id(params[:vendor_id])
     if vendor.name.present?
-      dispute.subject   = "#{vendor.name}-Issue##{params[:order_number]}-#{params[:vendor_id]}"
+      dispute.subject   = "[#{vendor.name}]-Issue##{params[:order_number]}-#{params[:vendor_id]}"
     else
       dispute.subject   = "Issue##{params[:order_number]}-#{params[:vendor_id]}"
     end
