@@ -18,6 +18,7 @@ class HomeController < ShopifyApp::AuthenticatedController
         end
       else
         vendor                       = Vendor.new
+        vendor.name                  = user_name
         vendor.email                 = "#{user_name}@swirblesolutions.com"
         vendor.password              = "#{user_name}"
         vendor.password_confirmation = "#{user_name}"
