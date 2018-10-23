@@ -30,7 +30,7 @@ class VendorsDashboardController < ApplicationController
           @message.email            = vendor.email
           @message.save!
           @vendor_dispute=VendorDispute.find_by_id(dispute.id)
-          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute).message_email.deliver_now
+          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: current_vendor.name).message_email.deliver_now
         end
       end
     else
@@ -99,7 +99,7 @@ class VendorsDashboardController < ApplicationController
     @messages = VendorDisputeMessage.where(vendor_dispute_id: @message.vendor_dispute_id)
     
     @vendor_dispute = VendorDispute.find_by_id(@message.vendor_dispute_id)
-    UserMailer.with(message: @message, vendor_dispute: @vendor_dispute).message_email.deliver_now
+    UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: current_vendor.name).message_email.deliver_now
     
     respond_to do |format|
       format.js
