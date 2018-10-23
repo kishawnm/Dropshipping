@@ -4,9 +4,11 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
 </head>
 <body>
-
+<p>Hey <%= @vendor_email.first_name if @vendor_email.first_name.present? %> <%= @vendor_email.last_name if @vendor_email.last_name.present? %>,</p>
 <p>
   <%= @message.body %>.<br>
 </p>
+<p>Best Regards,</p>
+<p>Team <%= @vendor_name if @vendor_name.present? %></p>
 </body>
 </html>
