@@ -3,7 +3,6 @@ class VendorsDashboardController < ApplicationController
   before_action :set_chat, expect: [:customer_issues]
   before_action :set_dispute, only: [:create_messages, :index]
   before_action :set_issues, only: [:index, :show]
-  before_action :set_messages, only: [:index, :show]
   
   def customer_issues
     dispute             = VendorDispute.new
@@ -47,6 +46,8 @@ class VendorsDashboardController < ApplicationController
     @response_rate = 0
     if @dispute.present?
       @count    = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id, read: false).where.not(email: current_vendor.email).count
+      @messages = VendorDisputeMessage.reversed.where(vendor_dispute_id: @dispute.id)
+
     end
     id             = current_vendor.vendor_disputes.pluck(:id)
     @total_unread  = VendorDisputeMessage.where("id IN (?)", id).where(read: false).where.not(email: current_vendor.email).count
@@ -66,6 +67,8 @@ class VendorsDashboardController < ApplicationController
     @dispute = VendorDispute.find_by_id(params[:id])
     if @dispute.present?
       VendorDisputeMessage.where(vendor_dispute_id: @dispute.id).update_all(read: true)
+      @messages = VendorDisputeMessage.reversed.where(vendor_dispute_id: @dispute.id)
+
     end
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no  = params[:tracking_number]
@@ -151,11 +154,6 @@ class VendorsDashboardController < ApplicationController
   
   def set_dispute
     @dispute=VendorDispute.find_by(vendor_id: current_vendor.id)
-  end
-  
-  def set_messages
-    @messages = VendorDisputeMessage.reversed.where(vendor_dispute_id: @dispute.id)
-
   end
 
 end
