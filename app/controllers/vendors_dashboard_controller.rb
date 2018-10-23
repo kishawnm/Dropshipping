@@ -1,8 +1,9 @@
 class VendorsDashboardController < ApplicationController
-  before_action :set_presets, only: [:show, :index  ]
+  before_action :set_presets, only: [:show, :index, :create_messages]
   before_action :set_chat, expect: [:customer_issues]
   before_action :set_dispute, only: [:create_messages, :index]
   before_action :set_issues, only: [:index, :show]
+  before_action :set_messages, only: [:index, :show]
   
   def customer_issues
     dispute             = VendorDispute.new
@@ -12,11 +13,11 @@ class VendorsDashboardController < ApplicationController
     dispute.email       = params[:email]
     dispute.order_number= params[:order_number]
     dispute.description = params[:description]
-    vendor = Vendor.find_by_id(params[:vendor_id])
+    vendor              = Vendor.find_by_id(params[:vendor_id])
     if vendor && vendor.name.present?
-      dispute.subject   = "#{vendor.name}-Issue##{params[:order_number]}-#{params[:vendor_id]}"
+      dispute.subject = "#{vendor.name}-Issue##{params[:order_number]}-#{params[:vendor_id]}"
     else
-      dispute.subject   = "Order##{params[:order_number]}-#{params[:vendor_id]}"
+      dispute.subject = "Order##{params[:order_number]}-#{params[:vendor_id]}"
     end
     unless VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
       dispute.save!
@@ -45,7 +46,6 @@ class VendorsDashboardController < ApplicationController
     @count         = 0
     @response_rate = 0
     if @dispute.present?
-      @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
       @count    = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id, read: false).where.not(email: current_vendor.email).count
     end
     id             = current_vendor.vendor_disputes.pluck(:id)
@@ -64,8 +64,9 @@ class VendorsDashboardController < ApplicationController
   
   def show
     @dispute = VendorDispute.find_by_id(params[:id])
-    VendorDisputeMessage.where(vendor_dispute_id: @dispute.id).update_all(read: true)
-    @messages = VendorDisputeMessage.where(vendor_dispute_id: @dispute.id)
+    if @dispute.present?
+      VendorDisputeMessage.where(vendor_dispute_id: @dispute.id).update_all(read: true)
+    end
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no  = params[:tracking_number]
       @tracking_url = params[:tracking_link]
@@ -150,6 +151,11 @@ class VendorsDashboardController < ApplicationController
   
   def set_dispute
     @dispute=VendorDispute.find_by(vendor_id: current_vendor.id)
+  end
+  
+  def set_messages
+    @messages = VendorDisputeMessage.reversed.where(vendor_dispute_id: @dispute.id)
+
   end
 
 end

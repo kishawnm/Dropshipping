@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="table color-table primary-table">
+    <thead>
+    <h4 class="page-title">My Responses</h4>
+    </thead>
+    <tbody>
+    <tr>
+      <% @responses.each do |response| %>
+          <td><%= response.trigger %></td>
+          <td><%= link_to 'Edit', new_automated_response_path(response) %>
+          <td><%= link_to 'Destroy', { action: :destroy, id: response.id }, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+      </tbody>
+  </table>
+</div>
