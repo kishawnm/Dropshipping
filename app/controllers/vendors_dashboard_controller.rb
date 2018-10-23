@@ -1,5 +1,5 @@
 class VendorsDashboardController < ApplicationController
-  before_action :set_presets, expect: [:customer_issues, :form_editor]
+  before_action :set_presets, only: [:show, :index  ]
   before_action :set_chat, expect: [:customer_issues]
   before_action :set_dispute, only: [:create_messages, :index]
   before_action :set_issues, only: [:index, :show]
@@ -13,8 +13,8 @@ class VendorsDashboardController < ApplicationController
     dispute.order_number= params[:order_number]
     dispute.description = params[:description]
     vendor = Vendor.find_by_id(params[:vendor_id])
-    if vendor.name.present?
-      dispute.subject   = "[#{vendor.name}]-Order##{params[:order_number]}-#{params[:vendor_id]}"
+    if vendor && vendor.name.present?
+      dispute.subject   = "#{vendor.name}-Issue##{params[:order_number]}-#{params[:vendor_id]}"
     else
       dispute.subject   = "Order##{params[:order_number]}-#{params[:vendor_id]}"
     end
