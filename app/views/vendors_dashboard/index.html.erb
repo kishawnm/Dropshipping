@@ -1,84 +1,88 @@
 <!-- Page Content -->
-<div id="page-wrapper">
-  <div class="container-fluid">
-    <div class="row bg-title">
-      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h4 class="page-title">Drop shipping Dashboard Page</h4>
-      </div>
-    </div>
-    <%= @order %>
-    <!--row -->
+
+<div class="content">
+  <!-- Animated -->
+  <div class="animated fadeIn">
+    <!-- Widgets  -->
     <div class="row">
-      <div class="col-lg-12 col-sm-12 col-xs-12">
-        <div class="col-lg-6 col-sm-6 col-xs-12">
-          <div class="white-box">
-            <h3 class="box-title">New Messages</h3>
-            <ul class="list-inline two-part">
-              <li><i class="ti-email text-info"></i></li>
-              <li class="text-right"><span class="counter"><%= @count %></span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6 col-xs-12">
-          <div class="white-box">
-            <h3 class="box-title">New Created Disputes Today</h3>
-            <ul class="list-inline two-part">
-              <li><i class="ti-email text-purple"></i></li>
-              <li class="text-right"><span class="counter"><%= @dispute_count %></span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6 col-xs-12">
-          <div class="white-box">
-            <h3 class="box-title">Unread Messages</h3>
-            <ul class="list-inline two-part">
-              <li><i class="icon-folder-alt text-danger"></i></li>
-              <li class="text-right"><span class="counter"><%= @total_unread %></span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6 col-xs-12">
-          <div class="white-box">
-            <h3 class="box-title">Response Rate</h3>
-            <ul class="list-inline two-part">
-              <li><i class="ti-wallet text-success"></i></li>
-              <li class="text-right"><span class="counter"><%= @response_rate %></span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <!-- Left sidebar -->
-      <div class="col-md-12">
-        <div class="white-box">
-          <div class="row">
-            <div class="col-lg-2 col-md-3  col-sm-4 col-xs-12 inbox-panel">
-              <div class="list-group mail-list m-t-20">
-                Todays Disputes
-                <table id="issue-id">
-                  <% @issues.each do |issue| %>
-                      <tr class="list-group-item active make-request" data-href="<%= vendors_dashboard_path(issue) %>">
-                        <td class="p-3"><%= issue.first_name %></td>
-                        <td class="p-3"><%= issue.last_name %></td>
-                        <td class="p-3"><%= issue.order_number %></td>
-                      </tr>
-                  <% end %>
-                </table>
-                <br>
+      <div class="col-lg-3 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="stat-widget-five">
+              <div class="stat-icon dib flat-color-1">
+                <i class="pe-7s-cash"></i>
+              </div>
+              <div class="stat-content">
+                <div class="text-left dib">
+                  <div class="stat-text">$<span class="count"><%= @count %></span></div>
+                  <div class="stat-heading">New Messages</div>
+                </div>
               </div>
             </div>
-            <div class=" chatview col-lg-10 col-md-9 col-sm-8 col-xs-12 mail_listing">
-              <%= render 'chat_view', messages: @messages, dispute: @dispute %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="stat-widget-five">
+              <div class="stat-icon dib flat-color-2">
+                <i class="pe-7s-cart"></i>
+              </div>
+              <div class="stat-content">
+                <div class="text-left dib">
+                  <div class="stat-text"><span class="count"><%= @dispute_count %></span></div>
+                  <div class="stat-heading">New Created Disputes Today</div>
+                </div>
+              </div>
             </div>
-            <div class="col-lg-2 col-md-3  col-sm-4 col-xs-12 inbox-panel">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="stat-widget-five">
+              <div class="stat-icon dib flat-color-3">
+                <i class="pe-7s-browser"></i>
+              </div>
+              <div class="stat-content">
+                <div class="text-left dib">
+                  <div class="stat-text"><span class="count"><%= @total_unread %></span></div>
+                  <div class="stat-heading">Unread Messages</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="stat-widget-five">
+              <div class="stat-icon dib flat-color-4">
+                <i class="pe-7s-users"></i>
+              </div>
+              <div class="stat-content">
+                <div class="text-left dib">
+                  <div class="stat-text"><span class="count"><%= @response_rate %></span></div>
+                  <div class="stat-heading">Response Rate</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- /Widgets -->
+    <!--  Traffic  -->
+    <!-- To Do and Live Chat -->
+    <%= render 'vendors_dashboard/chat_view' %>
+    <!-- /To Do and Live Chat -->
   </div>
-  <!-- /.container-fluid -->
 </div>
 <script>
 

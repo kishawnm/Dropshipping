@@ -25,12 +25,19 @@ gem 'shopify_app'
 
 gem 'griddler'
 gem 'griddler-sendgrid'
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap', '~> 4.1.3'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'normalize-rails'
+gem "stroke-seven-rails"
+gem 'flag-icons-rails'
+gem 'popper_js', '~> 1.14.3'
+gem 'jquery-matchheight-rails'
+gem 'momentjs-rails'
+gem "autoprefixer-rails"
+gem 'mini_racer'
+gem 'rails-ujs'
 # gem for styling
 gem 'font-awesome-rails'
-
-gem 'jquery-rails'
-
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

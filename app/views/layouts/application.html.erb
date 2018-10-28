@@ -6,14 +6,18 @@
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 
 <body>
 <!-- Preloader -->
-<div id="wrapper">
+<%= render 'layouts/left_side_navbar' %>
+<div id="right-panel" class="right-panel">
   <% if current_vendor.present? %>
       <%= render 'layouts/header' %>
-      <%= render 'layouts/left_side_navbar' %>
+
   <% end %>
   <%= yield %>
   <% render 'layouts/footer' %>
