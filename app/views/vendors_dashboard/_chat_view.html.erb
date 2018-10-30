@@ -8,15 +8,17 @@
             <div class="tdl-holder">
               <div class="tdl-content">
                 <ul>
+                  <% if @issues.present? %>
                   <% @issues.each do |issue| %>
                       <li>
-                        <label class="check-box" data-href="<%= vendors_dashboard_path(issue) %>">
+                        <label class="check-box make-request" data-href="<%= vendors_dashboard_path(issue) %>">
                           <%= issue.first_name %>
                           <%= issue.last_name %>
                           <%= issue.order_number %>
                         </label>
                       </li>
                   <% end %>
+                      <% end %>
                 </ul>
               </div>
             </div>
@@ -33,7 +35,7 @@
         <div class="card-content">
           <% if @dispute.present? %>
               <div class="messenger-box">
-                <ul style=" height: 500px; overflow: auto;">
+                <ul style=" height: 435px; overflow: auto;">
                   <li style="width: 100%; float: left;">
                     <div class="msg-received msg-container">
                       <div class="avatar">
@@ -57,7 +59,6 @@
                           <li style="width: 100%; float: right;">
                             <div class="msg-sent msg-container">
                               <div class="avatar">
-                                <img src="images/avatar/64-2.jpg" alt="">
                                 <div class="send-time"><%= message.created_at.strftime("%H:%M") %></div>
                               </div>
                               <div class="msg-box">
@@ -76,7 +77,6 @@
                           <li style="width: 100%; float: left;">
                             <div class="msg-received msg-container">
                               <div class="avatar">
-                                <img src="images/avatar/64-1.jpg" alt="">
                                 <div class="send-time"><%= message.created_at.strftime("%H:%M") %></div>
                               </div>
                               <div class="msg-box">
@@ -163,6 +163,15 @@
       e.preventDefault();
       var value = jQuery(this).data("desc");
       jQuery("#TextArea").text(value);
+    });
+  });
+
+  $(document).on("click", ".make-request", function (e) {
+    e.preventDefault();
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
     });
   });
 </script>

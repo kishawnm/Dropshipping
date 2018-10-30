@@ -14,6 +14,13 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="switch">
+          <%= f.check_box :is_active %>
+          <span class="slider"></span>
+        </label>
+        Activate it !
+      </div>
+      <div class="form-group">
         <div class="col-md-12">
           <%= f.submit 'Submit', class: 'btn btn-default' %>
         </div>

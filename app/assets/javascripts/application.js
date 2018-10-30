@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
 //= require popper
+//= require bootstrap
 //= require main
 //= require jquery.matchHeight
 //= require moment

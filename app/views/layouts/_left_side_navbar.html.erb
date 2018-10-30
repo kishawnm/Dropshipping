@@ -3,17 +3,25 @@
   <nav class="navbar navbar-expand-sm navbar-default">
     <div id="main-menu" class="main-menu collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active">
-          <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+        <li><%= link_to vendors_dashboard_index_path do %>
+              <i class="menu-icon fa fa-caret-square-o-up"></i> Dashboard
+          <% end %>
         </li>
-        <li class="menu-title">UI elements</li><!-- /.menu-title -->
-        <li><%= link_to 'Dashboard', vendors_dashboard_index_path, class: 'dropdown-toggle' %></li>
-        <% if @dispute.present? %>
-            <li><%= link_to 'Disputes', vendors_dashboard_path(@dispute.id), class: 'dropdown-toggle' %></li>
+        <% if @disputed.present? %>
+            <li><%= link_to disputes_path do %>
+                  <i class="menu-icon fa fa-comment-o"></i> Dispute
+              <% end %>
+            </li>
         <% end %>
-        <li><%= link_to 'Automated Response', new_automated_response_path, class: 'dropdown-toggle' %></li>
-        <li><%= link_to 'Presets', new_response_preset_path, class: 'dropdown-toggle' %></li>
-        <li><%= link_to 'Style form', form_editor_vendors_dashboard_index_path, class: 'dropdown-toggle' %></li>
+        <li><%= link_to new_automated_response_path do %>
+              <i class="menu-icon fa fa-pencil-square-o"></i> Automated Response
+          <% end %></li>
+        <li><%= link_to new_response_preset_path do %>
+              <i class="menu-icon fa fa-pencil-square"></i>Presets
+              <% end %></li>
+        <li><%= link_to form_editor_vendors_dashboard_index_path do %>
+              <i class="menu-icon fa fa-font"></i>Style form
+              <% end %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>

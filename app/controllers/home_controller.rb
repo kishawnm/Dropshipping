@@ -11,8 +11,10 @@ class HomeController < ShopifyApp::AuthenticatedController
       if vend.present?
         vend = Vendor.where(store: store).last
         sign_in :vendor, vend
-        if current_vendor.present?
+        if current_vendor.present? && current_vendor.sign_in_count >= 1
           redirect_to vendors_dashboard_index_path
+        elsif current_vendor.sign_in_count = 0
+          redirect_to edit_vendor_registration_path
         else
           redirect_to new_vendor_session_path
         end
@@ -41,11 +43,11 @@ class HomeController < ShopifyApp::AuthenticatedController
       begin
         orders = ShopifyAPI::Order.find(:all, :params => { :name => "##{params[:order_id]}", :status => 'any', :limit => 250 })
         if orders.present?
-          orders = ShopifyAPI::Order.find(:all, :params => { :name => "##{params[:order_id]}", :status => 'any', :limit => 250 }).last
-          orders = orders.to_json
-          obj    = JSON.parse(orders)
-          sv1    = obj['fulfillments'].first if obj['fulfillments'].present?
-
+          orders          = ShopifyAPI::Order.find(:all, :params => { :name => "##{params[:order_id]}", :status => 'any', :limit => 250 }).last
+          orders          = orders.to_json
+          obj             = JSON.parse(orders)
+          sv1             = obj['fulfillments'].first if obj['fulfillments'].present?
+          
           tracking_number = sv1['tracking_number'] if sv1.present?
           tracking_link   = sv1['tracking_url'] if sv1.present?
           fulfilled_at    = sv1['created_at'] if sv1.present?
@@ -61,7 +63,7 @@ class HomeController < ShopifyApp::AuthenticatedController
             fulfilled_at = 'Order is not fulfilled yet '
           end
           created_at = obj['created_at']
-
+          
           if tracking_number.nil? && tracking_link.nil?
             status = "Order is not fulfilled yet"
           end

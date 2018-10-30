@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dropshipping</title>
+  <title>Swirble</title>
   <%= csrf_meta_tags %>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -18,7 +18,6 @@
 <div id="right-panel" class="right-panel">
   <% if current_vendor.present? %>
       <%= render 'layouts/header' %>
-
   <% end %>
   <%= yield %>
   <% render 'layouts/footer' %>
