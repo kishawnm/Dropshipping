@@ -6,7 +6,7 @@ class DisputesController < ApplicationController
     @messages = VendorDisputeMessage.reversed.where(vendor_dispute_id: @dispute.id)
     @chat = VendorDisputeMessage.new
     @presets = ResponsePreset.all.where(vendor_id: current_vendor.id)
-
+    @disputed = @dispute
   end
   
 end

@@ -69,11 +69,11 @@ class HomeController < ShopifyApp::AuthenticatedController
           end
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at: created_at, status: status)
         else
-          status='Please enter valid order number'
+          status='Dispute Order no is not valid'
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
         end
       rescue ActiveResource::ResourceNotFound
-        status='Please enter valid order number'
+        status='Dispute Order no is not valid'
         redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
       end
     

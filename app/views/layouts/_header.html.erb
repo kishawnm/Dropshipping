@@ -54,17 +54,11 @@
         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= image_tag 'default-profile-pic.png',class:'user-avatar rounded-circle' %>
         </a>
-
         <div class="user-menu dropdown-menu">
           <%= link_to edit_vendor_registration_path, class: "nav-link" do %>
               <i class="fa fa- user"></i>My Profile
           <% end %>
-
-          <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-          <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-          <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+          <%= link_to(' Logout', destroy_vendor_session_path, method: :get, class: " fa fa-power-off") %>
         </div>
       </div>
 

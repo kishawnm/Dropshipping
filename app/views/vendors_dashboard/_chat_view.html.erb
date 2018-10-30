@@ -18,6 +18,8 @@
                         </label>
                       </li>
                   <% end %>
+                      <% else %>
+                      There is no disputes for today
                       <% end %>
                 </ul>
               </div>
@@ -45,7 +47,7 @@
                       <div class="msg-box">
                         <div class="inner-box">
                           <div class="name">
-                            John Doe
+                            <%= @dispute.first_name %>
                           </div>
                           <div class="meg">
                             <%= @dispute.description %>
@@ -64,7 +66,7 @@
                               <div class="msg-box">
                                 <div class="inner-box">
                                   <div class="name">
-                                    John Doe
+                                    <%= current_vendor.name if  current_vendor.name.present?  %>
                                   </div>
                                   <div class="meg">
                                     <%= message.body %>
@@ -82,7 +84,7 @@
                               <div class="msg-box">
                                 <div class="inner-box">
                                   <div class="name">
-                                    John Doe
+                                    <%= @dispute.first_name %>
                                   </div>
                                   <div class="meg">
                                     <%= message.body %>
@@ -115,9 +117,7 @@
                   <% end %>
                   <% if @tracking_no.present? %>
                       <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
-                      <div class="hidden" id="tracking_id_content1"> Here is your tracking
-                        number <%= @tracking_no if @tracking_no.present? %> and tracking
-                        url <%= @tracking_url if @tracking_url.present? %> </div>
+                      <div class="hidden" id="tracking_id_content1"style="display: none;"> Here is your tracking number <%= @tracking_no if @tracking_no.present? %> and trackingurl <%= @tracking_url if @tracking_url.present? %> </div>
                   <% elsif @status.present? %>
                       <a class=" btn btn-primary disabled" id="enter_track_no" disabled="disabled">Send Tracking no</a>
                       <div class="hidden" id="tracking_id_content1"><%= @status %> </div>
@@ -129,26 +129,34 @@
 
                 </div>
               </div><!-- /.messenger-box -->
+              <% else %>
+              <div class="messenger-box">
+                <ul style=" height: 435px; overflow: auto;">
+                  No Message available
+                  </ul>
+                </div>
+
           <% end %>
         </div>
-      </div> <!-- /.card-body -->
+      </div><!-- /.card-body -->
+      <% if params[:created_at].present? %>
+          <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 ">
+            <div class=" col-lg-3 col-md-3 col-sm-3">
+              <p>Name:<%= @name if @name.present? %></p>
+              <span class="time-right">order#<%= @dispute.order_number if @dispute.present? %></span>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+              <p>fulfilled at:<%= @fulfilled_at.to_date if @fulfilled_at.present? %></p>
+              <span class="time-right">Created at:<%= @created_at.to_date if @created_at.present? %></span>
+            </div>
+          </div>
+      <% end %>
     </div><!-- /.card -->
   </div>
 </div>
 
 
-<% if params[:created_at].present? %>
-    <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 ">
-      <div class=" col-lg-3 col-md-3 col-sm-3">
-        <p>Name:<%= @name if @name.present? %></p>
-        <span class="time-right">order#<%= @dispute.order_number if @dispute.present? %></span>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <p>fulfilled at:<%= @fulfilled_at.to_date if @fulfilled_at.present? %></p>
-        <span class="time-right">Created at:<%= @created_at.to_date if @created_at.present? %></span>
-      </div>
-    </div>
-<% end %>
+
 <script>
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
