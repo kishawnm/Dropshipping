@@ -872,7 +872,7 @@ aside.left-panel {
   top: 0;
   z-index: 999; }
 .right-panel .navbar-brand {
-  width: 140px;
+  width: 250px;
   display: inline-block; }
 .right-panel .menutoggle {
   padding-top: 7px; }
@@ -1197,10 +1197,7 @@ header .form-inline {
 .content {
   float: left;
   padding: 1.875em;
-  width: 100%;
-    background: #F0F0F6;
-
-}
+  width: 100%; }
 
 .card {
   margin-bottom: 1.875em;

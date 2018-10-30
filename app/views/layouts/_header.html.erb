@@ -1,27 +1,73 @@
-<nav class="navbar navbar-default navbar-static-top m-b-0">
-  <div class="navbar-header">
-    <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
-    <div class="top-left-part">
-      <a class="logo"><b><!--This is dark logo icon--><!--This is light logo icon--></b><span class="hidden-xs"><!--This is dark logo text-->Drop Shipping<!--This is light logo text--></span></a>
+<header id="header" class="header">
+  <div class="top-left">
+    <div class="navbar-header">
+      <%= image_tag 'swirblogo.png',class:'navbar-brand' %>
+      <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
     </div>
-    <ul class="nav navbar-top-links navbar-left hidden-xs">
-      <li>
-        <a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a>
-      </li>
-      <li>
-        <form role="search" class="app-search hidden-xs">
-          <input type="text" placeholder="Search..." class="form-control">
-          <a href=""><i class="fa fa-search"></i></a>
-        </form>
-      </li>
-    </ul>
-    <ul class="nav navbar-top-links navbar-right pull-right">
-      <li class="mega-dropdown">
-        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><span class="hidden-xs"><%= current_vendor.email %></span>
-          <i class="icon-options-vertical"></i></a>
-      </li>
-
-    </ul>
   </div>
+  <div class="top-right">
+    <div class="header-menu">
+      <div class="header-left">
+        <button class="search-trigger"><i class="fa fa-search"></i></button>
+        <div class="form-inline">
+          <form class="search-form">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+            <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+          </form>
+        </div>
 
-</nav>
+        <div class="dropdown for-notification">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-bell"></i>
+            <span class="count bg-danger">3</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="notification">
+            <p class="red">You have 3 Notification</p>
+            <a class="dropdown-item media" href="#">
+              <i class="fa fa-check"></i>
+              <p>Server #1 overloaded.</p>
+            </a>
+            <a class="dropdown-item media" href="#">
+              <i class="fa fa-info"></i>
+              <p>Server #2 overloaded.</p>
+            </a>
+            <a class="dropdown-item media" href="#">
+              <i class="fa fa-warning"></i>
+              <p>Server #3 overloaded.</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown for-message">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-envelope"></i>
+            <span class="count bg-primary">4</span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="message">
+            <p class="red">You have 4 Mails</p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="user-area dropdown float-right">
+        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= image_tag 'default-profile-pic.png',class:'user-avatar rounded-circle' %>
+        </a>
+
+        <div class="user-menu dropdown-menu">
+          <%= link_to edit_vendor_registration_path, class: "nav-link" do %>
+              <i class="fa fa- user"></i>My Profile
+          <% end %>
+
+          <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+
+          <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+
+          <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>

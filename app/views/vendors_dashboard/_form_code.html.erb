@@ -1,8 +1,8 @@
-<div class="col-lg-6 col-sm-6 col-xs-12">
-  <div class="news-slide m-b-15">
-    <div class="vcarousel slide">
-      <!-- Carousel items -->
-      <div class="white-box over-flow">
+<div class="col-lg-6">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title box-title">Form Code</h4>
+      <div class="card-content">
         <p id="p1"><%= @str='<form action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
 		 <input type="hidden" id="vendor_id" name="vendor_id" ' + "value=#{current_vendor.id}>"+'
 		<div style="margin-bottom: 15px;">
@@ -35,32 +35,41 @@ function myFunction() {
 }
 </script>
 ' %></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button onclick="copyToClipboard('#p1')" class="btn btn-default " id="copybutton">Copy Textarea</button>
-      </div>
-      <fieldset>
-        <legend>Choose form colors</legend>
-        <div>
-          <input type="color" class="head" name="color" value=<%= @input_fields %>>
-          <input id="in" onchange="chaa()" class="head" type="text" value="">
-          <script>
-            function chaa() {
-              var aa = $("#in").val();
-              document.getElementById("head").value = aa;
-
-            } </script>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button onclick="copyToClipboard('#p1')" class="btn btn-default " id="copybutton">Copy Textarea</button>
         </div>
-      </fieldset>
+        <fieldset>
+          <legend>Choose form colors</legend>
+          <div>
+            <input type="color" class="head" name="color" value=<%= @input_fields %>>
+            <input id="in" onchange="chaa()" class="head" type="text" value="" placeholder="#000000">
+            <script>
+              function chaa() {
+                var aa = $("#in").val();
+                document.getElementById("head").value = aa;
 
-    </div>
-  </div>
+              } </script>
+          </div>
+        </fieldset>
+      </div>
+    </div> <!-- /.card-body -->
+  </div><!-- /.card -->
 </div>
-<div class="form-code col-lg-6 col-sm-6 col-xs-12">
-  <%= @str.html_safe %>
+
+<div class="col-lg-6">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title box-title">Preview</h4>
+      <div class="card-content">
+        <%= @str.html_safe %>
+      </div>
+    </div> <!-- /.card-body -->
+  </div><!-- /.card -->
 </div>
+
 <script>
+
   $(document).on("click", ".btn-custom-class", function (e) {
     e.preventDefault();
     var value = jQuery(this).data("desc");
@@ -76,10 +85,11 @@ function myFunction() {
     document.execCommand("copy");
     $temp.remove();
   }
+
   var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  if(isSafari){
-      $("#color_fields").css("display", "none");
+  if (isSafari) {
+    $("#color_fields").css("display", "none");
   } else {
-      $("#color_fields").css("display", "block");
+    $("#color_fields").css("display", "block");
   }
 </script>

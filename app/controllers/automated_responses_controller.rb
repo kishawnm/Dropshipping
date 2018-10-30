@@ -10,6 +10,7 @@ class AutomatedResponsesController < ApplicationController
   end
   
   def create
+    binding.pry
     @response          = AutomatedResponse.new(response_params)
     @response.vendor_id=current_vendor.id
     @response.save
@@ -36,8 +37,7 @@ class AutomatedResponsesController < ApplicationController
   
   private
   def response_params
-    params.require(:automated_response).permit(:name_of_response, :trigger, :subject, :response, :vendor_id)
-  
+    params.require(:automated_response).permit(:name_of_response, :trigger, :subject, :response, :vendor_id,:is_active)
   end
   
   def set_response

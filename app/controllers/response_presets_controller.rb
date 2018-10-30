@@ -1,4 +1,4 @@
-class ResponsePresetsController < ApplicationController
+class   ResponsePresetsController < ApplicationController
   before_action :set_all_preset
   
   def new
