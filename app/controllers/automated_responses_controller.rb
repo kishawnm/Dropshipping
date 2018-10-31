@@ -10,7 +10,6 @@ class AutomatedResponsesController < ApplicationController
   end
   
   def create
-    binding.pry
     @response          = AutomatedResponse.new(response_params)
     @response.vendor_id=current_vendor.id
     @response.save

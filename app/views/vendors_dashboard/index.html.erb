@@ -80,7 +80,12 @@
     <!-- /Widgets -->
     <!--  Traffic  -->
     <!-- To Do and Live Chat -->
-    <%= render 'vendors_dashboard/chat_view' %>
+    <div class="row">
+      <%= render 'layouts/shared/dispute_list' %>
+      <div class="col-lg-8" id="chat-view" >
+      <%= render 'layouts/shared/chat_view' %>
+        </div>
+    </div>
     <!-- /To Do and Live Chat -->
   </div>
 </div>

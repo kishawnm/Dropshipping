@@ -7,21 +7,20 @@
               <i class="menu-icon fa fa-caret-square-o-up"></i> Dashboard
           <% end %>
         </li>
-        <% if @disputed.present? %>
-            <li><%= link_to disputes_path do %>
-                  <i class="menu-icon fa fa-comment-o"></i> Dispute
-              <% end %>
-            </li>
-        <% end %>
+
+        <li><%= link_to disputes_path do %>
+              <i class="menu-icon fa fa-comment-o"></i> Dispute
+          <% end %>
+        </li>
         <li><%= link_to new_automated_response_path do %>
               <i class="menu-icon fa fa-pencil-square-o"></i> Automated Response
           <% end %></li>
         <li><%= link_to new_response_preset_path do %>
               <i class="menu-icon fa fa-pencil-square"></i>Presets
-              <% end %></li>
+          <% end %></li>
         <li><%= link_to form_editor_vendors_dashboard_index_path do %>
               <i class="menu-icon fa fa-font"></i>Style form
-              <% end %></li>
+          <% end %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>

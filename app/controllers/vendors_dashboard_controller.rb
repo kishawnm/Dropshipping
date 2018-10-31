@@ -1,7 +1,7 @@
 class VendorsDashboardController < ApplicationController
   before_action :set_presets, only: [:show, :index, :create_messages]
   before_action :set_chat, expect: [:customer_issues]
-  before_action :set_dispute, only: [:create_messages, :index]
+  before_action :set_dispute, only: [:index]
   before_action :set_issues, only: [:index]
   
   def customer_issues
@@ -88,7 +88,7 @@ class VendorsDashboardController < ApplicationController
         format.html
       end
     elsif params[:status].present?
-      
+
       @status = params[:status]
       respond_to do |format|
         format.js
@@ -97,7 +97,7 @@ class VendorsDashboardController < ApplicationController
     else
       redirect_to get_tracking_status_path(order_id: @dispute.order_number, vendor_dispute_id: params[:id])
     end
-  
+
   end
   
   
@@ -109,8 +109,8 @@ class VendorsDashboardController < ApplicationController
     @message.save!
     @messages = VendorDisputeMessage.where(vendor_dispute_id: @message.vendor_dispute_id)
     
-    @vendor_dispute = VendorDispute.find_by_id(@message.vendor_dispute_id)
-    UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: current_vendor.name).message_email.deliver_now
+    @dispute = VendorDispute.find_by_id(@message.vendor_dispute_id)
+    UserMailer.with(message: @message, vendor_dispute: @dispute, name: current_vendor.name).message_email.deliver_now
     
     respond_to do |format|
       format.js
@@ -160,8 +160,7 @@ class VendorsDashboardController < ApplicationController
   end
   
   def set_dispute
-    @dispute  =@issues.first if @issues.present?
-    @disputed = VendorDispute.where(vendor_id: current_vendor.id)
+    @dispute =@issues.first if @issues.present?
   end
 
 end

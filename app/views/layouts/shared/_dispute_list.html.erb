@@ -1,0 +1,30 @@
+<div class="col-lg-4">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title box-title">Today's Disputes</h4>
+      <div class="card-content">
+        <div class="todo-list" style=" height: 600px; overflow: auto;">
+          <div class="tdl-holder">
+            <div class="tdl-content">
+              <ul>
+                <% if @issues.present? %>
+                    <% @issues.each do |issue| %>
+                        <li>
+                          <label class="check-box make-request" data-href="<%= vendors_dashboard_path(issue) %>">
+                            <%= issue.first_name %>
+                            <%= issue.last_name %>
+                            <%= issue.order_number %>
+                          </label>
+                        </li>
+                    <% end %>
+                <% else %>
+                    There is no disputes for today
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div> <!-- /.todo-list -->
+      </div>
+    </div> <!-- /.card-body -->
+  </div><!-- /.card -->
+</div>

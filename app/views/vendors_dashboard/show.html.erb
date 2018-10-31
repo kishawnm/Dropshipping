@@ -1,6 +1,11 @@
 <!-- Page Content -->
-<div class="chatview ">
-  <%= render 'chat_view' %>
+<div class="content">
+  <div class="row">
+    <%= render 'layouts/shared/dispute_list' %>
+    <div class="col-lg-8" id="chat-view" >
+      <%= render 'layouts/shared/chat_view' %>
+    </div>
+  </div>
 </div>
 
 <script>

@@ -1,1 +1,1 @@
-$(".chatview").html("<%= escape_javascript(render partial: 'chat_view',:dispute=> @dispute ) %>");
+$("#chat-view").html("<%= escape_javascript(render partial: 'layouts/shared/chat_view',:dispute=> @dispute,:messages=>@messages ) %>");

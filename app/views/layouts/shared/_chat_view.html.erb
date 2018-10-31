@@ -1,0 +1,156 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title box-title">Live Chat</h4>
+    <div class="card-content">
+      <% if @dispute.present? %>
+          <div class="messenger-box">
+            <ul style=" height: 435px; overflow: auto;">
+              <li style="width: 100%; float: left;">
+                <div class="msg-received msg-container">
+                  <div class="avatar">
+
+                    <div class="send-time"><%= @dispute.created_at.strftime("%H:%M") %></div>
+                  </div>
+                  <div class="msg-box">
+                    <div class="inner-box">
+                      <div class="name">
+                        <%= @dispute.first_name %>
+                      </div>
+                      <div class="meg">
+                        <%= @dispute.description %>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- /.msg-received -->
+              </li>
+              <% @messages.each do |message| %>
+                  <% if message.email == current_vendor.email %>
+                      <li style="width: 100%; float: right;">
+                        <div class="msg-sent msg-container">
+                          <div class="avatar">
+                            <div class="send-time"><%= message.created_at.strftime("%H:%M") %></div>
+                          </div>
+                          <div class="msg-box">
+                            <div class="inner-box">
+                              <div class="name">
+                                <%= current_vendor.name if current_vendor.name.present? %>
+                              </div>
+                              <div class="meg">
+                                <%= message.body %>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!-- /.msg-sent -->
+                      </li>
+                  <% else %>
+                      <li style="width: 100%; float: left;">
+                        <div class="msg-received msg-container">
+                          <div class="avatar">
+                            <div class="send-time"><%= message.created_at.strftime("%H:%M") %></div>
+                          </div>
+                          <div class="msg-box">
+                            <div class="inner-box">
+                              <div class="name">
+                                <%= @dispute.first_name %>
+                              </div>
+                              <div class="meg">
+                                <%= message.body %>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!-- /.msg-received -->
+                      </li>
+                  <% end %>
+              <% end %>
+            </ul>
+            <%= form_for @chat, :url => create_messages_vendors_dashboard_index_path(@chat), :method => :post, remote: true do |f| %>
+                <div class="send-mgs">
+                  <div class="yourmsg">
+                    <%= f.text_area :body, id: 'TextArea', class: 'form-control', placeholder: "Your Text Goes Here.." %>
+                  </div>
+                  <%= f.hidden_field :vendor_dispute_id, :value => @dispute.id if @dispute.present? %>
+                  <%= f.hidden_field :email, :value => current_vendor.email %>
+
+                  <% if @dispute.present? %>
+                      <%= button_tag(class: "btn fa msg-send-btn") do %>
+                          <i class="pe-7s-paper-plane"></i>
+                      <% end %>
+                  <% end %>
+                </div>
+            <% end %>
+            <div class="p-10">
+              <% @presets.each do |preset| %>
+                  <a href="#" class="btn btn-default btn-custom-class" data-desc="<%= preset.message %>" id="<%= preset.id %>"><%= preset.name %></a>
+              <% end %>
+              <% if @tracking_no.present? %>
+                  <a class=" btn btn-primary" id="enter_track_no">Send Tracking no</a>
+                  <div class="hidden" id="tracking_id_content1" style="display: none;"> Here is your tracking
+                    number <%= @tracking_no if @tracking_no.present? %> and
+                    trackingurl <%= @tracking_url if @tracking_url.present? %> </div>
+              <% elsif @status.present? %>
+                  <a class=" btn btn-primary disabled" id="enter_track_no" disabled="disabled">Send Tracking no</a>
+                  <div class="hidden" id="tracking_id_content1"><%= @status %> </div>
+              <% else %>
+                  <button heref="#" title="No tracking available" class="btn btn-default disabled" disabled="disabled">
+                    <span>Send Tracking no</span>
+                  </button>
+              <% end %>
+
+            </div>
+          </div><!-- /.messenger-box -->
+      <% else %>
+          <div class="messenger-box">
+            <ul style=" height: 435px; overflow: auto;">
+              No Message available
+            </ul>
+          </div>
+
+      <% end %>
+    </div>
+  </div><!-- /.card-body -->
+  <% if params[:created_at].present? %>
+      <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 ">
+        <div class=" col-lg-3 col-md-3 col-sm-3">
+          <p>Name:<%= @name if @name.present? %></p>
+          <span class="time-right">order#<%= @dispute.order_number if @dispute.present? %></span>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <p>fulfilled at:<%= @fulfilled_at.to_date if @fulfilled_at.present? %></p>
+          <span class="time-right">Created at:<%= @created_at.to_date if @created_at.present? %></span>
+        </div>
+      </div>
+  <% end %>
+</div><!-- /.card -->
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+
+  });
+
+  $("#enter_track_no").click(function () {
+    $("#TextArea").val($("#tracking_id_content1").text());
+  });
+  $(document).ready(function () {
+    $(document).on("click", ".btn-custom-class", function (e) {
+      e.preventDefault();
+      var value = jQuery(this).data("desc");
+      jQuery("#TextArea").text(value);
+    });
+  });
+
+  $(document).on("click", ".make-request", function (e) {
+    e.preventDefault();
+    var link = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });
+</script>
+
+
