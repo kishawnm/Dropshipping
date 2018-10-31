@@ -20,8 +20,9 @@ class VendorsDashboardController < ApplicationController
     end
     unless VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
       dispute.save!
-      automated_res=AutomatedResponse.where(vendor_id: params[:vendor_id])
-      vendor       =Vendor.find_by_id(params[:vendor_id])
+      automated_res = AutomatedResponse.where('vendor_id = ? and is_active = ? ',params[:vendor_id],'true')
+      
+      vendor       = Vendor.find_by_id(params[:vendor_id])
       automated_res.each do |res|
         if dispute.description.downcase.include? res.trigger.downcase
           @message                  = VendorDisputeMessage.new
