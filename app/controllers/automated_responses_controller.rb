@@ -28,6 +28,11 @@ class AutomatedResponsesController < ApplicationController
     end
   end
   
+  def turn_off
+    @responses.update_all(is_active:false)
+    redirect_to new_automated_response_path
+  end
+  
   def destroy
     @response=AutomatedResponse.find_by_id(params[:id])
     @response.destroy

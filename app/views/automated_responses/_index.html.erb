@@ -1,4 +1,8 @@
 <div class="card-body card-block">
+  <label class="switch switch-primary" id="switch">
+    <%= link_to 'off', turn_off_automated_responses_path, method:'post',remote: true  %>
+  </label>
+
   <table class="table color-table primary-table">
     <thead>
     <h4 class="page-title">My Responses</h4>
@@ -14,3 +18,15 @@
       </tbody>
   </table>
 </div>
+<script>
+
+  $(document).on("change", "#switch", function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: '/automated_responses/turn_off',
+      type: "POST"
+    });
+  });
+
+
+</script>

@@ -9,7 +9,7 @@
                 <div class="msg-received msg-container">
                   <div class="avatar">
 
-                    <div class="send-time"><%= @dispute.created_at.strftime("%H:%M") %></div>
+                    <div class="send-time"><%= time_ago_in_words(@dispute.created_at.to_time) %></div>
                   </div>
                   <div class="msg-box">
                     <div class="inner-box">
@@ -28,7 +28,7 @@
                       <li style="width: 100%; float: right;">
                         <div class="msg-sent msg-container">
                           <div class="avatar">
-                            <div class="send-time"><%= message.created_at.strftime("%H:%M") %></div>
+                            <div class="send-time"> <%= time_ago_in_words(message.created_at.to_time) %></div>
                           </div>
                           <div class="msg-box">
                             <div class="inner-box">
@@ -46,7 +46,7 @@
                       <li style="width: 100%; float: left;">
                         <div class="msg-received msg-container">
                           <div class="avatar">
-                            <div class="send-time"><%= message.created_at.strftime("%H:%M") %></div>
+                            <div class="send-time"><%= time_ago_in_words(message.created_at.to_time) %></div>
                           </div>
                           <div class="msg-box">
                             <div class="inner-box">
