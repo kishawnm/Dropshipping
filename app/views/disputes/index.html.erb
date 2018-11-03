@@ -1,5 +1,11 @@
 <!-- Page Content -->
 <div class=" content ">
+  <%= form_tag disputes_path, :method => 'get', class:"search-form" do %>
+    <p>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search Dispute' ,class: "form-control mr-sm-2", id: "search_dispute_index"%>
+      <%= submit_tag "Search" , name: nil, id: "submit_search_index"  %>
+    </p>
+  <% end %>
   <div class="row">
     <%= render 'layouts/shared/dispute_list' %>
     <div class="col-lg-8" id="chat-view" >
@@ -7,15 +13,21 @@
     </div>
   </div>
 </div>
-
+<style>
+  #submit_search_index{
+    display: none;
+  }
+</style>
 <script>
-
-
   $(document).on("click", ".make-request", function (e) {
     e.preventDefault();
     var link = $(this).data("href");
     window.location.href = link;
   });
 
-
+  $('#search_dispute_index').on("keypress", function(e) {
+      if (e.keyCode == 13) {
+          $("#submit_search_index").click();
+      }
+  });
 </script>

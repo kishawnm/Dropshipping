@@ -29,7 +29,11 @@ class AutomatedResponsesController < ApplicationController
   end
   
   def turn_off
-    @responses.update_all(is_active:false)
+    if params[:disable] == "true"
+      @responses.update_all(is_active: true)
+    elsif params[:disable] == "false"
+      @responses.update_all(is_active: false)
+    end
     redirect_to new_automated_response_path
   end
   
