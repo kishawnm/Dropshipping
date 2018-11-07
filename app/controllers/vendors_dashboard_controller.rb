@@ -67,9 +67,9 @@ class VendorsDashboardController < ApplicationController
   def show
     req = request.referer
     if req.include?("disputes")
-      @issues = VendorDispute.join(:vendor_dispute_messages).where(vendor_id: current_vendor.id)
-    else
-      @issues = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today)
+  
+      @issues = VendorDispute.joins(:vendor_dispute_messages).where(vendor_id: current_vendor.id).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC")    else
+      @issues = VendorDispute.joins(:vendor_dispute_messages).where("vendor_id = ? AND vendor_disputes.created_at >= ?", current_vendor.id, Time.zone.now.beginning_of_day).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC")
     end
     
     @dispute = VendorDispute.find_by_id(params[:id])
