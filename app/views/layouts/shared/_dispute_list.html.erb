@@ -15,6 +15,16 @@
                             <%= issue.last_name %>
                             <%= issue.order_number %>
                           </label>
+                          <% if issue.vendor_dispute_messages.present? %>
+                            <%= time_ago_in_words(issue.vendor_dispute_messages.last.created_at) %>
+                          <% else %>
+                            <%= time_ago_in_words(issue.created_at) %>
+                          <% end %>
+                          <% if issue.vendor_dispute_messages.present? && issue.vendor_dispute_messages.last.read == false %>
+                            <i class="fa fa-circle" style="
+                            color: #49a342;
+                            "></i>
+                          <% end %>
                         </li>
                     <% end %>
                 <% else %>
