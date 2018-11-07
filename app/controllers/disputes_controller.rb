@@ -5,8 +5,7 @@ class DisputesController < ApplicationController
     if @disputed_result.present?
       @issues = @disputed_result
     else
-      @issues = VendorDispute.where(vendor_id: current_vendor.id)
- 
+      @issues = VendorDispute.joins(:vendor_dispute_messages).where(vendor_id: current_vendor.id).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC")
     end
     @dispute = @issues.first
     if @dispute.present?

@@ -20,9 +20,9 @@ class VendorsDashboardController < ApplicationController
     end
     unless VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
       dispute.save!
-      automated_res = AutomatedResponse.where('vendor_id = ? and is_active = ? ',params[:vendor_id],'true')
+      automated_res = AutomatedResponse.where('vendor_id = ? and is_active = ? ', params[:vendor_id], 'true')
       
-      vendor       = Vendor.find_by_id(params[:vendor_id])
+      vendor = Vendor.find_by_id(params[:vendor_id])
       automated_res.each do |res|
         if dispute.description.downcase.include? res.trigger.downcase
           @message                  = VendorDisputeMessage.new
@@ -59,7 +59,7 @@ class VendorsDashboardController < ApplicationController
       customer_message = VendorDisputeMessage.where(vendor_dispute_id: vendor_dispute.id).where(email: current_vendor.email).first
     end
     if vendor_dispute.present? && customer_message.present?
-      @response_rate = time_diff(vendor_dispute.created_at, customer_message.created_at)
+      @response_rate = time_diff(vendor_dispute.created_at, customer_message.created_at).to_i
     end
   
   end
@@ -67,7 +67,7 @@ class VendorsDashboardController < ApplicationController
   def show
     req = request.referer
     if req.include?("disputes")
-      @issues = VendorDispute.where(vendor_id: current_vendor.id)
+      @issues = VendorDispute.join(:vendor_dispute_messages).where(vendor_id: current_vendor.id)
     else
       @issues = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today)
     end
@@ -76,7 +76,10 @@ class VendorsDashboardController < ApplicationController
     if @dispute.present?
       VendorDisputeMessage.where(vendor_dispute_id: @dispute.id).update_all(read: true)
       @messages = VendorDisputeMessage.reversed.where(vendor_dispute_id: @dispute.id)
-    
+      # respond_to do |format|
+      #   format.js
+      #   format.html
+      # end
     end
     if params[:tracking_number].present? && @dispute.present?
       @tracking_no  = params[:tracking_number]
@@ -89,7 +92,7 @@ class VendorsDashboardController < ApplicationController
         format.html
       end
     elsif params[:status].present?
-
+      
       @status = params[:status]
       respond_to do |format|
         format.js
@@ -98,7 +101,7 @@ class VendorsDashboardController < ApplicationController
     else
       redirect_to get_tracking_status_path(order_id: @dispute.order_number, vendor_dispute_id: params[:id])
     end
-
+  
   end
   
   
@@ -153,9 +156,8 @@ class VendorsDashboardController < ApplicationController
   end
   
   def set_issues
-    @issues = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today)
+    @issues = VendorDispute.joins(:vendor_dispute_messages).where("vendor_id = ? AND vendor_disputes.created_at >= ?", current_vendor.id, Time.zone.now.beginning_of_day).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC")
   end
-  
   def set_presets
     @presets = ResponsePreset.all.where(vendor_id: current_vendor.id)
   end

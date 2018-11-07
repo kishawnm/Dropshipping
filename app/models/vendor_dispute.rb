@@ -8,9 +8,7 @@ class VendorDispute < ApplicationRecord
     if search.blank?  # blank? covers both nil and empty string
       all
     else
-      where('vendor_id = ? and order_number LIKE ?', id ,"%#{search}%")
+      where('vendor_id = :id and first_name  LIKE :search OR last_name LIKE :search OR order_number LIKE :search',id: id ,search: "%#{search}%")
     end
   end
-
-
 end

@@ -5,4 +5,5 @@
 //= require main
 //= require jquery.matchHeight
 //= require moment
+//= require toastr
 //= require_tree .

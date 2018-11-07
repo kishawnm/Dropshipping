@@ -22,7 +22,10 @@
   $(document).on("click", ".make-request", function (e) {
     e.preventDefault();
     var link = $(this).data("href");
-    window.location.href = link;
+    $.ajax({
+      type:'GET',
+      url: link
+    });
   });
 
   $('#search_dispute_index').on("keypress", function(e) {
