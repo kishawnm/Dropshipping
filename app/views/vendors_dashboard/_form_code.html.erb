@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
@@ -18,31 +18,31 @@
 <p id="Form Submitted"></p>
 </div>
 <form id="myForm" action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post" onsubmit="myFunction()">
-     <input type="hidden" id="vendor_id" name="vendor_id" ' + "value=#{current_vendor.id}>"+'
-    <div style="margin-bottom: 15px;">
-      <label style="margin-bottom: 5px; display: block;' + "color:#{@input_fields};" ' ">First Name</label>
-      <input type="text" name="first_name" placeholder="First name" required style="height: 35px; border:' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%; box-sizing: border-box;outline-color:' "#{@input_fields};" '"">
-    </div>
-    <div style="margin-bottom: 15px;">
-      <label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Last Name</label>
-      <input type="text" name="last_name" placeholder="Last name" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '"">
-    </div>
-    <div style="margin-bottom: 15px;">
-      <label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Email</label>
-      <input type="text" name="email" placeholder="Email" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '"">
-    </div>
-    <div style="margin-bottom: 15px;">
-      <label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Order No</label>
-      <input type="text" name="order_number" placeholder="Order No" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '" ">
-    </div>
-    <div style="margin-bottom: 15px;">
-      <label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Description of Issue</label>
-      <textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none; outline-color:' "#{@input_fields};" '"></textarea>
-    </div>
-    <div style="margin-bottom: 15px;">
-      <input  type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
-    </div>
-  </form>
+		 <input type="hidden" id="vendor_id" name="vendor_id" ' + "value=#{current_vendor.id}>"+'
+		<div style="margin-bottom: 15px;">
+			<label style="margin-bottom: 5px; display: block;' + "color:#{@input_fields};" ' ">First Name</label>
+			<input type="text" name="first_name" placeholder="First name" required style="height: 35px; border:' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%; box-sizing: border-box;outline-color:' "#{@input_fields};" '"">
+		</div>
+		<div style="margin-bottom: 15px;">
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Last Name</label>
+			<input type="text" name="last_name" placeholder="Last name" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '"">
+		</div>
+		<div style="margin-bottom: 15px;">
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Email</label>
+			<input type="text" name="email" placeholder="Email" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '"">
+		</div>
+		<div style="margin-bottom: 15px;">
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Order No</label>
+			<input type="text" name="order_number" placeholder="Order No" required style="height: 35px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; outline-color:' "#{@input_fields};" '" ">
+		</div>
+		<div style="margin-bottom: 15px;">
+			<label style="margin-bottom: 10px; display: block; ' + "color:#{@input_fields};" ' ">Description of Issue</label>
+			<textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none; outline-color:' "#{@input_fields};" '"></textarea>
+		</div>
+		<div style="margin-bottom: 15px;">
+			<input  type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
+		</div>
+	</form>
     <div id="myModal" class="modal">
 
   <!-- Modal content -->
@@ -53,7 +53,7 @@
 
 </div>
 <style ">
-  body {font-family: Arial, Helvetica, sans-serif;}
+	body {font-family: Arial, Helvetica, sans-serif;}
 
 /* The Modal (background) */
 .modal {
@@ -95,7 +95,7 @@
 }
 </style>
   <script>
-var modal = document.getElementById('myModal');
+var modal = document.getElementById("myModal");
 
 var span = document.getElementsByClassName("close")[0];
 function myFunction() {
