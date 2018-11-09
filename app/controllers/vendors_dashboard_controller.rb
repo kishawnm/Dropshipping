@@ -156,7 +156,7 @@ class VendorsDashboardController < ApplicationController
   end
   
   def set_issues
-    @issues = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today)
+    @issues = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today).reverse
   end
   def set_presets
     @presets = ResponsePreset.all.where(vendor_id: current_vendor.id)
