@@ -69,7 +69,7 @@ class VendorsDashboardController < ApplicationController
     if req.include?("disputes")
       @issues = VendorDispute.joins(:vendor_dispute_messages).where(vendor_id: current_vendor.id).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC")
     else
-      @issues = VendorDispute.joins(:vendor_dispute_messages).where("vendor_id = ? AND DATE(vendor_disputes.created_at) >= ?", current_vendor.id, Date.today).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC").uniq
+      @issues = VendorDispute.joins(:vendor_dispute_messages).where("vendor_id = ? AND DATE(vendor_disputes.created_at) = ?", current_vendor.id, Date.today).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC").uniq
     end
     
     @dispute = VendorDispute.find_by_id(params[:id])
