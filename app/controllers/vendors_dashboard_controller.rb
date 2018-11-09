@@ -156,7 +156,7 @@ class VendorsDashboardController < ApplicationController
   end
   
   def set_issues
-    @issues = VendorDispute.joins(:vendor_dispute_messages).where("vendor_id = ? AND DATE(vendor_disputes.created_at) >= ?", current_vendor.id, Date.today).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC")
+    @issues = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today)
   end
   def set_presets
     @presets = ResponsePreset.all.where(vendor_id: current_vendor.id)
