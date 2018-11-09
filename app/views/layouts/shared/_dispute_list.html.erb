@@ -15,18 +15,14 @@
                             <%= issue.last_name %>
                             <%= issue.order_number %>
                             <% if issue.vendor_dispute_messages.present? && issue.vendor_dispute_messages.last.read == false %>
-                              <div id="unread_dot_<%= issue.id %>">
                               <i class="fa fa-circle" style="
                               color: #49a342;
                               "></i>
-                              </div>
                             <% end %>
                             <br>
                             <% if issue.vendor_dispute_messages.present? && issue.vendor_dispute_messages.last.read == false %>
-                              <div id="unread_counter_<%= issue.id %>">
                               <%= "#{issue.vendor_dispute_messages.where(read: false).count} unread messages" %>
                               <br>
-                              </div>
                             <% end %>
                             <% if issue.vendor_dispute_messages.present? %>
                               <%= "#{time_ago_in_words(issue.vendor_dispute_messages.last.created_at)} ago" %>

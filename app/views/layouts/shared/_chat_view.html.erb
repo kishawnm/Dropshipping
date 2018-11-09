@@ -1,6 +1,12 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title box-title">Live Chat</h4>
+    <% if @dispute.first_name.present? &&  @dispute.last_name.present? &&  @dispute.order_number.present? %>
+      <%= @dispute.first_name %>
+      <%= @dispute.last_name %>
+      <%= @dispute.order_number %>
+      <% else %>
+      <h4 class="card-title box-title">Live Chat</h4>
+      <% end %>
     <div class="card-content">
       <% if @dispute.present? %>
           <div class="messenger-box">
