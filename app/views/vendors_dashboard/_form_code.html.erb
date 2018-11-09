@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <form id="myForm" action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post" onsubmit="myFunction()">
@@ -38,67 +39,33 @@
 			<input  type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
 		</div>
 	</form>
-    <div id="myModal" class="modal">
+   <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
     <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Your request is submmited. We will contact you shortly via email</p>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Thnak you</h4>
+      </div>
+      <div class="modal-body">
+        <p>Your request is submitted. we will contact you shortly.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>
-<style ">
-	body {font-family: Arial, Helvetica, sans-serif;}
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-</style>
+
   <script>
-var modal = document.getElementById("myModal");
-
-var span = document.getElementsByClassName("close")[0];
 function myFunction() {
-    $("#myModal").show
-    document.getElementById("myForm").reset();
-}
-
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+ $("#myModal").modal("show");
+ document.getElementById("myForm").reset();
+	}
   </script>
-</body>>' %></p>
+</body>' %></p>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button onclick="copyToClipboard('#p1')" class="btn btn-default " id="copybutton">Copy Textarea</button>
