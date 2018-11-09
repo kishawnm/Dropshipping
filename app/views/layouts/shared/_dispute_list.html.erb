@@ -21,7 +21,7 @@
                             <% end %>
                             <br>
                             <% if issue.vendor_dispute_messages.present? && issue.vendor_dispute_messages.last.read == false %>
-                              <%= "#{issue.vendor_dispute_messages.where(read: false).count} unread messages" %>
+                              <span><%= "#{issue.vendor_dispute_messages.where(read: false).count} unread messages" %></span>
                               <br>
                             <% end %>
                             <% if issue.vendor_dispute_messages.present? %>
