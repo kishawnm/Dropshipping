@@ -31,7 +31,14 @@ class VendorsDashboardController < ApplicationController
           @message.email            = vendor.email
           @message.save!
           @vendor_dispute=VendorDispute.find_by_id(dispute.id)
+          if vendor.name.present?
           UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: current_vendor.name).message_email.deliver_now
+          else
+            name =  current_vendor.email.split('@').first
+            UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: name).message_email.deliver_now
+
+          end
+          
         end
       end
     else
