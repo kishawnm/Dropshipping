@@ -163,7 +163,7 @@ class VendorsDashboardController < ApplicationController
   end
   
   def set_issues
-    @issues = VendorDispute.joins(:vendor_dispute_messages).where("vendor_id = ? AND vendor_disputes.created_at >= ?", current_vendor.id, Time.zone.now.beginning_of_day).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC").uniq
+    @issues = VendorDispute.where(vendor_id: current_vendor.id).where("DATE(created_at) = ?", Date.today).reverse
   end
   
   def set_presets
