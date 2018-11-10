@@ -2,18 +2,8 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title box-title">Form Code</h4>
-      <div class="card-content"  >
-        <p id="p1" style="height: 435px; overflow: auto;"><%= @str='<head>
-  <title>Dispute Form</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</head>
-<body>
-<form id="myForm" action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post" onsubmit="myFunction()">
+      <div class="card-content">
+        <p id="p1"><%= @str='<form action="http://www.swirblesolutions.com/vendors_dashboard/customer_issues" method="post">
 		 <input type="hidden" id="vendor_id" name="vendor_id" ' + "value=#{current_vendor.id}>"+'
 		<div style="margin-bottom: 15px;">
 			<label style="margin-bottom: 5px; display: block;' + "color:#{@input_fields};" ' ">First Name</label>
@@ -36,36 +26,15 @@
 			<textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none; outline-color:' "#{@input_fields};" '"></textarea>
 		</div>
 		<div style="margin-bottom: 15px;">
-			<input  type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
+			<input onclick="myFunction()" type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
 		</div>
 	</form>
-   <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Thnak you</h4>
-      </div>
-      <div class="modal-body">
-        <p>Your request is submitted. we will contact you shortly.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-  <script>
+	<script>
 function myFunction() {
- $("#myModal").modal("show");
- document.getElementById("myForm").reset();
-	}
-  </script>
-</body>' %></p>
+    alert("Your request is submitted");
+}
+</script>
+' %></p>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button onclick="copyToClipboard('#p1')" class="btn btn-default " id="copybutton">Copy Textarea</button>

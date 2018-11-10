@@ -14,8 +14,9 @@
 
 <body>
 <!-- Preloader -->
-
-<%= render 'layouts/left_side_navbar' %>
+<% if current_vendor.present? %>
+    <%= render 'layouts/left_side_navbar' %>
+<% end %>
 <div id="right-panel" class="right-panel">
   <% if current_vendor.present? %>
       <%= render 'layouts/header' %>
