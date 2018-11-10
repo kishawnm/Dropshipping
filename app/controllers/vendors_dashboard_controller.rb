@@ -32,13 +32,13 @@ class VendorsDashboardController < ApplicationController
           @message.save!
           @vendor_dispute=VendorDispute.find_by_id(dispute.id)
           if vendor.name.present?
-          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: current_vendor.name).message_email.deliver_now
+            UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: vendor.name).message_email.deliver_now
           else
-            name =  current_vendor.email.split('@').first
+            name = vendor.email.split('@').first
             UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: name).message_email.deliver_now
-
-          end
           
+          end
+        
         end
       end
     else
@@ -165,6 +165,7 @@ class VendorsDashboardController < ApplicationController
   def set_issues
     @issues = VendorDispute.joins(:vendor_dispute_messages).where("vendor_id = ? AND vendor_disputes.created_at >= ?", current_vendor.id, Time.zone.now.beginning_of_day).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC").uniq
   end
+  
   def set_presets
     @presets = ResponsePreset.all.where(vendor_id: current_vendor.id)
   end
