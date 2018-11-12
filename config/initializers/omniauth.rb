@@ -3,6 +3,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            ShopifyApp.configuration.api_key,
            ShopifyApp.configuration.secret,
            scope: ShopifyApp.configuration.scope,
+           redirect_uri: ShopifyApp.configuration.redirect_uri,
+           callback_url: ShopifyApp.configuration.redirect_uri,
            setup: lambda { |env|
              strategy = env['omniauth.strategy']
 
