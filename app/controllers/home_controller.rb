@@ -83,6 +83,10 @@ class HomeController < ShopifyApp::AuthenticatedController
   
   end
 
+  def app_uninstalled
+    puts "webhook is running"*90
+  end
+
 end
 
 
