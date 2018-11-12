@@ -1,7 +1,7 @@
 <header id="header" class="header">
   <div class="top-left">
     <div class="navbar-header">
-      <%= image_tag 'swirblogo.png',class:'navbar-brand' %>
+      <%= image_tag 'swirblogo.png', class: 'navbar-brand' %>
       <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
     </div>
   </div>
@@ -10,10 +10,10 @@
       <div class="header-left">
         <button class="search-trigger"><i class="fa fa-search"></i></button>
         <div class="form-inline">
-          <%= form_tag disputes_path, :method => 'get', class:"search-form" do %>
+          <%= form_tag disputes_path, :method => 'get', class: "search-form" do %>
               <p>
-                <%= text_field_tag :search, params[:search], placeholder: 'Search Dispute' ,class: "form-control mr-sm-2", id: "search_dispute_input"%>
-                <%= submit_tag "Search" , name: nil, id: "submit_search"  %>
+                <%= text_field_tag :search, params[:search], placeholder: 'Search Dispute', class: "form-control mr-sm-2", id: "search_dispute_input" %>
+                <%= submit_tag "Search", name: nil, id: "submit_search" %>
               </p>
           <% end %>
         </div>
@@ -21,32 +21,25 @@
         <div class="dropdown for-notification">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-bell"></i>
-            <span class="count bg-danger">3</span>
+            <span class="count bg-danger"><%= notifications.count %></span>
           </button>
           <div class="dropdown-menu" aria-labelledby="notification">
-            <p class="red">You have 3 Notification</p>
-            <a class="dropdown-item media" href="#">
-              <i class="fa fa-check"></i>
-              <p>Server #1 overloaded.</p>
-            </a>
-            <a class="dropdown-item media" href="#">
-              <i class="fa fa-info"></i>
-              <p>Server #2 overloaded.</p>
-            </a>
-            <a class="dropdown-item media" href="#">
-              <i class="fa fa-warning"></i>
-              <p>Server #3 overloaded.</p>
-            </a>
+            <p class="red">You have <%= notifications.count %> Notification</p>
+            <% notifications.each do |notification| %>
+                <%= link_to vendors_dashboard_path(notification),class:'dropdown-item media' do %>
+                  <i class="fa fa-check"></i>
+                  <p><%= notification.order_number %> have a message</p>
+                <% end %>
+            <% end %>
           </div>
         </div>
-
         <div class="dropdown for-message">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-envelope"></i>
-            <span class="count bg-primary">4</span>
+            <span class="count bg-primary"><%= messages_count %></span>
           </button>
           <div class="dropdown-menu" aria-labelledby="message">
-            <p class="red">You have 4 Mails</p>
+            <p class="red">You have <%= messages_count %> Mails</p>
 
           </div>
         </div>
@@ -54,7 +47,7 @@
 
       <div class="user-area dropdown float-right">
         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= image_tag 'default-profile-pic.png',class:'user-avatar rounded-circle' %>
+          <%= image_tag 'default-profile-pic.png', class: 'user-avatar rounded-circle' %>
         </a>
         <div class="user-menu dropdown-menu">
           <%= link_to edit_vendor_registration_path, class: "nav-link" do %>
@@ -68,15 +61,15 @@
   </div>
 </header>
 <style>
-  #submit_search{
+  #submit_search {
     display: none;
   }
 </style>
 
 <script>
-    $('#search_dispute_input').on("keypress", function(e) {
-        if (e.keyCode == 13) {
-            $("#submit_search").click();
-        }
-    });
+  $('#search_dispute_input').on("keypress", function (e) {
+    if (e.keyCode == 13) {
+      $("#submit_search").click();
+    }
+  });
 </script>

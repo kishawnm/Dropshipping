@@ -62,7 +62,9 @@ class Vendors::RegistrationsController < Devise::RegistrationsController
   end
   def after_update_path_for(resource)
     if resource.sign_in_count <= 1
+      resource.sign_in_count += 1
       form_editor_vendors_dashboard_index_path
+      
     else
       vendors_dashboard_index_path
       end
