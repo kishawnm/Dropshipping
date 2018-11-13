@@ -77,7 +77,9 @@
         </div>
       </div>
     </div>
-      <% if params[:created_at].present? %>
+  <% if params[:created_at].present? %>  
+  <div class="card">
+    <div class="card-body">
       <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 ">
         <div class=" col-lg-3 col-md-3 col-sm-3">
           <p>Name:<%= @name if @name.present? %></p>
@@ -88,6 +90,8 @@
           <span class="time-right">Created at:<%= @created_at.to_date if @created_at.present? %></span>
         </div>
       </div>
+    </div>
+  </div>
   <% end %>
     <!-- /Widgets -->
     <!--  Traffic  -->
