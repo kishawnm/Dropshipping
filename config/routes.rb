@@ -27,5 +27,5 @@ Rails.application.routes.draw do
   # get 'welcome/home' => "welcome#home", as: :home
   get 'home/get_tracking_status' => "home#get_tracking_status", as: :get_tracking_status
   post 'home/app_uninstalled' => "home#app_uninstalled", as: :app_uninstalled
-  get 'home/token' => "home#token", as: :token
+
 end

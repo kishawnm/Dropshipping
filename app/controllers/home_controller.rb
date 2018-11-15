@@ -8,9 +8,25 @@ class HomeController < ShopifyApp::AuthenticatedController
     # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
     require 'rest_client'
     require 'json'
-    puts @shop_session.inspect
-    res = HTTParty.get("https://usamastore12.myshopify.com/admin/oauth/authorize?client_id=c4cb3a84ba5ba3f28e147ca9d8c110e6&scope=read_orders, read_products, read_all_orders, read_content, write_content&redirect_uri=http://www.swirblesolutions.com/home/token")
+    # res = HTTParty.get("https://usamastore12.myshopify.com/admin/oauth/authorize?client_id=c4cb3a84ba5ba3f28e147ca9d8c110e6&scope=read_orders, read_products, read_all_orders, read_content, write_content&redirect_uri=http://www.swirblesolutions.com /home/token")
+    # puts params
+    # puts res.parsed_response
+    # shop = res.params['shop']
+    # code = res.params['code']
+    # hmac = res.params['hmac']
+    # access_tokensss = get_shop_access_token(shop,"c4cb3a84ba5ba3f28e147ca9d8c110e6","e86e8600ddd3d2326d3ca03818ae34a2",code)
+    #
+    # access_token = access_tokensss
+    revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
 
+    headers = {
+        'X-Shopify-Access-Token' => @shop_session.token,
+        content_type: 'application/json',
+        accept: 'application/json'
+    }
+    payload = '{ "page": { "title":"Contact us", "body_html":"<h2>Warranty</h2>\n<p>Returns accepted if we receive items <strong>30 days after purchase</strong>.</p>"} }'
+    response =  RestClient.post(revoke_url, payload, headers)
+    puts "response"*response.code # 200 for success
 
     if params[:shop].present?
       store     = params[:shop]
@@ -44,26 +60,6 @@ class HomeController < ShopifyApp::AuthenticatedController
         end
       end
     end
-  end
-
-  def token
-    puts params
-    shop = request.params['shop']
-    code = request.params['code']
-    hmac = request.params['hmac']
-    access_tokensss = get_shop_access_token(shop,"c4cb3a84ba5ba3f28e147ca9d8c110e6","e86e8600ddd3d2326d3ca03818ae34a2",code)
-
-    access_token = access_tokensss
-    revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
-
-    headers = {
-        'X-Shopify-Access-Token' => access_token,
-        content_type: 'application/json',
-        accept: 'application/json'
-    }
-    payload = '{ "page": { "title":"Contact us", "body_html":"<h2>Warranty</h2>\n<p>Returns accepted if we receive items <strong>30 days after purchase</strong>.</p>"} }'
-    response =  RestClient.post(revoke_url, payload, headers)
-    puts "response"*response.code # 200 for success
   end
   
   def get_tracking_status
