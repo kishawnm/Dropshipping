@@ -17,32 +17,32 @@ class HomeController < ShopifyApp::AuthenticatedController
     # access_tokensss = get_shop_access_token(shop,"c4cb3a84ba5ba3f28e147ca9d8c110e6","e86e8600ddd3d2326d3ca03818ae34a2",code)
     #
     # access_token = access_tokensss
-    # revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
-    #
-    # headers = {
-    #     'X-Shopify-Access-Token' => @shop_session.token,
-    #     content_type: 'application/json',
-    #     accept: 'application/json'
-    # }
-    # payload = '{ "page": { "title":"Contact us", "body_html":"<h2>Warranty</h2>\n<p>Returns accepted if we receive items <strong>30 days after purchase</strong>.</p>"} }'
-    # response =  RestClient.post(revoke_url, payload, headers)
-    # puts "response"*response.code # 200 for success
-
-    # access_token = "#{params[:hmac]}"
-    revoke_url   = "https://usamastore12.myshopify.com/admin/webhooks.json"
+    revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
 
     headers = {
         'X-Shopify-Access-Token' => @shop_session.token,
         content_type: 'application/json',
         accept: 'application/json'
     }
-    payload = {
-        "webhook": {
-            "topic": "orders/create",
-            "address": "https://whatever.hostname.com/",
-            "format": "json"
-        }
-    }
+    payload = '{ "page": { "title":"Contact us", "body_html":"<h2>Warranty</h2>\n<p>Returns accepted if we receive items <strong>30 days after purchase</strong>.</p>"} }'
+    response =  RestClient.post(revoke_url, payload, headers)
+    puts "response"*response.code # 200 for success
+    puts JSON.parse(response)
+    # access_token = "#{params[:hmac]}"
+    # revoke_url   = "https://usamastore12.myshopify.com/admin/webhooks.json"
+    #
+    # headers = {
+    #     'X-Shopify-Access-Token' => @shop_session.token,
+    #     content_type: 'application/json',
+    #     accept: 'application/json'
+    # }
+    # payload = {
+    #     "webhook": {
+    #         "topic": "orders/create",
+    #         "address": "https://whatever.hostname.com/",
+    #         "format": "json"
+    #     }
+    # }
     response =  RestClient.post(revoke_url, payload, headers)
     puts "response"*response.code # 200 for success
     if params[:shop].present?
