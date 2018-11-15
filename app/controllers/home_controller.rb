@@ -4,22 +4,22 @@ class HomeController < ShopifyApp::AuthenticatedController
   def index
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @webhooks = ShopifyAPI::Webhook.find(:all)
-    # /shop = Shop.find_by(shopify_domain: params[:shop])
+    # shop = Shop.find_by(shopify_domain: params[:shop])
     # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
-    require 'rest_client'
-    require 'json'
-
-    revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
-
-    headers = {
-        'X-Shopify-Access-Token' => @shop_session.token,
-        content_type: 'application/json',
-        accept: 'application/json'
-    }
-    payload = '{ "page": { "title":"Contact us", "body_html":"<h2>Warranty</h2>\n<p>Returns accepted if we receive items <strong>30 days after purchase</strong>.</p>"} }'
-    response =  RestClient.post(revoke_url, payload, headers)
-    puts "response"*response.code # 200 for success
-    puts JSON.parse(response)
+    # require 'rest_client'
+    # require 'json'
+    #
+    # revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
+    #
+    # headers = {
+    #     'X-Shopify-Access-Token' => @shop_session.token,
+    #     content_type: 'application/json',
+    #     accept: 'application/json'
+    # }
+    # payload = '{ "page": { "title":"Contact us", "body_html":"<h2>Warranty</h2>\n<p>Returns accepted if we receive items <strong>30 days after purchase</strong>.</p>"} }'
+    # response =  RestClient.post(revoke_url, payload, headers)
+    # puts "response"*response.code # 200 for success
+    # puts JSON.parse(response)
     # access_token = "#{params[:hmac]}"
     # revoke_url   = "https://usamastore12.myshopify.com/admin/webhooks.json"
     #
