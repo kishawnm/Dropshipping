@@ -12,8 +12,7 @@ class HomeController < ShopifyApp::AuthenticatedController
 
 
 
-    puts 'hello vendore none', @products.inspect
-    puts 'hello  vendor one', @webhooks.inspect
+    puts 'hello  vendor one', shop.inspect
 
 
 
