@@ -36,7 +36,13 @@ class HomeController < ShopifyApp::AuthenticatedController
         content_type: 'application/json',
         accept: 'application/json'
     }
-    payload = '{ "webhook": { "topic":"app/uninstalled", "address":"https://www.swirblesolutions.com/home/app_uninstalled", "format":"json" } }'
+    payload = {
+        "webhook": {
+            "topic": "orders/create",
+            "address": "https://whatever.hostname.com/",
+            "format": "json"
+        }
+    }
     response =  RestClient.post(revoke_url, payload, headers)
     puts "response"*response.code # 200 for success
     if params[:shop].present?
