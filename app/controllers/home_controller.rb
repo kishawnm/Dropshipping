@@ -4,47 +4,28 @@ class HomeController < ShopifyApp::AuthenticatedController
   def index
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @webhooks = ShopifyAPI::Webhook.find(:all)
+    # /shop = Shop.find_by(shopify_domain: params[:shop])
+    # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
+    require 'rest_client'
+    require 'json'
+    res = HTTParty.get("http://#{params[:shop]}/admin/oauth/authorize?client_id=c4cb3a84ba5ba3f28e147ca9d8c110e6&scope=read_orders, read_products, read_all_orders, read_content, write_content&redirect_uri=http://www.swirblesolutions.com/auth/shopify/callback")
+    shop = res.params['shop']
+    code = res.params['code']
+    hmac = res.params['hmac']
+    access_tokensss = get_shop_access_token(shop,"c4cb3a84ba5ba3f28e147ca9d8c110e6","e86e8600ddd3d2326d3ca03818ae34a2",code)
 
-    puts 'hello none', @products.inspect
-    puts 'hello ', @webhooks.inspect
-    shop = Shop.find_by(shopify_domain: current_vendor.store)
-    shop = ShopifyApp::SessionRepository.retrieve(shop.id)
+    access_token = access_tokensss
+    revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
 
+    headers = {
+        'X-Shopify-Access-Token' => access_token,
+        content_type: 'application/json',
+        accept: 'application/json'
+    }
+    payload = '{ "page": { "title":"Contact us", "body_html":"<h2>Warranty</h2>\n<p>Returns accepted if we receive items <strong>30 days after purchase</strong>.</p>"} }'
+    response =  RestClient.post(revoke_url, payload, headers)
+    puts "response"*response.code # 200 for success
 
-
-    puts 'hello  vendor one', shop.inspect
-
-
-
-    # require 'rest_client'
-    # require 'json'
-    #
-    # access_token = "#{params[:hmac]}"
-    # revoke_url   = "https://usamastore12.myshopify.com/admin/webhooks.json"
-    #
-    # headers = {
-    #     'X-Shopify-Access-Token' => access_token,
-    #     content_type: 'application/json',
-    #     accept: 'application/json'
-    # }
-    # payload = '{ "webhook": { "topic":"app/uninstalled", "address":"https://www.swirblesolutions.com/home/app_uninstalled", "format":"json" } }'
-    # response =  RestClient.post(revoke_url, payload, headers)
-    # puts "response"*response.code # 200 for success
-    # unless ShopifyAPI::Webhook.find(:all).any?
-      webhook = {
-          topic: 'shop/update',
-          address: "https://www.swirblesolutions.com/home/app_uninstalled",
-          format: 'json'}
-
-      ShopifyAPI::Webhook.create(webhook)
-      new_webhook = ShopifyAPI::Webhook.new({
-                                                topic: "shop/update",
-                                                address: "https://www.swirblesolutions.com/home/app_uninstalled", # substitute url with your endpoint
-                                                format: "json"
-                                            })
-
-      new_webhook.save
-    # end
     if params[:shop].present?
       store     = params[:shop]
       user_name = store.split(".")[0]
@@ -124,15 +105,32 @@ class HomeController < ShopifyApp::AuthenticatedController
     end
   
   end
+  def get_shop_access_token(shop,client_id,client_secret,code)
+    if @tokens[shop].nil?
+      url = "https://#{shop}/admin/oauth/access_token"
 
-  def app_uninstalled
-    puts "params"*10
-    puts params
-    email = "#{params[:name]}@swirblesolutions.com"
-    vendor = Vendor.where(email: email)
-    if vendor.present? && vendor.last.sign_in_count > 0
-       vendor.last.destroy
+      payload = {
+          client_id: client_id,
+          client_secret: client_secret,
+          code: code}
+
+      response = HTTParty.post(url, body: payload)
+      # if the response is successful, obtain the token and store it in a hash
+      if response.code == 200
+        @tokens[shop] = response['access_token']
+        return response['access_token']
+      else
+        return [500, "Something went wrong."]
+      end
     end
+  end
+  def app_uninstalled
+    # puts "params"*10
+    # email = "#{params[:name]}@swirblesolutions.com"
+    # vendor = Vendor.where(email: email)
+    # if vendor.present? && vendor.last.sign_in_count > 0
+    #    vendor.last.destroy
+    # end
     puts "webhook is running"*90
   end
 
