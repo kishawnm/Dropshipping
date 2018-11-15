@@ -105,7 +105,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     email = "#{params[:name]}@swirblesolutions.com"
     vendor = Vendor.where(email: email)
     if vendor.present?
-      puts vendor.last.email
+       vendor.last.destroy
     end
     puts "webhook is running"*90
   end
