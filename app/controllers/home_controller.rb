@@ -10,7 +10,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     require 'json'
 
     access_token = 'e86e8600ddd3d2326d3ca03818ae34a2'
-    revoke_url   = "#{params[:shop]}/admin/webhooks.json"
+    revoke_url   = "https://usamastore12.myshopify.com/admin/webhooks.json"
 
     headers = {
         'X-Shopify-Access-Token' => access_token,
