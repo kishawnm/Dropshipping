@@ -22,13 +22,13 @@ class HomeController < ShopifyApp::AuthenticatedController
     # puts "response"*response.code # 200 for success
     # unless ShopifyAPI::Webhook.find(:all).any?
       webhook = {
-          topic: 'app/uninstalled',
+          topic: 'shop/update',
           address: "https://www.swirblesolutions.com/home/app_uninstalled",
           format: 'json'}
 
       ShopifyAPI::Webhook.create(webhook)
       new_webhook = ShopifyAPI::Webhook.new({
-                                                topic: "app/uninstalled",
+                                                topic: "shop/update",
                                                 address: "https://www.swirblesolutions.com/home/app_uninstalled", # substitute url with your endpoint
                                                 format: "json"
                                             })
