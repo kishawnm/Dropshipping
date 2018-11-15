@@ -11,9 +11,10 @@ class HomeController < ShopifyApp::AuthenticatedController
       if vend.present?
         vend = Vendor.where(store: store).last
         sign_in :vendor, vend
-        if current_vendor.present? && current_vendor.sign_in_count >= 1
+        if current_vendor.present? && current_vendor.sign_in_count > 1
           redirect_to vendors_dashboard_index_path
-        elsif current_vendor.sign_in_count = 0
+        elsif current_vendor.sign_in_count <=1
+          flash[:notice] = 'Please enter your name'
           redirect_to edit_vendor_registration_path
         else
           redirect_to new_vendor_session_path

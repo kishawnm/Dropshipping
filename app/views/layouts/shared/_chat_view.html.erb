@@ -1,6 +1,10 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title box-title">Live Chat</h4>
+    <h4 class="card-title box-title"><label class="check-box make-request">
+                            <%= @dispute.first_name if @dispute.present?  %>
+                            <%= @dispute.last_name if @dispute.present? %>
+                            <%= @dispute.order_number if @dispute.present? %>
+                          </label></h4>
     <div class="card-content">
       <% if @dispute.present? %>
           <div class="messenger-box">
@@ -105,18 +109,6 @@
       <% end %>
     </div>
   </div><!-- /.card-body -->
-  <% if params[:created_at].present? %>
-      <div class="chat col-lg-10 col-md-9 col-sm-8 col-xs-12 ">
-        <div class=" col-lg-3 col-md-3 col-sm-3">
-          <p>Name:<%= @name if @name.present? %></p>
-          <span class="time-right">order#<%= @dispute.order_number if @dispute.present? %></span>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <p>fulfilled at:<%= @fulfilled_at.to_date if @fulfilled_at.present? %></p>
-          <span class="time-right">Created at:<%= @created_at.to_date if @created_at.present? %></span>
-        </div>
-      </div>
-  <% end %>
 </div><!-- /.card -->
 
 
