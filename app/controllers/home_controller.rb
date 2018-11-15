@@ -8,15 +8,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
     require 'rest_client'
     require 'json'
-    # res = HTTParty.get("https://usamastore12.myshopify.com/admin/oauth/authorize?client_id=c4cb3a84ba5ba3f28e147ca9d8c110e6&scope=read_orders, read_products, read_all_orders, read_content, write_content&redirect_uri=http://www.swirblesolutions.com /home/token")
-    # puts params
-    # puts res.parsed_response
-    # shop = res.params['shop']
-    # code = res.params['code']
-    # hmac = res.params['hmac']
-    # access_tokensss = get_shop_access_token(shop,"c4cb3a84ba5ba3f28e147ca9d8c110e6","e86e8600ddd3d2326d3ca03818ae34a2",code)
-    #
-    # access_token = access_tokensss
+
     revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
 
     headers = {
@@ -43,8 +35,8 @@ class HomeController < ShopifyApp::AuthenticatedController
     #         "format": "json"
     #     }
     # }
-    response =  RestClient.post(revoke_url, payload, headers)
-    puts "response"*response.code # 200 for success
+    # response =  RestClient.post(revoke_url, payload, headers)
+    # puts "response"*response.code # 200 for success
     if params[:shop].present?
       store     = params[:shop]
       user_name = store.split(".")[0]
@@ -124,25 +116,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     end
   
   end
-  def get_shop_access_token(shop,client_id,client_secret,code)
-    if @tokens[shop].nil?
-      url = "https://#{shop}/admin/oauth/access_token"
 
-      payload = {
-          client_id: client_id,
-          client_secret: client_secret,
-          code: code}
-
-      response = HTTParty.post(url, body: payload)
-      # if the response is successful, obtain the token and store it in a hash
-      if response.code == 200
-        @tokens[shop] = response['access_token']
-        return response['access_token']
-      else
-        return [500, "Something went wrong."]
-      end
-    end
-  end
   def app_uninstalled
     # puts "params"*10
     # email = "#{params[:name]}@swirblesolutions.com"
