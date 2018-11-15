@@ -4,10 +4,19 @@ class HomeController < ShopifyApp::AuthenticatedController
   def index
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @webhooks = ShopifyAPI::Webhook.find(:all)
-    puts @products
-    shop = Shop.find_by(shopify_domain: params[:shop])
+
+    puts 'hello none', @products.inspect
+    puts 'hello ', @webhooks.inspect
+    shop = Shop.find_by(shopify_domain: current_vendor.store)
     shop = ShopifyApp::SessionRepository.retrieve(shop.id)
-    puts shop
+
+
+
+    puts 'hello vendore none', @products.inspect
+    puts 'hello  vendor one', @webhooks.inspect
+
+
+
     # require 'rest_client'
     # require 'json'
     #
