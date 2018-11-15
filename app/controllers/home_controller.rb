@@ -102,9 +102,11 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def app_uninstalled
+    puts "params"*10
+    puts params
     email = "#{params[:name]}@swirblesolutions.com"
     vendor = Vendor.where(email: email)
-    if vendor.present?
+    if vendor.present? && vendor.last.sign_in_count > 0
        vendor.last.destroy
     end
     puts "webhook is running"*90
