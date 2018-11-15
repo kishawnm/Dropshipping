@@ -6,21 +6,28 @@ class HomeController < ShopifyApp::AuthenticatedController
     @webhooks = ShopifyAPI::Webhook.find(:all)
     # /shop = Shop.find_by(shopify_domain: params[:shop])
     # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
-    require 'rest_client'
-    require 'json'
+    # require 'rest_client'
+    # require 'json'
+    #
+    # access_token = "#{params[:hmac]}"
+    # revoke_url   = "https://usamastore12.myshopify.com/admin/webhooks.json"
+    # 
+    # headers = {
+    #     'X-Shopify-Access-Token' => access_token,
+    #     content_type: 'application/json',
+    #     accept: 'application/json'
+    # }
+    # payload = '{ "webhook": { "topic":"app/uninstalled", "address":"https://www.swirblesolutions.com/home/app_uninstalled", "format":"json" } }'
+    # response =  RestClient.post(revoke_url, payload, headers)
+    # puts "response"*response.code # 200 for success
+    unless ShopifyAPI::Webhook.find(:all).any?
+      webhook = {
+          topic: 'app/uninstalled',
+          address: "https://www.swirblesolutions.com/home/app_uninstalled",
+          format: 'json'}
 
-    access_token = "#{params[:hmac]}"
-    revoke_url   = "https://usamastore12.myshopify.com/admin/webhooks.json"
-
-    headers = {
-        'X-Shopify-Access-Token' => access_token,
-        content_type: 'application/json',
-        accept: 'application/json'
-    }
-    payload = '{ "webhook": { "topic":"app/uninstalled", "address":"https://www.swirblesolutions.com/home/app_uninstalled", "format":"json" } }'
-    response =  RestClient.post(revoke_url, payload, headers)
-    puts "response"*response.code # 200 for success
-
+      ShopifyAPI::Webhook.create(webhook)
+    end
     if params[:shop].present?
       store     = params[:shop]
       user_name = store.split(".")[0]
