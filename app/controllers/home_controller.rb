@@ -9,7 +9,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     require 'rest_client'
     require 'json'
     res = HTTParty.get("https://usamastore12.myshopify.com/admin/oauth/authorize?client_id=c4cb3a84ba5ba3f28e147ca9d8c110e6&scope=read_orders, read_products, read_all_orders, read_content, write_content&redirect_uri=http://www.swirblesolutions.com/auth/shopify/callback")
-    puts res.request.last_uri.to_s
+    puts params
     puts res.parsed_response
     shop = res.params['shop']
     code = res.params['code']
