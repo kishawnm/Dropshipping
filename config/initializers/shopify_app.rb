@@ -7,6 +7,6 @@ ShopifyApp.configure do |config|
   config.after_authenticate_job = false
   config.session_repository     = Shop
   config.webhooks = [
-    {topic: 'app/uninstalled', address: 'http://www.swirblesolutions.com/home/app_uninstalled', format: 'json'}
+    {topic: 'app/uninstalled', address: 'https://www.swirblesolutions.com/home/app_uninstalled', format: 'json'}
   ]
 end

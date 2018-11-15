@@ -1,6 +1,6 @@
 class HomeController < ShopifyApp::AuthenticatedController
   protect_from_forgery with: :null_session
-  
+
   def index
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @webhooks = ShopifyAPI::Webhook.find(:all)
@@ -17,7 +17,7 @@ class HomeController < ShopifyApp::AuthenticatedController
         content_type: 'application/json',
         accept: 'application/json'
     }
-    payload = '{ "webhook": { "topic":"app/uninstalled", "address":"http://www.swirblesolutions.com/home/app_uninstalled", "format":"json" } }'
+    payload = '{ "webhook": { "topic":"app/uninstalled", "address":"https://www.swirblesolutions.com/home/app_uninstalled", "format":"json" } }'
     response =  RestClient.post(revoke_url, payload, headers)
     puts "response"*response.code # 200 for success
 
