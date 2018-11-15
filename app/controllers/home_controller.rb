@@ -1,9 +1,26 @@
 class HomeController < ShopifyApp::AuthenticatedController
+  protect_from_forgery with: :null_session
+  
   def index
     @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
     @webhooks = ShopifyAPI::Webhook.find(:all)
     # /shop = Shop.find_by(shopify_domain: params[:shop])
     # shop = ShopifyApp::SessionRepository.retrieve(shop.id)
+    require 'rest_client'
+    require 'json'
+
+    access_token = 'e86e8600ddd3d2326d3ca03818ae34a2'
+    revoke_url   = "#{params[:shop]}/admin/webhooks.json"
+
+    headers = {
+        'X-Shopify-Access-Token' => access_token,
+        content_type: 'application/json',
+        accept: 'application/json'
+    }
+    payload = '{ "webhook": { "topic":"app/uninstalled", "address":"http://www.swirblesolutions.com/home/app_uninstalled", "format":"json" } }'
+    response =  RestClient.post(revoke_url, payload, headers)
+    puts "response"*response.code # 200 for success
+
     if params[:shop].present?
       store     = params[:shop]
       user_name = store.split(".")[0]
@@ -85,6 +102,7 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def app_uninstalled
+    puts current_vendor.email
     puts "webhook is running"*90
   end
 

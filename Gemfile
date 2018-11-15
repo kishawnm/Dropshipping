@@ -22,10 +22,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 
 gem 'shopify_app'
-
+gem 'httparty', '~> 0.13.7'
 gem 'griddler'
 gem 'griddler-sendgrid'
 gem 'bootstrap', '~> 4.1.3'
+gem 'json', '~> 1.8', '>= 1.8.3'
+gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'normalize-rails'
 gem "stroke-seven-rails"
