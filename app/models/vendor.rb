@@ -7,4 +7,5 @@ class Vendor < ApplicationRecord
   has_many :vendor_disputes, dependent: :destroy
   has_many :automated_responses, dependent: :destroy
   has_many :response_presets, dependent: :destroy
+  has_many :vendor_pages, dependent: :destroy
 end

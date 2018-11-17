@@ -21,6 +21,9 @@
         <li><%= link_to form_editor_vendors_dashboard_index_path do %>
               <i class="menu-icon fa fa-font"></i>Style form
           <% end %></li>
+        <li><%= link_to contact_us_vendors_dashboard_index_path(id: current_vendor.id) do %>
+            <i class="menu-icon fa fa-comment-o"></i>Contact Us
+          <% end %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>

@@ -52,6 +52,8 @@ function myFunction() {
               } </script>
           </div>
         </fieldset>
+        <br>
+        <button type="button" id="add_to_store" class="btn btn-primary">Add Form to Your Store</button>
       </div>
     </div> <!-- /.card-body -->
   </div><!-- /.card -->
@@ -76,6 +78,18 @@ function myFunction() {
     jQuery("#TextArea").text(value);
   });
 
+  $(document).on("click", "#add_to_store", function (e) {
+      e.preventDefault();
+      $.ajax({ url: '/home/add_to_store',
+          type: 'GET',
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+              data: {code: $("#p1").text()},
+          success: function(response) {
+              // $('#someDiv').html(response);
+              alert("asdsa");
+          }
+      });
+  });
 
   function copyToClipboard(element) {
     var $temp = $("<input>");

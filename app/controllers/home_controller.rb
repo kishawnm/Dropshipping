@@ -117,6 +117,22 @@ class HomeController < ShopifyApp::AuthenticatedController
   
   end
 
+  def add_to_store
+    require 'rest_client'
+    require 'json'
+    revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
+
+    headers = {
+        'X-Shopify-Access-Token' => @shop_session.token,
+        content_type: 'application/json',
+        accept: 'application/json'
+    }
+    payload = { "page": { "title":"Contact us", "body_html":"#{params[:code]}"} }
+    response =  RestClient.post(revoke_url, payload, headers)
+    puts "response"*response.code # 200 for success
+    puts JSON.parse(response)
+  end
+
   def app_uninstalled
     # puts "params"*10
     # email = "#{params[:name]}@swirblesolutions.com"

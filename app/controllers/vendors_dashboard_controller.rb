@@ -140,6 +140,10 @@ class VendorsDashboardController < ApplicationController
     end
   
   end
+
+  def contact_us
+
+  end
   
   
   private
