@@ -36,8 +36,8 @@ function myFunction() {
 </script>
 ' %></p>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button onclick="copyToClipboard('#p1')" class="btn btn-default " id="copybutton">Copy Textarea</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button onclick="copyToClipboard('#p1')" class="btn btn-primary" id="copybutton">Copy Form Code</button>
         </div>
         <fieldset>
           <legend>Choose form colors</legend>
@@ -58,6 +58,16 @@ function myFunction() {
         <% else %>
           <button type="button" id="add_to_store" class="btn btn-primary">Add Form to Your Store</button>
         <% end %>
+        <br>
+        <% if VendorPage.where(vendor_id: current_vendor.id).present? %>
+          <br>
+          <br>
+          <h5>Copy the below button code and paste it after closing of this div <strong><%= @div %></strong> in header.liquid. You can find it in theme directory in your store.</h5>
+          <br>
+          <p id="button_code"><%= @anchor_tag %></p>
+          <br>
+          <button onclick="copyToClipboard('#button_code')" class="btn btn-primary" id="copybutton">Copy Button Code</button>
+        <% end %>
       </div>
     </div> <!-- /.card-body -->
   </div><!-- /.card -->
@@ -73,9 +83,6 @@ function myFunction() {
     </div> <!-- /.card-body -->
   </div><!-- /.card -->
 </div>
-<% if VendorPage.where(vendor_id: current_vendor.id).present? %>
-<div><%= "https://#{current_vendor.email.split("@")[0]}.myshopify.com/pages/#{VendorPage.where(vendor_id: current_vendor.id).last.shopify_page_handle}" %></div>
-<% end %>
 <script>
 
   $(document).on("click", ".btn-custom-class", function (e) {
@@ -126,6 +133,7 @@ function myFunction() {
     $temp.val($(element).text()).select();
     document.execCommand("copy");
     $temp.remove();
+      toastr.success('Copied to clipboard', {timeOut: 5000});
   }
 
   var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
