@@ -110,6 +110,7 @@ function myFunction() {
               $('#update_to_store').prop('disabled', false);
               $('#update_to_store').text('Update Form on Store');
               toastr.success('Form updated on your store successfully', {timeOut: 5000});
+              location.reload();
           }
       });
   });

@@ -148,7 +148,7 @@ class HomeController < ShopifyApp::AuthenticatedController
         accept: 'application/json'
     }
     payload = { "page": { "id":"#{@page.shopify_page_id}", "body_html":"#{params[:code]}"} }
-    response =  RestClient.post(revoke_url, payload, headers)
+    response =  RestClient.put(revoke_url, payload, headers)
     puts "response"*response.code # 200 for success
     puts JSON.parse(response)
     obj =  JSON.parse(response)
