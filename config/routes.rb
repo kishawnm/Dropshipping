@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => 'vendors_dashboard#index'
+  root :to => 'home#index'
   mount ShopifyApp::Engine, at: '/'
   # mount using default path: /email_processor
   mount_griddler
