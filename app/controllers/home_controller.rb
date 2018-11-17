@@ -132,7 +132,11 @@ class HomeController < ShopifyApp::AuthenticatedController
     puts "response"*response.code # 200 for success
     puts JSON.parse(response)
     obj =  JSON.parse(response)
-    VendorPage.create(vendor_id: current_vendor.id, shopify_page_id: obj['page']['id'],shopify_page_handle: obj['page']['handle'], shopify_page_title: obj['page']['title'])
+    if VendorPage.where(vendor_id: current_vendor.id).present?
+      # do nothing
+    else
+      VendorPage.create(vendor_id: current_vendor.id, shopify_page_id: obj['page']['id'],shopify_page_handle: obj['page']['handle'], shopify_page_title: obj['page']['title'])
+    end
   end
 
 
