@@ -37,7 +37,7 @@ gem 'jquery-matchheight-rails'
 gem 'momentjs-rails'
 gem "autoprefixer-rails"
 gem 'mini_racer'
-# gem 'rails-ujs'
+gem 'rails-ujs'
 # gem for styling
 gem 'font-awesome-rails'
 # Use CoffeeScript for .coffee assets and views
