@@ -135,6 +135,26 @@ class HomeController < ShopifyApp::AuthenticatedController
     VendorPage.create(vendor_id: current_vendor.id, shopify_page_id: obj['page']['id'],shopify_page_handle: obj['page']['handle'], shopify_page_title: obj['page']['title'])
   end
 
+
+  def update_to_store
+    require 'rest_client'
+    require 'json'
+    @page = VendorPage.where(vendor_id: current_vendor.id).last
+    revoke_url   = "https://usamastore12.myshopify.com/admin/pages/#{@page.shopify_page_id}.json"
+
+    headers = {
+        'X-Shopify-Access-Token' => @shop_session.token,
+        content_type: 'application/json',
+        accept: 'application/json'
+    }
+    payload = { "page": { "id":"#{@page.shopify_page_id}", "body_html":"#{params[:code]}"} }
+    response =  RestClient.post(revoke_url, payload, headers)
+    puts "response"*response.code # 200 for success
+    puts JSON.parse(response)
+    obj =  JSON.parse(response)
+    @page.update_attributes(vendor_id: current_vendor.id, shopify_page_id: obj['page']['id'],shopify_page_handle: obj['page']['handle'], shopify_page_title: obj['page']['title'])
+  end
+
   def app_uninstalled
     # puts "params"*10
     # email = "#{params[:name]}@swirblesolutions.com"

@@ -26,7 +26,7 @@
 			<textarea name="description" placeholder="Description of Issue" required style="height: 100px; border: ' + "#{@input_fields}" +' 1px solid; padding-left: 10px; padding-right: 10px; width: 100%;box-sizing: border-box; resize: none; outline-color:' "#{@input_fields};" '"></textarea>
 		</div>
 		<div style="margin-bottom: 15px;">
-			<input onclick="myFunction()" type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px; padding-left: 20px; padding-right: 20px; cursor: pointer;padding: 0px;">
+			<input onclick="myFunction()" type="submit" name="submit" value="Submit" style="' "background-color:#{@input_fields};" ' color: #fff; border: none; height: 35px; line-height: 35px;padding: 0px; padding-left: 20px; padding-right: 20px; cursor: pointer;">
 		</div>
 	</form>
 	<script>
@@ -53,7 +53,11 @@ function myFunction() {
           </div>
         </fieldset>
         <br>
-        <button type="button" id="add_to_store" class="btn btn-primary">Add Form to Your Store</button>
+        <% if VendorPage.where(vendor_id: current_vendor.id).present? %>
+          <button type="button" id="update_to_store" class="btn btn-primary">Update Form on Store</button>
+        <% else %>
+          <button type="button" id="add_to_store" class="btn btn-primary">Add Form to Your Store</button>
+        <% end %>
       </div>
     </div> <!-- /.card-body -->
   </div><!-- /.card -->
@@ -80,15 +84,36 @@ function myFunction() {
 
   $(document).on("click", "#add_to_store", function (e) {
       e.preventDefault();
+      $('#add_to_store').prop('disabled', true);
+      $('#add_to_store').text('Adding to store');
       $.ajax({ url: '/home/add_to_store',
           type: 'GET',
           beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
               data: {code: $("#p1").text()},
           success: function(response) {
+              $('#add_to_store').prop('disabled', false);
+              $('#add_to_store').text('Add Form to Your Store');
               toastr.success('Form added to your store successfully', {timeOut: 5000});
           }
       });
   });
+
+  $(document).on("click", "#update_to_store", function (e) {
+      e.preventDefault();
+      $('#update_to_store').prop('disabled', true);
+      $('#update_to_store').text('Updating page on store');
+      $.ajax({ url: '/home/update_to_store',
+          type: 'GET',
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+          data: {code: $("#p1").text()},
+          success: function(response) {
+              $('#update_to_store').prop('disabled', false);
+              $('#update_to_store').text('Update Form on Store');
+              toastr.success('Form updated on your store successfully', {timeOut: 5000});
+          }
+      });
+  });
+
 
   function copyToClipboard(element) {
     var $temp = $("<input>");
