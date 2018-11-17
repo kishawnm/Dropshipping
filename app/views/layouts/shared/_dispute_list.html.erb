@@ -1,7 +1,11 @@
 <div class="col-lg-4">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title box-title">Today's Disputes</h4>
+      <% if current_page?(disputes_path) %>
+        <h4 class="card-title box-title">Disputes List</h4>
+      <% else %>
+        <h4 class="card-title box-title">Today's Disputes</h4>
+      <% end %>
       <div class="card-content">
         <div class="todo-list" style=" height: 600px; overflow: auto;">
           <div class="tdl-holder">
