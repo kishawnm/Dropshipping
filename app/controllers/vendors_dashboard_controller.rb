@@ -23,24 +23,40 @@ class VendorsDashboardController < ApplicationController
     else
       dispute.save!
       automated_res = AutomatedResponse.where('vendor_id = ? and is_active = ? ', params[:vendor_id], 'true')
-      
+      responses = []
       vendor = Vendor.find_by_id(params[:vendor_id])
-      automated_res.each do |res|
-        if dispute.description.downcase.include? res.trigger.downcase
-          @message                  = VendorDisputeMessage.new
-          @message.vendor_dispute_id= dispute.id
-          @message.body             = res.response
-          @message.email            = vendor.email
-          @message.save!
-          @vendor_dispute=VendorDispute.find_by_id(dispute.id)
-          if vendor.name.present?
-            UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: vendor.name).message_email.deliver_now
-          else
-            name = vendor.email.split('@').first
-            UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: name).message_email.deliver_now
-          
+      if automated_res.present?
+        automated_res.each do |res|
+          if dispute.description.downcase.include? res.trigger.downcase
+            responses << res
           end
-        
+        end
+      end
+      if responses.present?
+        @message                  = VendorDisputeMessage.new
+        @message.vendor_dispute_id= dispute.id
+        @message.body             = responses.last.response
+        @message.email            = vendor.email
+        @message.save!
+        @vendor_dispute=VendorDispute.find_by_id(dispute.id)
+        if vendor.name.present?
+          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: vendor.name).message_email.deliver_now
+        else
+          name = vendor.email.split('@').first
+          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: name).message_email.deliver_now
+        end
+      else
+        @message                  = VendorDisputeMessage.new
+        @message.vendor_dispute_id= dispute.id
+        @message.body             = "Thank you for opening dispute.Our team is looking into your issue.We will get back to you soon"
+        @message.email            = vendor.email
+        @message.save!
+        @vendor_dispute=VendorDispute.find_by_id(dispute.id)
+        if vendor.name.present?
+          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: vendor.name).message_email.deliver_now
+        else
+          name = vendor.email.split('@').first
+          UserMailer.with(message: @message, vendor_dispute: @vendor_dispute, name: name).message_email.deliver_now
         end
       end
     end

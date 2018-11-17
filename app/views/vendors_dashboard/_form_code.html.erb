@@ -32,6 +32,11 @@
 	<script>
 function myFunction() {
     alert("Your request is submitted");
+    setTimeout(
+      function()
+      {
+        $("form").each(function() { this.reset() });
+      }, 3000);
 }
 </script>
 ' %></p>
