@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181117170535) do
+ActiveRecord::Schema.define(version: 20181117184850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20181117170535) do
   end
 
   create_table "vendor_pages", force: :cascade do |t|
-    t.integer "shopify_page_id"
+    t.bigint "shopify_page_id"
     t.string "shopify_page_handle"
     t.string "shopify_page_title"
     t.integer "vendor_id"
