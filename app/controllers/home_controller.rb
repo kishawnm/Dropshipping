@@ -131,6 +131,8 @@ class HomeController < ShopifyApp::AuthenticatedController
     response =  RestClient.post(revoke_url, payload, headers)
     puts "response"*response.code # 200 for success
     puts JSON.parse(response)
+    obj =  JSON.parse(response)
+    VendorPage.create(vendor_id: current_vendor.id, shopify_page_id: obj['page']['id'],shopify_page_handle: obj['page']['handle'], shopify_page_title: obj['page']['title'])
   end
 
   def app_uninstalled
