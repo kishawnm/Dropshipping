@@ -18,7 +18,9 @@ class VendorsDashboardController < ApplicationController
     else
       dispute.subject = "Order##{params[:order_number]}-#{params[:vendor_id]}"
     end
-    unless VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
+    if VendorDispute.where(order_number: params[:order_number], vendor_id: params[:vendor_id]).present?
+      redirect_to error_message_path
+    else
       dispute.save!
       automated_res = AutomatedResponse.where('vendor_id = ? and is_active = ? ', params[:vendor_id], 'true')
       
@@ -41,8 +43,6 @@ class VendorsDashboardController < ApplicationController
         
         end
       end
-    else
-      redirect_to error_message_path
     end
   end
   
