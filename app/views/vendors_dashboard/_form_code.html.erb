@@ -73,7 +73,9 @@ function myFunction() {
     </div> <!-- /.card-body -->
   </div><!-- /.card -->
 </div>
-
+<% if VendorPage.where(vendor_id: current_vendor.id).present? %>
+<div><%= "https://#{current_vendor.email.split("@")[0]}.myshopify.com/pages/#{VendorPage.where(vendor_id: current_vendor.id).last.shopify_page_handle}" %></div>
+<% end %>
 <script>
 
   $(document).on("click", ".btn-custom-class", function (e) {
@@ -94,6 +96,7 @@ function myFunction() {
               $('#add_to_store').prop('disabled', false);
               $('#add_to_store').text('Add Form to Your Store');
               toastr.success('Form added to your store successfully', {timeOut: 5000});
+              location.reload();
           }
       });
   });
