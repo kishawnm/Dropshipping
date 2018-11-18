@@ -151,8 +151,17 @@ class VendorsDashboardController < ApplicationController
       @input_fields = params[:input_fields]
     end
     if VendorPage.where(vendor_id: current_vendor.id).present?
-      @anchor_tag = '<a href="'+"https://#{current_vendor.email.split("@")[0]}.myshopify.com/pages/#{VendorPage.where(vendor_id: current_vendor.id).last.shopify_page_handle}"+'" style="position:fixed;right:30px;bottom:25px;"><img style="max-width: 8%;float: right;" src="https://cdn.shopify.com/s/files/1/0053/2286/6799/files/Untitled_21.png?10829388671160194190"></a>'
+      @anchor_tag = '<a href="'+"https://#{current_vendor.email.split("@")[0]}.myshopify.com/pages/#{VendorPage.where(vendor_id: current_vendor.id).last.shopify_page_handle}"+'" style="position:fixed;right:20px;bottom:25px;"><img id="dispute_form_btn" style="max-width: 35%;float: right;" src="https://cdn.shopify.com/s/files/1/0053/2286/6799/files/Untitled_21.png?10829388671160194190"></a>'
+      @js_code = '<script>
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        document.getElementById("dispute_form_btn").style.maxWidth = "35%";
+      } else {
+        document.getElementById("dispute_form_btn").style.maxWidth = "8%";
+
+      }
+      </script>'
       @div = '<div class="site-header__icons-wrapper">'
+      @script = '<script></script>'
     end
     respond_to do |format|
       format.js
