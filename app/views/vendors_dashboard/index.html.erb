@@ -105,3 +105,13 @@
     <!-- /To Do and Live Chat -->
   </div>
 </div>
+<script>
+    $(document).on("click", ".make-request", function (e) {
+        e.preventDefault();
+        var link = $(this).data("href");
+        $.ajax({
+            type:'GET',
+            url: link
+        });
+    });
+</script>
