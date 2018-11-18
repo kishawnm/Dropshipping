@@ -120,7 +120,7 @@ class HomeController < ShopifyApp::AuthenticatedController
   def add_to_store
     require 'rest_client'
     require 'json'
-    revoke_url   = "https://usamastore12.myshopify.com/admin/pages.json"
+    revoke_url   = "https://#{current_vendor.email.split("@")[0]}.myshopify.com/admin/pages.json"
 
     headers = {
         'X-Shopify-Access-Token' => @shop_session.token,
@@ -144,7 +144,7 @@ class HomeController < ShopifyApp::AuthenticatedController
     require 'rest_client'
     require 'json'
     @page = VendorPage.where(vendor_id: current_vendor.id).last
-    revoke_url   = "https://usamastore12.myshopify.com/admin/pages/#{@page.shopify_page_id}.json"
+    revoke_url   = "https://#{current_vendor.email.split("@")[0]}.myshopify.com/admin/pages/#{@page.shopify_page_id}.json"
 
     headers = {
         'X-Shopify-Access-Token' => @shop_session.token,
