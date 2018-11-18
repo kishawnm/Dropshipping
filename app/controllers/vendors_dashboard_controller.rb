@@ -151,7 +151,7 @@ class VendorsDashboardController < ApplicationController
       @input_fields = params[:input_fields]
     end
     if VendorPage.where(vendor_id: current_vendor.id).present?
-      @anchor_tag = '<a href="'+"https://#{current_vendor.email.split("@")[0]}.myshopify.com/pages/#{VendorPage.where(vendor_id: current_vendor.id).last.shopify_page_handle}"+'" style="position:fixed;right:30px;bottom:25px;"><img style="max-width: 8%;" src="https://cdn.shopify.com/s/files/1/0053/2286/6799/files/Untitled_21.png?10829388671160194190"></a>'
+      @anchor_tag = '<a href="'+"https://#{current_vendor.email.split("@")[0]}.myshopify.com/pages/#{VendorPage.where(vendor_id: current_vendor.id).last.shopify_page_handle}"+'" style="position:fixed;right:30px;bottom:25px;"><img style="max-width: 8%;float: right;" src="https://cdn.shopify.com/s/files/1/0053/2286/6799/files/Untitled_21.png?10829388671160194190"></a>'
       @div = '<div class="site-header__icons-wrapper">'
     end
     respond_to do |format|
