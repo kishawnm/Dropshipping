@@ -5,12 +5,12 @@
           <div class=" col-lg-6 col-md-6 col-sm-6">
             <ul>
               <li>Order Number:<%= @dispute.order_number if @dispute.present? %></li>
-              <li>Customer Name:<%= @name if @name.present? %></li>
-              <li>Customer Email:<%= @email if @email.present? %></li>
-              <li>Order Place date:<%= @created_at.to_date if @created_at.present? %></li>
-              <li>Fulfilment Status:<%= @fulfilled_at.to_date if @fulfilled_at.present? %></li>
-              <li>Tracking code:<%= @tracking_number if @tracking_number.present? %></li>
-              <li>Tracking Url :<%= @tracking_url if @tracking_url.present? %></li>
+              <li>Customer Name:<%= params[:name] if params[:name].present? %></li>
+              <li>Customer Email:<%= params[:email] if params[:email].present? %></li>
+              <li>Order Place date:<%= params[:created_at].to_date if params[:created_at].present? %></li>
+              <li>Fulfilment Status:<%= params[:fulfilled_at] if @fulfilled_at.present? %></li>
+              <li>Tracking code:<%= params[:tracking_number] if params[:tracking_number].present? %></li>
+              <li>Tracking Url :<%= params[:tracking_link] if params[:tracking_link].present? %></li>
             </ul>
           </div>
         </div>
