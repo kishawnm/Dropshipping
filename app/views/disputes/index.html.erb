@@ -6,11 +6,10 @@
         <%= submit_tag "Search", name: nil, id: "submit_search_index" %>
       </p>
   <% end %>
+  <%= puts '##################'*100%>
+  <%= puts params %>
+  <%= puts '##################'*100%>
   <% if params[:created_at].present? %>
-      <%= puts '##################'*100%>
-      <%= puts params %>
-      <%= puts '##################'*100%>
-
       <div class="card">
         <div class="card-body">
           <div class="col-lg-12 col-md-12 col-sm-8 col-xs-12 ">
