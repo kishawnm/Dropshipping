@@ -83,7 +83,9 @@ class HomeController < ShopifyApp::AuthenticatedController
           sv1             = obj['fulfillments'].first if obj['fulfillments'].present?
           puts '********'*100
           puts obj
+          puts obj['email']
           puts '********'*100
+          email = obj['email'] if obj.present?
           tracking_number = sv1['tracking_number'] if sv1.present?
           tracking_link   = sv1['tracking_url'] if sv1.present?
           fulfilled_at    = sv1['created_at'] if sv1.present?
@@ -98,12 +100,12 @@ class HomeController < ShopifyApp::AuthenticatedController
           else
             fulfilled_at = 'Order is not fulfilled yet '
           end
-          created_at = obj['created_at']
+            created_at = obj['created_at']
           
           if tracking_number.nil? && tracking_link.nil?
             status = "Order is not fulfilled yet"
           end
-          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at: created_at, status: status)
+          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at: created_at, status: status, emai:email)
         else
           status='Dispute Order no is not valid'
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)
