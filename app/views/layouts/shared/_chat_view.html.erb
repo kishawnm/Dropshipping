@@ -12,14 +12,13 @@
               <li>Tracking code:<%= params[:tracking_number] if params[:tracking_number].present? %></li>
               <li>Tracking Url :<%= params[:tracking_link] if params[:tracking_link].present? %></li>
             </ul>
+            <%= link_to 'Refund',  %>
           </div>
         </div>
       </div>
     </div>
 <% end %>
-<%= puts '##################'*100%>
-<%= puts params %>
-<%= puts '##################'*100%>
+
 <div class="card">
   <div class="card-body">
     <h4 class="card-title box-title"><label class="check-box make-request">
