@@ -81,7 +81,9 @@ class HomeController < ShopifyApp::AuthenticatedController
           orders          = orders.to_json
           obj             = JSON.parse(orders)
           sv1             = obj['fulfillments'].first if obj['fulfillments'].present?
-          
+          puts '********'*100
+          puts obj
+          puts '********'*100
           tracking_number = sv1['tracking_number'] if sv1.present?
           tracking_link   = sv1['tracking_url'] if sv1.present?
           fulfilled_at    = sv1['created_at'] if sv1.present?
