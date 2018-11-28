@@ -92,6 +92,7 @@ class HomeController < ShopifyApp::AuthenticatedController
           tracking_link   = sv1['tracking_url'] if sv1.present?
           fulfilled_at    = sv1['created_at'] if sv1.present?
           address         = obj['billing_address'] if obj.present?
+          order_id = obj['id']  if obj.present?
           if address.present?
             name = address['name']
           else
@@ -107,7 +108,7 @@ class HomeController < ShopifyApp::AuthenticatedController
           if tracking_number.nil? && tracking_link.nil?
             status = "Order is not fulfilled yet"
           end
-          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at: created_at, status: status, email:email)
+          redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], tracking_number: tracking_number, tracking_link: tracking_link, fulfilled_at: fulfilled_at, name: name, created_at: created_at, status: status, email:email, order_id: order_id)
         else
           status='Dispute Order no is not valid'
           redirect_to vendors_dashboard_path(id: params[:vendor_dispute_id], status: status)

@@ -110,7 +110,7 @@ class VendorsDashboardController < ApplicationController
       @name         = params[:name]
       @fulfilled_at = params[:fulfilled_at]
       @created_at   = params[:created_at]
-      @refund_btn = "https://#{current_vendor.email.split("@")[0]}.myshopify.com/admin/orders/718096629856/refund"
+      @refund_btn = "https://#{current_vendor.email.split("@")[0]}.myshopify.com/admin/orders/#{params[:order_id]}/refund"
       respond_to do |format|
         format.js
         format.html
