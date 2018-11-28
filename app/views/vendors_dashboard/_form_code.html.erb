@@ -68,14 +68,14 @@ function myFunction() {
         <% if VendorPage.where(vendor_id: current_vendor.id).present? %>
           <br>
           <br>
-          <h5>Copy the below button code and paste it after closing of this div <strong><%= @div %></strong> in header.liquid. You can find it in theme directory in your store.</h5>
+          <h5>Copy the below button code and paste it above closing of second last div inside <strong><%= @div %></strong> tag in header.liquid. You can find it in theme directory in your store.</h5>
           <br>
           <p id="button_code"><%= @anchor_tag %></p>
           <br>
           <button onclick="copyToClipboard('#button_code')" class="btn btn-primary" id="copybuttoncode">Copy Button Code</button>
           <br>
           <br>
-          <h5>Copy the below script and paste it. You can find it in theme directory in your store.</h5>
+          <h5>Copy the below script and paste it after closing <strong><%= @div %></strong> tag in header.liquid file.You can find it in theme directory in your store.</h5>
           <br>
           <p id="js_button_media_query"><%= @js_code %></p>
           <br>

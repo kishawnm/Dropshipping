@@ -161,7 +161,7 @@ class VendorsDashboardController < ApplicationController
 
       }
       </script>'
-      @div = '<div class="site-header__icons-wrapper">'
+      @div = '<header></header>'
       @script = '<script></script>'
     end
     respond_to do |format|
