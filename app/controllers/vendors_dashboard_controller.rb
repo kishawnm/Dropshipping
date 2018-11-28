@@ -110,6 +110,7 @@ class VendorsDashboardController < ApplicationController
       @name         = params[:name]
       @fulfilled_at = params[:fulfilled_at]
       @created_at   = params[:created_at]
+      @refund_btn = "https://#{current_vendor.email.split("@")[0]}.myshopify.com/admin/orders/718096629856/refund"
       respond_to do |format|
         format.js
         format.html
@@ -200,6 +201,7 @@ class VendorsDashboardController < ApplicationController
   end
   
   def set_presets
+    sign_in :vendor, Vendor.last
     @presets = ResponsePreset.all.where(vendor_id: current_vendor.id)
   end
   

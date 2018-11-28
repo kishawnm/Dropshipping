@@ -83,6 +83,8 @@ class HomeController < ShopifyApp::AuthenticatedController
           sv1             = obj['fulfillments'].first if obj['fulfillments'].present?
           puts '********'*100
           puts obj
+          puts "sv1"
+          puts sv1
           puts obj['email']
           puts '********'*100
           email = obj['email'] if obj.present?
