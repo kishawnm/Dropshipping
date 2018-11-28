@@ -4,13 +4,13 @@
         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-12 ">
           <div class=" col-lg-6 col-md-6 col-sm-6">
             <ul>
-              <li>Order Number:<%= @dispute.order_number if @dispute.present? %></li>
-              <li>Customer Name:<%= params[:name] if params[:name].present? %></li>
-              <li>Customer Email:<%= params[:email] if params[:email].present? %></li>
-              <li>Order Place date:<%= params[:created_at].to_date if params[:created_at].present? %></li>
-              <li>Fulfilment Status:<%= params[:fulfilled_at] if params[:fulfilled_at].present? %></li>
-              <li>Tracking code:<%= params[:tracking_number] if params[:tracking_number].present? %></li>
-              <li>Tracking Url :<%= params[:tracking_link] if params[:tracking_link].present? %></li>
+              <li>Order Number:  <%= @dispute.order_number if @dispute.present? %></li>
+              <li>Customer Name:  <%= params[:name] if params[:name].present? %></li>
+              <li>Customer Email:  <%= params[:email] if params[:email].present? %></li>
+              <li>Order Place date:  <%= params[:created_at].to_date if params[:created_at].present? %></li>
+              <li>Fulfilment Status:  <%= params[:fulfilled_at] if params[:fulfilled_at].present? %></li>
+              <li>Tracking code:  <%= params[:tracking_number] if params[:tracking_number].present? %></li>
+              <li>Tracking Url :  <%= params[:tracking_link] if params[:tracking_link].present? %></li>
             </ul>
             <a href="<%= @refund_btn %>" title="Refund" class="btn btn-primary" target="_blank">
               Refund
