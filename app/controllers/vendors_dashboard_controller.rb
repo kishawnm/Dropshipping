@@ -84,7 +84,7 @@ class VendorsDashboardController < ApplicationController
     if vendor_dispute.present? && customer_message.present?
       @response_rate = time_diff(vendor_dispute.created_at, customer_message.created_at).to_i
     end
-  
+    @disputes_index = "yes"
   end
   
   def show
