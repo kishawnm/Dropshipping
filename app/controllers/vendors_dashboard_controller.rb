@@ -104,7 +104,7 @@ class VendorsDashboardController < ApplicationController
       #   format.html
       # end
     end
-    if params[:tracking_number].present? && @dispute.present?
+    if (params[:tracking_number].present? || params[:created_at].present?) && @dispute.present?
       @tracking_no  = params[:tracking_number]
       @tracking_url = params[:tracking_link]
       @name         = params[:name]
