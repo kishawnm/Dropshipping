@@ -12,5 +12,6 @@ class DisputesController < ApplicationController
     end
     @chat     = VendorDisputeMessage.new
     @presets  = ResponsePreset.all.where(vendor_id: current_vendor.id)
+    @disputes_index = "yes"
   end
 end
