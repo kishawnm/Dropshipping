@@ -201,7 +201,6 @@ class VendorsDashboardController < ApplicationController
   end
   
   def set_presets
-    sign_in :vendor, Vendor.last
     @presets = ResponsePreset.all.where(vendor_id: current_vendor.id)
   end
   
