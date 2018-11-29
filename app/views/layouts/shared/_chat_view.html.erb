@@ -26,7 +26,7 @@
       <div class="col-lg-12 col-md-12 col-sm-8 col-xs-12 ">
         <div class=" col-lg-6 col-md-6 col-sm-6">
           <h5>Invalid Order details provided by customer</h5>
-          <% form_for(:update_order_no, :url => update_dispute_vendors_dashboard_index_path, method: :post, remote: true) do |f| %>
+          <%= form_for(:update_order_no, :url => update_dispute_vendors_dashboard_index_path, method: :post, remote: true) do |f| %>
             <div class="actions">
               <%=f.text_field :order_number, placeholder: "Order Number", :value => @dispute_id.order_number %>
               <%= f.hidden_field :dispute_id, value: @dispute_id.id %>
