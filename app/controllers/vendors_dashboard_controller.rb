@@ -181,9 +181,11 @@ class VendorsDashboardController < ApplicationController
     vendor_dispute.order_number = params[:update_order_no][:order_number]
     if vendor_dispute.save
       @status = "Updated successfully"
-      redirect_to request.referer
     else
       @status = "Failed to Updated"
+    end
+    respond_to do |format|
+      format.js
     end
   end
   
