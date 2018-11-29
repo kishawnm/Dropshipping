@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       post :create_messages
       get :form_editor
       get :contact_us
+      get :update_dispute
     end
   end
   resources :disputes, only: [:index]
