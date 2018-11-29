@@ -29,7 +29,8 @@
           <% form_for(:update_order_no, :url => update_dispute_vendors_dashboard_index_path, method: :post, remote: true) do |f| %>
             <div class="actions">
               <%=f.text_field :order_number, placeholder: "Order Number", :value => @dispute_id.order_number %>
-              <%= f.hidden_field :dispute_id, @dispute_id.id  %>
+              <%= f.hidden_field :dispute_id, value: @dispute_id.id %>
+
               <%= f.submit "Update", class: 'btn btn-default'  %>
             </div>
           <% end %>
