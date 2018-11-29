@@ -88,7 +88,7 @@ class VendorsDashboardController < ApplicationController
   end
   
   def show
-    @dispute_id = params[:id]
+    @dispute_id = VendorDispute.find(params[:id])
     req = request.referer
     if req.include?("disputes")
       @issues = VendorDispute.joins(:vendor_dispute_messages).where(vendor_id: current_vendor.id).order(" vendor_dispute_messages.read ASC, vendor_dispute_messages.created_at DESC")
@@ -177,9 +177,13 @@ class VendorsDashboardController < ApplicationController
   end
 
   def update_dispute
-    @dispute_id = params[:dispute_id]
-    respond_to do |format|
-      format.js
+    vendor_dispute = VendorDispute.find(params[:update_order_no][:dispute_id])
+    vendor_dispute.order_number = params[:update_order_no][:order_number]
+    if vendor_dispute.save
+      @status = "Updated successfully"
+      redirect_to request.referer
+    else
+      @status = "Failed to Updated"
     end
   end
   

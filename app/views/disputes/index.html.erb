@@ -7,7 +7,6 @@
       </p>
   <% end %>
   <div class="row">
-    <div id='post-content'></div>
     <%= render 'layouts/shared/dispute_list' %>
     <div class="col-lg-8" id="chat-view">
       <%= render 'layouts/shared/chat_view' %>
@@ -33,8 +32,5 @@
     if (e.keyCode == 13) {
       $("#submit_search_index").click();
     }
-  });
-  $(document).on("click", ".close", function (e) {
-      $('#myModal').remove();
   });
 </script>
