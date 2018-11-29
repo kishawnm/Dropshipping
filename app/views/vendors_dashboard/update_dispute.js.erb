@@ -1,6 +1,6 @@
 $('#post-content').html("<%= j render 'order_modal', dispute_id: @dispute_id %>");
-$('#myModal').modal('show');
-$('#myModal').css('z-index', '999');
-document.getElementById( 'myModal' ).style.display = 'block';
-document.getElementById( 'myModal' ).style.opacity = 1;
+$('.modal').modal('show');
+$('.modal').css('z-index', '999');
+$('.modal').style.display = 'block';
+$('.modal').style.opacity = 1;
 
